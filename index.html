@@ -478,8 +478,10 @@
             letter-spacing: 0.02em;
         }
 
-        /* ---------- CAPTURE VISUAL (ZYNORA SVG) ---------- */
-        .capture-visual {
+        /* ---------- IMAGE CONTAINERS (shared) ---------- */
+        .capture-visual,
+        .community-image,
+        .final-visual {
             position: relative;
             width: 100%;
             aspect-ratio: 4/5;
@@ -489,9 +491,13 @@
             border: 1px solid rgba(255,255,255,0.08);
         }
 
-        .capture-visual img { width: 100%; height: 100%; object-fit: cover; }
+        .capture-visual img,
+        .community-image img,
+        .final-visual img { width: 100%; height: 100%; object-fit: cover; }
 
-        .capture-visual .image-label {
+        .capture-visual .image-label,
+        .community-image .image-label,
+        .final-visual .image-label {
             position: absolute;
             bottom: 1.5rem;
             left: 1.5rem;
@@ -502,31 +508,33 @@
             mix-blend-mode: difference;
         }
 
-        /* Zynora SVG variant */
-        .capture-visual-logo {
+        /* SVG variant base */
+        .capture-visual-logo,
+        .community-image-svg,
+        .final-visual-svg {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0d0d0d 70%);
+            background: #0d0d0d;
             padding: 0;
         }
 
-        .capture-visual-logo .zynora-mark {
+        .capture-visual-logo svg,
+        .community-image-svg svg,
+        .final-visual-svg svg {
             width: 100%;
             height: 100%;
             display: block;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .capture-visual-logo svg {
             animation: zynoraFadeIn 1.4s cubic-bezier(0.19, 1, 0.22, 1) 0.4s both;
         }
 
         @keyframes zynoraFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .capture-visual-logo line {
@@ -537,6 +545,11 @@
         @keyframes lineGrow {
             from { transform: scaleX(0); }
             to { transform: scaleX(1); }
+        }
+
+        .community-image-svg:hover svg,
+        .final-visual-svg:hover svg {
+            transform: scale(1.03);
         }
 
         /* ---------- SUCCESS ---------- */
@@ -746,6 +759,7 @@
             aspect-ratio: 4/3;
             overflow: hidden;
             background: var(--border-dark);
+            position: relative;
         }
 
         .proof-image img {
@@ -756,6 +770,25 @@
         }
 
         .proof-card:hover .proof-image img { transform: scale(1.06); }
+
+        .proof-image-svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d0d0d;
+            padding: 0;
+        }
+
+        .proof-image-svg svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .proof-card:hover .proof-image-svg svg {
+            transform: scale(1.04);
+        }
 
         .proof-content {
             padding: 0 1.8rem 1.8rem;
@@ -850,36 +883,6 @@
             border-radius: 50%;
             background: var(--accent);
             flex-shrink: 0;
-        }
-
-        .community-image {
-            width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-        }
-
-        .community-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s;
-        }
-
-        .community-image:hover img { transform: scale(1.04); }
-
-        .community-image .image-label {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            font-size: 0.6rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: white;
-            mix-blend-mode: difference;
         }
 
         .btn-community {
@@ -1102,29 +1105,6 @@
 
         .final-alt-link:hover span:last-child { transform: translateX(6px); }
 
-        .final-visual {
-            width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            position: relative;
-        }
-
-        .final-visual img { width: 100%; height: 100%; object-fit: cover; }
-
-        .final-visual .image-label {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            font-size: 0.6rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: white;
-            mix-blend-mode: difference;
-        }
-
         /* ---------- FOOTER ---------- */
         .footer {
             background: var(--ink);
@@ -1244,7 +1224,8 @@
             .hero-image { height: 55vh; min-height: 380px; }
 
             .capture-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .capture-visual { aspect-ratio: 3/2; max-height: 400px; }
+            .capture-visual,
+            .capture-visual-logo { aspect-ratio: 3/2; max-height: 400px; }
 
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -1255,7 +1236,8 @@
             .beyond-grid { grid-template-columns: 1fr; gap: 3rem; }
 
             .final-cta-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .final-visual { aspect-ratio: 3/2; max-height: 400px; }
+            .final-visual,
+            .final-visual-svg { aspect-ratio: 3/2; max-height: 400px; }
 
             .footer-top { grid-template-columns: 1fr 1fr; }
         }
@@ -1304,7 +1286,7 @@
         </nav>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO — Image 1 -->
     <header class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -1330,7 +1312,7 @@
         </div>
     </header>
 
-    <!-- CAPTURE (top) -->
+    <!-- CAPTURE — Zynora wordmark SVG -->
     <section class="capture" id="community">
         <div class="container capture-grid">
             <div>
@@ -1415,7 +1397,7 @@
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT — Image 2 -->
     <section id="about" class="section">
         <div class="container">
             <div class="section-number reveal-meta">01 / ABOUT KUNMI</div>
@@ -1439,14 +1421,14 @@
                     </p>
                 </div>
                 <div class="about-image reveal reveal-delay-1">
-                    <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Kunmi">
+                    <img src="https://i.ibb.co/rfR21yTL/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-2.webp" alt="Kunmi">
                     <span class="image-label">Kunmi the Great</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROOF -->
+    <!-- PROOF — SVG 2 + SVG 3 -->
     <section id="proof" class="section proof-section">
         <div class="container">
             <div class="section-number reveal-meta">02 / SELECTED WORK</div>
@@ -1460,8 +1442,53 @@
             </p>
             <div class="proof-grid">
                 <div class="proof-card reveal">
-                    <div class="proof-image">
-                        <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="The Great Initiative">
+                    <div class="proof-image proof-image-svg">
+                        <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                            <defs>
+                                <linearGradient id="initiativeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#1a1a1a"/>
+                                    <stop offset="100%" stop-color="#0d0d0d"/>
+                                </linearGradient>
+                                <linearGradient id="initiativeAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#c84b2b"/>
+                                    <stop offset="100%" stop-color="#9f3720"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="600" height="450" fill="url(#initiativeBg)"/>
+                            
+                            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+                                <line x1="0" y1="0" x2="600" y2="450"/>
+                                <line x1="100" y1="0" x2="600" y2="375"/>
+                                <line x1="200" y1="0" x2="600" y2="300"/>
+                                <line x1="300" y1="0" x2="600" y2="225"/>
+                                <line x1="400" y1="0" x2="600" y2="150"/>
+                                <line x1="500" y1="0" x2="600" y2="75"/>
+                                <line x1="0" y1="75" x2="500" y2="450"/>
+                                <line x1="0" y1="150" x2="400" y2="450"/>
+                                <line x1="0" y1="225" x2="300" y2="450"/>
+                                <line x1="0" y1="300" x2="200" y2="450"/>
+                                <line x1="0" y1="375" x2="100" y2="450"/>
+                            </g>
+                            
+                            <circle cx="300" cy="200" r="80" fill="none" stroke="url(#initiativeAccent)" stroke-width="2"/>
+                            <text x="300" y="228" text-anchor="middle" 
+                                  font-family="Times New Roman, Times, serif" 
+                                  font-size="90" 
+                                  fill="#fcf9f5"
+                                  font-weight="400">01</text>
+                            
+                            <text x="300" y="320" text-anchor="middle" 
+                                  font-family="Inter, -apple-system, sans-serif" 
+                                  font-size="11" 
+                                  letter-spacing="5" 
+                                  fill="rgba(255,255,255,0.5)"
+                                  font-weight="500">THE GREAT INITIATIVE</text>
+                            
+                            <line x1="30" y1="30" x2="80" y2="30" stroke="url(#initiativeAccent)" stroke-width="2"/>
+                            <line x1="30" y1="30" x2="30" y2="80" stroke="url(#initiativeAccent)" stroke-width="2"/>
+                            <line x1="570" y1="420" x2="520" y2="420" stroke="url(#initiativeAccent)" stroke-width="2"/>
+                            <line x1="570" y1="420" x2="570" y2="370" stroke="url(#initiativeAccent)" stroke-width="2"/>
+                        </svg>
                     </div>
                     <div class="proof-content">
                         <div class="proof-meta">
@@ -1476,8 +1503,68 @@
                     </div>
                 </div>
                 <div class="proof-card reveal reveal-delay-1">
-                    <div class="proof-image">
-                        <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Zynora">
+                    <div class="proof-image proof-image-svg">
+                        <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                            <defs>
+                                <linearGradient id="zynoraBg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#1e4a4a"/>
+                                    <stop offset="100%" stop-color="#0f2828"/>
+                                </linearGradient>
+                                <linearGradient id="zynoraAccent2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#c84b2b"/>
+                                    <stop offset="100%" stop-color="#f5c9b8"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="600" height="450" fill="url(#zynoraBg2)"/>
+                            
+                            <g fill="rgba(255,255,255,0.08)">
+                                <circle cx="80" cy="90" r="3"/>
+                                <circle cx="180" cy="60" r="2"/>
+                                <circle cx="450" cy="80" r="3"/>
+                                <circle cx="520" cy="150" r="2"/>
+                                <circle cx="100" cy="350" r="2"/>
+                                <circle cx="500" cy="380" r="3"/>
+                                <circle cx="380" cy="60" r="2"/>
+                                <circle cx="60" cy="220" r="2"/>
+                            </g>
+                            
+                            <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+                                <line x1="80" y1="90" x2="180" y2="60"/>
+                                <line x1="180" y1="60" x2="380" y2="60"/>
+                                <line x1="380" y1="60" x2="450" y2="80"/>
+                                <line x1="450" y1="80" x2="520" y2="150"/>
+                                <line x1="100" y1="350" x2="500" y2="380"/>
+                                <line x1="60" y1="220" x2="100" y2="350"/>
+                                <line x1="500" y1="380" x2="520" y2="150"/>
+                            </g>
+                            
+                            <circle cx="300" cy="225" r="90" fill="none" stroke="url(#zynoraAccent2)" stroke-width="1.5"/>
+                            <circle cx="300" cy="225" r="60" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                            <circle cx="300" cy="225" r="30" fill="url(#zynoraAccent2)" opacity="0.15"/>
+                            
+                            <circle cx="300" cy="225" r="6" fill="#f5c9b8"/>
+                            
+                            <g stroke="rgba(245,201,184,0.4)" stroke-width="1">
+                                <line x1="300" y1="135" x2="300" y2="105"/>
+                                <line x1="300" y1="315" x2="300" y2="345"/>
+                                <line x1="210" y1="225" x2="180" y2="225"/>
+                                <line x1="390" y1="225" x2="420" y2="225"/>
+                            </g>
+                            
+                            <text x="300" y="380" text-anchor="middle" 
+                                  font-family="Times New Roman, Times, serif" 
+                                  font-size="28" 
+                                  letter-spacing="6" 
+                                  fill="#fcf9f5"
+                                  font-weight="400">ZYNORA</text>
+                            
+                            <text x="300" y="405" text-anchor="middle" 
+                                  font-family="Inter, -apple-system, sans-serif" 
+                                  font-size="9" 
+                                  letter-spacing="4" 
+                                  fill="rgba(255,255,255,0.5)"
+                                  font-weight="500">A COMMUNITY</text>
+                        </svg>
                     </div>
                     <div class="proof-content">
                         <div class="proof-meta">
@@ -1495,7 +1582,7 @@
         </div>
     </section>
 
-    <!-- COMMUNITY REINFORCEMENT -->
+    <!-- COMMUNITY — SVG 4 -->
     <section class="section community-section">
         <div class="container">
             <div class="section-number reveal-meta">03 / ZYNORA</div>
@@ -1520,21 +1607,80 @@
                     </div>
                     <a href="#contact" class="btn btn-community reveal">JOIN ZYNORA →</a>
                 </div>
-                <div class="community-image reveal reveal-delay-1">
-                    <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Zynora">
+                <div class="community-image community-image-svg reveal reveal-delay-1">
+                    <svg viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <linearGradient id="communityBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1e4a4a"/>
+                                <stop offset="100%" stop-color="#0d2626"/>
+                            </linearGradient>
+                            <radialGradient id="communityGlow" cx="50%" cy="40%" r="50%">
+                                <stop offset="0%" stop-color="rgba(200, 75, 43, 0.4)"/>
+                                <stop offset="100%" stop-color="rgba(200, 75, 43, 0)"/>
+                            </radialGradient>
+                        </defs>
+                        <rect width="600" height="750" fill="url(#communityBg)"/>
+                        <rect width="600" height="750" fill="url(#communityGlow)"/>
+                        
+                        <g fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                            <ellipse cx="300" cy="320" rx="220" ry="80" transform="rotate(-15 300 320)"/>
+                            <ellipse cx="300" cy="320" rx="180" ry="60" transform="rotate(-15 300 320)"/>
+                            <ellipse cx="300" cy="320" rx="140" ry="40" transform="rotate(-15 300 320)"/>
+                        </g>
+                        
+                        <g fill="#f5c9b8">
+                            <circle cx="120" cy="290" r="5"/>
+                            <circle cx="240" cy="240" r="4"/>
+                            <circle cx="380" cy="260" r="5"/>
+                            <circle cx="480" cy="330" r="4"/>
+                            <circle cx="430" cy="400" r="5"/>
+                            <circle cx="300" cy="420" r="4"/>
+                            <circle cx="170" cy="380" r="5"/>
+                        </g>
+                        
+                        <circle cx="300" cy="320" r="40" fill="none" stroke="#c84b2b" stroke-width="2"/>
+                        <text x="300" y="328" text-anchor="middle" 
+                              font-family="Times New Roman, Times, serif" 
+                              font-size="24" 
+                              fill="#fcf9f5"
+                              font-weight="400">ZY</text>
+                        
+                        <text x="300" y="560" text-anchor="middle" 
+                              font-family="Times New Roman, Times, serif" 
+                              font-size="42" 
+                              letter-spacing="4" 
+                              fill="#fcf9f5"
+                              font-weight="400">ZYNORA</text>
+                        
+                        <line x1="240" y1="585" x2="360" y2="585" stroke="#c84b2b" stroke-width="2"/>
+                        
+                        <text x="300" y="615" text-anchor="middle" 
+                              font-family="Inter, -apple-system, sans-serif" 
+                              font-size="10" 
+                              letter-spacing="5" 
+                              fill="rgba(255,255,255,0.5)"
+                              font-weight="500">LEARN · BUILD · CREATE</text>
+                        
+                        <text x="300" y="660" text-anchor="middle" 
+                              font-family="Inter, -apple-system, sans-serif" 
+                              font-size="9" 
+                              letter-spacing="3" 
+                              fill="rgba(255,255,255,0.35)"
+                              font-weight="400">A SPACE FOR YOUNG BUILDERS</text>
+                    </svg>
                     <span class="image-label">Zynora</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BEYOND -->
+    <!-- BEYOND — Image 3 -->
     <section class="section beyond-section">
         <div class="container">
             <div class="section-number reveal-meta">04 / BEYOND THE WORK</div>
             <div class="beyond-grid">
                 <div class="beyond-image reveal">
-                    <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Kunmi">
+                    <img src="https://i.ibb.co/0RBkBB23/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-3.webp" alt="Kunmi">
                     <span class="image-label">Kunmi the Great</span>
                 </div>
                 <div class="beyond-text">
@@ -1552,7 +1698,7 @@
         </div>
     </section>
 
-    <!-- FINAL CTA -->
+    <!-- FINAL CTA — SVG 5 -->
     <section id="contact" class="final-cta">
         <div class="container final-cta-inner">
             <div>
@@ -1602,8 +1748,61 @@
                     </a>
                 </div>
             </div>
-            <div class="final-visual reveal reveal-delay-1">
-                <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Kunmi">
+            <div class="final-visual final-visual-svg reveal reveal-delay-1">
+                <svg viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <linearGradient id="finalBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#0a0a0a"/>
+                        </linearGradient>
+                        <linearGradient id="finalAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#c84b2b"/>
+                            <stop offset="100%" stop-color="#9f3720"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="600" height="750" fill="url(#finalBg)"/>
+                    
+                    <g stroke="url(#finalAccent)" stroke-width="3" fill="none" stroke-linecap="round">
+                        <path d="M 100 550 L 300 350 L 500 550" />
+                        <line x1="300" y1="350" x2="300" y2="150"/>
+                        <path d="M 260 190 L 300 150 L 340 190" />
+                    </g>
+                    
+                    <circle cx="100" cy="550" r="8" fill="#c84b2b"/>
+                    <circle cx="300" cy="350" r="8" fill="#c84b2b"/>
+                    <circle cx="500" cy="550" r="8" fill="#c84b2b"/>
+                    <circle cx="300" cy="150" r="10" fill="#f5c9b8"/>
+                    
+                    <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+                        <line x1="0" y1="100" x2="600" y2="100"/>
+                        <line x1="0" y1="200" x2="600" y2="200"/>
+                        <line x1="0" y1="300" x2="600" y2="300"/>
+                        <line x1="0" y1="400" x2="600" y2="400"/>
+                        <line x1="0" y1="500" x2="600" y2="500"/>
+                        <line x1="0" y1="600" x2="600" y2="600"/>
+                        <line x1="100" y1="0" x2="100" y2="750"/>
+                        <line x1="200" y1="0" x2="200" y2="750"/>
+                        <line x1="300" y1="0" x2="300" y2="750"/>
+                        <line x1="400" y1="0" x2="400" y2="750"/>
+                        <line x1="500" y1="0" x2="500" y2="750"/>
+                    </g>
+                    
+                    <text x="300" y="640" text-anchor="middle" 
+                          font-family="Times New Roman, Times, serif" 
+                          font-size="36" 
+                          letter-spacing="4" 
+                          fill="#fcf9f5"
+                          font-weight="400">WHAT'S NEXT?</text>
+                    
+                    <line x1="240" y1="665" x2="360" y2="665" stroke="#c84b2b" stroke-width="2"/>
+                    
+                    <text x="300" y="695" text-anchor="middle" 
+                          font-family="Inter, -apple-system, sans-serif" 
+                          font-size="10" 
+                          letter-spacing="5" 
+                          fill="rgba(255,255,255,0.5)"
+                          font-weight="500">BUILD SOMETHING MEANINGFUL</text>
+                </svg>
                 <span class="image-label">Kunmi the Great</span>
             </div>
         </div>
@@ -1647,9 +1846,6 @@
     </footer>
 
     <script>
-        // ============================================================
-        // CONFIG — Google Apps Script endpoint
-        // ============================================================
         const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbywP0-O6ceNxM55jMbCan_ZDl1xKRL5cmR7J_E0D-HXe6DyBgVyCBn_ZJML8nny4NnUQQ/exec';
 
         // ---------- NAV SCROLL ----------
@@ -1707,9 +1903,7 @@
             }
         });
 
-        // ============================================================
-        // REVEAL OBSERVER
-        // ============================================================
+        // ---------- REVEAL OBSERVER ----------
         const revealTargets = document.querySelectorAll('.reveal, .reveal-text, .reveal-words, .reveal-meta');
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -1764,9 +1958,7 @@
             });
         });
 
-        // ============================================================
-        // CAPTURE FORMS
-        // ============================================================
+        // ---------- CAPTURE FORMS ----------
         async function submitToSheet(name, email) {
             const response = await fetch(SHEET_ENDPOINT, {
                 method: 'POST',
