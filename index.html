@@ -38,7 +38,6 @@
   --size-h2-xl:clamp(3rem,8vw,7rem);
   --size-h2-mega:clamp(4rem,12vw,10rem);
 
-  /* form-specific tokens (mapped to site palette) */
   --surface:#FFFFFF;
   --surface-alt:#F7F3FB;
   --tint:#EFE7F5;
@@ -59,6 +58,7 @@ body{
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 body.is-loading{overflow:hidden;height:100vh}
+body.nav-open{overflow:hidden}
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
@@ -68,6 +68,12 @@ ul{list-style:none}
 .icon{
   width:1.1rem;height:1.1rem;flex:0 0 auto;
   fill:none;stroke:currentColor;stroke-width:2.25;stroke-linecap:square;stroke-linejoin:miter;
+}
+
+/* LAZY PAINT CONTAINMENT */
+.lazy-section{
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
 }
 
 /* LOADER */
@@ -97,7 +103,7 @@ ul{list-style:none}
 
 /* NAV */
 .nav{
-  position:fixed;top:var(--bar-h);left:0;right:0;z-index:200;
+  position:fixed;top:var(--bar-h);left:0;right:0;z-index:400;
   display:flex;justify-content:center;pointer-events:none;
 }
 .nav-inner{
@@ -123,13 +129,66 @@ ul{list-style:none}
 .nav-links a:hover{background:var(--ink);color:#fff}
 .nav-links a.nav-cta{background:var(--accent);color:#fff}
 .nav-links a.nav-cta:hover{background:var(--accent-deep)}
+
 .nav-toggle{
-  display:flex;background:var(--ink);color:#fff;
-  padding:.7rem 1.3rem;border-radius:10px;
+  display:flex;align-items:center;gap:.55rem;
+  background:var(--ink);color:#fff;
+  padding:.7rem 1.1rem;border-radius:10px;
   font-family:var(--font-body);font-size:.7rem;font-weight:600;
   letter-spacing:.1em;text-transform:uppercase;
 }
 @media(min-width:900px){.nav-toggle{display:none}}
+.nav-toggle .burger{
+  display:flex;flex-direction:column;gap:3px;width:14px;
+}
+.nav-toggle .burger span{
+  display:block;height:2px;width:100%;background:#fff;border-radius:2px;
+  transition:transform .3s, opacity .3s;
+}
+.nav-toggle.is-open .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.nav-toggle.is-open .burger span:nth-child(2){opacity:0}
+.nav-toggle.is-open .burger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:390;
+  background:var(--dark);
+  display:flex;flex-direction:column;
+  padding:calc(2rem + var(--bar-h)) 6vw 3rem;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(-12px);
+  transition:opacity .35s var(--ease-out), transform .35s var(--ease-out), visibility 0s .35s;
+}
+.mobile-menu.is-open{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateY(0);
+  transition-delay:0s;
+}
+.mobile-menu-links{
+  display:flex;flex-direction:column;gap:.25rem;
+  margin-top:auto;margin-bottom:auto;
+}
+.mobile-menu-links a{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,9vw,3.5rem);
+  font-weight:800;letter-spacing:-.03em;line-height:1.05;
+  color:#fff;text-transform:uppercase;
+  padding:.35rem 0;
+  border-bottom:1px solid var(--border-dark);
+  transition:color .25s, padding-left .25s;
+}
+.mobile-menu-links a:hover,
+.mobile-menu-links a:focus-visible{
+  color:var(--pink);padding-left:.5rem;outline:none;
+}
+.mobile-menu-links a.mobile-cta{
+  margin-top:1.5rem;border-bottom:0;
+  color:var(--pink);font-style:italic;font-weight:400;
+  text-transform:none;font-size:clamp(1.6rem,6vw,2.4rem);
+}
+.mobile-menu-foot{
+  font-family:var(--font-mono);font-size:.68rem;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);
+}
 
 /* BUTTONS */
 .btn-cta{
@@ -150,6 +209,15 @@ ul{list-style:none}
 .btn-cta:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
 .btn-cta:hover .ico .icon{transform:translateX(3px)}
 .btn-cta:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.btn-cta.ghost{
+  background:transparent;border-color:rgba(255,255,255,.28);color:#fff;
+}
+.btn-cta.ghost:hover{
+  background:rgba(255,255,255,.08);border-color:#fff;
+}
+.btn-cta.ghost .ico{background:rgba(255,255,255,.12)}
+
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
 
 /* HERO */
 .hero{
@@ -320,6 +388,48 @@ ul{list-style:none}
 
 .lede{font-size:1.05rem;line-height:1.7;color:var(--muted);max-width:44ch}
 
+/* QUICK APPLY */
+.quick-apply{
+  background:var(--surface-alt);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:1.5rem 5vw;
+}
+.quick-apply-inner{
+  max-width:1400px;margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  flex-wrap:wrap;
+}
+.quick-apply-text{
+  display:flex;align-items:center;gap:1rem;min-width:0;
+}
+.quick-apply-pulse{
+  flex:0 0 auto;width:.7rem;height:.7rem;border-radius:50%;
+  background:var(--pink);position:relative;
+}
+.quick-apply-pulse::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid var(--pink);opacity:.5;
+  animation:qpulse 2s ease-out infinite;
+}
+@keyframes qpulse{
+  0%{transform:scale(.6);opacity:.6}
+  100%{transform:scale(1.6);opacity:0}
+}
+.quick-apply-text p{
+  font-family:var(--font-display);font-size:clamp(1rem,2.2vw,1.35rem);
+  font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.2;
+}
+.quick-apply-text p em{font-style:italic;font-weight:400;color:var(--accent)}
+.quick-apply-text span{
+  display:block;font-family:var(--font-body);font-size:.85rem;font-weight:400;
+  color:var(--muted);letter-spacing:0;margin-top:.15rem;
+}
+@media(max-width:640px){
+  .quick-apply-inner{flex-direction:column;align-items:stretch}
+  .btn-cta{width:100%;justify-content:space-between}
+}
+
 /* SECTIONS */
 .sec{position:relative;overflow:hidden}
 .sec-white{background:#FFFFFF}
@@ -485,7 +595,7 @@ ul{list-style:none}
   .row-card{min-height:240px;padding:3rem 1.5rem 1.75rem}
 }
 
-/* VISION — untouched */
+/* VISION */
 .stat-grid{
   display:flex;flex-direction:row;gap:1.25rem;
   overflow-x:auto;overflow-y:hidden;
@@ -640,6 +750,9 @@ ul{list-style:none}
   .founder-grid .img-block.tall{width:100%;max-width:340px;margin-inline:auto}
   .founder-grid .lede{max-width:100%}
 }
+.founder-img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
 
 /* FIT + FAQ */
 .fit-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:4rem}
@@ -744,7 +857,13 @@ ul{list-style:none}
   display:grid;grid-template-columns:1.5fr 1fr 1fr;
   gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border-dark);
 }
-@media(max-width:800px){.foot-top{grid-template-columns:1fr;gap:2rem}}
+@media(max-width:800px){
+  .foot-top{
+    grid-template-columns:1fr 1fr;
+    gap:2rem 1.5rem;
+  }
+  .foot-brand{grid-column:1 / -1}
+}
 .foot-brand-name{
   font-family:var(--font-display);font-size:1.4rem;font-weight:700;
   letter-spacing:-.02em;margin-bottom:.75rem;
@@ -805,7 +924,7 @@ ul{list-style:none}
 .js-gsap-ready .banner{opacity:0;transform:translateY(40px)}
 
 @media (prefers-reduced-motion:reduce){
-  .announce-track,.hcard-inner,.marquee-track{animation:none}
+  .announce-track,.hcard-inner,.marquee-track,.quick-apply-pulse::after{animation:none}
   .js-gsap-ready .anim-fade,
   .js-gsap-ready .anim-rise > span,
   .js-gsap-ready .img-block,
@@ -816,9 +935,7 @@ ul{list-style:none}
   .js-gsap-ready .sec-watermark{opacity:.06 !important}
 }
 
-/* ============================================================
-   EMBEDDED APPLY FORM — reference styling, site palette
-   ============================================================ */
+/* APPLY FORM */
 .register-section{padding-block:80px;background:var(--surface-alt)}
 @media (min-width:1024px){.register-section{padding-block:112px}}
 
@@ -1021,6 +1138,13 @@ textarea.input{
   background:var(--pink);color:#fff;border-color:var(--pink);
 }
 .btn-accent:hover{background:#C400B8;border-color:#C400B8}
+.btn-outline-accent{
+  background:transparent;color:var(--accent);
+  border:1px solid var(--accent);
+}
+.btn-outline-accent:hover{
+  background:var(--accent);color:#fff;
+}
 
 .form-actions{
   margin-top:32px;
@@ -1099,6 +1223,17 @@ textarea.input{
   letter-spacing:.06em;
   text-transform:uppercase;
 }
+.confirm-actions{
+  margin-top:32px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
+}
+@media (min-width:640px){
+  .confirm-actions{flex-direction:row}
+}
 </style>
 </head>
 <body class="is-loading">
@@ -1123,9 +1258,22 @@ textarea.input{
       <a href="#mission">Mission</a>
       <a href="#register" class="nav-cta">Apply</a>
     </div>
-    <button class="nav-toggle" aria-label="Menu">Menu</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <nav class="mobile-menu-links">
+    <a href="#why" data-close>Why</a>
+    <a href="#vision" data-close>Vision</a>
+    <a href="#mission" data-close>Mission</a>
+    <a href="#register" data-close class="mobile-cta">Apply to join →</a>
+  </nav>
+  <p class="mobile-menu-foot">Start with Kunmi · 2026</p>
+</div>
 
 <main>
 
@@ -1150,6 +1298,10 @@ textarea.input{
         <div class="actions">
           <a href="#register" class="btn-cta">
             Apply to join
+            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </a>
+          <a href="#why" class="btn-cta ghost">
+            Why this exists
             <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
           </a>
         </div>
@@ -1186,7 +1338,24 @@ textarea.input{
   </div>
 </header>
 
-<section class="sec sec-white sec-xl" id="why">
+<section class="quick-apply" aria-label="Quick apply">
+  <div class="quick-apply-inner">
+    <div class="quick-apply-text">
+      <span class="quick-apply-pulse" aria-hidden="true"></span>
+      <p>
+        Applications are open.
+        <em>Six questions. Five minutes.</em>
+        <span>We read every one. No shortcuts, no spam.</span>
+      </p>
+    </div>
+    <a href="#register" class="btn-cta">
+      Start your application
+      <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<section class="sec sec-white sec-xl lazy-section" id="why">
   <span class="sec-watermark" aria-hidden="true">01</span>
   <div class="sec-inner">
     <div class="sec-head">
@@ -1281,7 +1450,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-dark sec-lg" id="vision">
+<section class="sec sec-dark sec-lg lazy-section" id="vision">
   <span class="sec-watermark" aria-hidden="true">02</span>
   <div class="sec-inner on-dark">
     <div class="sec-head">
@@ -1330,7 +1499,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-white sec-lg" id="mission">
+<section class="sec sec-white sec-lg lazy-section" id="mission">
   <span class="sec-watermark" aria-hidden="true">03</span>
   <div class="sec-inner">
     <div class="sec-head">
@@ -1413,7 +1582,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-white sec-lg" id="path">
+<section class="sec sec-white sec-lg lazy-section" id="path">
   <span class="sec-watermark" aria-hidden="true">04</span>
   <div class="sec-inner">
     <div class="sec-head">
@@ -1469,7 +1638,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-white sec-lg" id="founder">
+<section class="sec sec-white sec-lg lazy-section" id="founder">
   <span class="sec-watermark" aria-hidden="true">05</span>
   <div class="sec-inner">
     <div class="sec-head">
@@ -1479,7 +1648,7 @@ textarea.input{
 
     <div class="founder-grid">
       <div class="img-block tall anim-fade" style="margin-bottom:0">
-                       <img src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Kunmi the Great">
+        <img class="founder-img" src="https://i.ibb.co/RG564p6m/Insta-Saver-kunmithegreat-carousel-Dd-Ww-Sitjkt-I-image-1.webp" alt="Kunmi the Great" loading="lazy" decoding="async">
         <span class="img-label">Image · Kunmi the Great</span>
       </div>
       <div>
@@ -1498,7 +1667,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-tint sec-lg" id="faq">
+<section class="sec sec-tint sec-lg lazy-section" id="faq">
   <span class="sec-watermark" aria-hidden="true">06</span>
   <div class="sec-inner">
     <div class="sec-head">
@@ -1557,7 +1726,7 @@ textarea.input{
   </div>
 </section>
 
-<section class="sec sec-dark-2 sec-xl" id="invite">
+<section class="sec sec-dark-2 sec-xl lazy-section" id="invite">
   <span class="sec-watermark" aria-hidden="true">07</span>
   <div class="sec-inner on-dark">
     <div class="sec-head center" style="max-width:1000px">
@@ -1577,7 +1746,7 @@ textarea.input{
 </section>
 
 <!-- APPLY FORM -->
-<section id="register" class="register-section">
+<section id="register" class="register-section lazy-section">
   <div class="wrap" style="width:100%;max-width:1180px;margin-inline:auto;padding-inline:5vw">
     <div class="form-section-head">
       <h2>Apply to join <em>Start With Kunmi.</em></h2>
@@ -1719,7 +1888,10 @@ textarea.input{
         <p class="lede">Thank you for taking the time. We read every single application. This is not automated.</p>
         <p class="lede">We'll review your application and reach out on WhatsApp if it's a fit.</p>
         <p class="confirm-redirect-note" id="redirect-note">Application received.</p>
-        <a id="wa-link" href="#" class="btn btn-accent">Continue</a>
+        <div class="confirm-actions">
+          <a id="wa-link" href="#" class="btn btn-accent">Continue</a>
+          <button type="button" id="btn-another" class="btn btn-outline-accent">Submit another response</button>
+        </div>
         <p class="confirmation-note">Your details stay private. We only use them to review your application.</p>
       </div>
     </div>
@@ -1728,10 +1900,10 @@ textarea.input{
 
 </main>
 
-<footer class="footer">
+<footer class="footer lazy-section">
   <div class="foot-inner">
     <div class="foot-top">
-      <div>
+      <div class="foot-brand">
         <div class="foot-brand-name">Start <em>with</em> Kunmi</div>
         <p class="foot-tag">
           A community for young people who want to learn, build and become capable of meaningful things. Founded by Kunmi the Great.
@@ -1988,6 +2160,52 @@ textarea.input{
 </script>
 
 <script>
+(function(){
+  'use strict';
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('mobileMenu');
+  if (!toggle || !menu) return;
+
+  var label = toggle.querySelector('.nav-toggle-label');
+
+  function open(){
+    menu.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    if (label) label.textContent = 'Close';
+    document.body.classList.add('nav-open');
+  }
+  function close(){
+    menu.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    if (label) label.textContent = 'Menu';
+    document.body.classList.remove('nav-open');
+  }
+  function isOpen(){ return menu.classList.contains('is-open'); }
+
+  toggle.addEventListener('click', function(){
+    isOpen() ? close() : open();
+  });
+
+  menu.querySelectorAll('[data-close]').forEach(function(a){
+    a.addEventListener('click', close);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && isOpen()) close();
+  });
+
+  var mq = window.matchMedia('(min-width: 900px)');
+  var handler = function(e){ if (e.matches && isOpen()) close(); };
+  if (mq.addEventListener) mq.addEventListener('change', handler);
+  else if (mq.addListener) mq.addListener(handler);
+})();
+</script>
+
+<script>
 (function () {
   'use strict';
 
@@ -2006,6 +2224,8 @@ textarea.input{
   var barFill = document.getElementById('bar-fill');
   var errEl = document.getElementById('form-error');
   var registerSec = document.getElementById('register');
+  var confirmedSec = document.getElementById('confirmed');
+  var btnAnother = document.getElementById('btn-another');
 
   var isSubmitting = false;
 
@@ -2084,10 +2304,7 @@ textarea.input{
     btnNext.disabled = true;
     btnNextText.textContent = 'Submitting…';
 
-    /* Fill these in when you're ready:
-       GAS_URL = Google Apps Script Web App URL
-       REDIRECT_URL = where the confirmation button goes */
-    var GAS_URL = 'https://script.google.com/macros/s/AKfycbxPPPPoK6vuqjYDsfGI_hmvFXotDS-pbM7xzwKmpythnvZT29_etmO9S5UfB-ZjTe9a/exec';
+    var GAS_URL = '/api/submit';
     var REDIRECT_URL = '';
 
     function radioVal(field) {
@@ -2106,7 +2323,8 @@ textarea.input{
       currentChallenge: radioVal('currentChallenge'),
       finalResponse: (form.querySelector('#f-finalResponse').value || '').trim(),
       submittedAt: new Date().toISOString(),
-      source: 'Start With Kunmi — Apply'
+      source: 'Start With Kunmi — Apply',
+      website: (honeypot && honeypot.value) || ''
     };
 
     var waLink = document.getElementById('wa-link');
@@ -2119,17 +2337,16 @@ textarea.input{
 
     function showConfirmation() {
       registerSec.style.display = 'none';
-      var conf = document.getElementById('confirmed');
-      conf.classList.add('show');
+      confirmedSec.classList.add('show');
 
-      var confCard = conf.querySelector('.confirmation-card');
+      var confCard = confirmedSec.querySelector('.confirmation-card');
       if (confCard) {
         var y = confCard.getBoundingClientRect().top + window.scrollY - 96;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
 
       setTimeout(function () {
-        var heading = conf.querySelector('h2');
+        var heading = confirmedSec.querySelector('h2');
         if (heading) {
           heading.setAttribute('tabindex', '-1');
           heading.focus({ preventScroll: true });
@@ -2138,12 +2355,21 @@ textarea.input{
 
       var note = document.getElementById('redirect-note');
       if (note) note.textContent = REDIRECT_URL ? 'Redirecting…' : 'Application received.';
+
+      isSubmitting = false;
+      btnNext.disabled = false;
+      btnNextText.textContent = 'Submit Application';
     }
 
     if (GAS_URL) {
       fetch(GAS_URL, {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Submit failed');
+        return res.json().catch(function(){ return {}; });
       })
       .then(function () { showConfirmation(); })
       .catch(function (err) {
@@ -2159,6 +2385,25 @@ textarea.input{
       setTimeout(showConfirmation, 400);
     }
   });
+
+  if (btnAnother) {
+    btnAnother.addEventListener('click', function () {
+      form.reset();
+      errEl.textContent = '';
+      errEl.classList.add('hidden');
+      var hp = document.getElementById('f-website');
+      if (hp) hp.value = '';
+      showStep(0);
+      confirmedSec.classList.remove('show');
+      registerSec.style.display = '';
+      setTimeout(function () {
+        var y = registerSec.getBoundingClientRect().top + window.scrollY - 96;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        var firstInput = document.getElementById('f-name');
+        if (firstInput) firstInput.focus({ preventScroll: true });
+      }, 60);
+    });
+  }
 
   showStep(0);
 })();
