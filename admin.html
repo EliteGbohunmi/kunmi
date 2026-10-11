@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications — Start With Kunmi</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F3FB;
+  --surface:#FFFFFF;
+  --dark:#1C1038;
+  --ink:#0F0F0F;
+  --muted:#6E6660;
+  --accent:#4A0D8F;
+  --accent-deep:#35066B;
+  --accent-light:#7B4BC9;
+  --pink:#F500E0;
+  --border:#E8E4DC;
+  --border-soft:#F0EBF5;
+  --radius:15px;
+  --font-display:'Bricolage Grotesque','Archivo',system-ui,sans-serif;
+  --font-body:'Archivo',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --shadow-card:0 2px 4px rgba(28,16,56,.03), 0 12px 28px -18px rgba(28,16,56,.16);
+  --shadow-hover:0 4px 8px rgba(28,16,56,.04), 0 20px 40px -18px rgba(74,13,143,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+input{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:#fff}
+
+.icon{
+  width:1.1rem;height:1.1rem;flex:0 0 auto;
+  fill:none;stroke:currentColor;stroke-width:2.25;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* ============================================================
+   LOGIN GATE
+   ============================================================ */
+.gate{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--dark);
+  padding:2rem;
+  overflow:hidden;
+}
+.gate::before,.gate::after{
+  content:'';position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
+}
+.gate::before{
+  width:60vw;height:60vw;max-width:800px;max-height:800px;
+  left:-15vw;top:-15vw;
+  background:radial-gradient(circle,rgba(123,75,201,.5) 0%,rgba(74,13,143,0) 70%);
+}
+.gate::after{
+  width:40vw;height:40vw;max-width:600px;max-height:600px;
+  right:-10vw;bottom:-10vw;
+  background:radial-gradient(circle,rgba(245,0,224,.22) 0%,rgba(245,0,224,0) 70%);
+}
+.gate-card{
+  position:relative;z-index:2;
+  width:100%;max-width:440px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:var(--radius);
+  padding:3rem 2.5rem 2.5rem;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.6);
+}
+.gate-brand{
+  font-family:var(--font-display);
+  font-size:1.15rem;font-weight:700;
+  letter-spacing:-.02em;color:#fff;
+  margin-bottom:2.5rem;
+}
+.gate-brand em{font-style:italic;color:var(--accent-light)}
+.gate h1{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,4vw,2rem);
+  font-weight:800;letter-spacing:-.02em;line-height:1.1;
+  color:#fff;margin-bottom:.65rem;
+}
+.gate h1 em{font-style:italic;font-weight:400;color:var(--accent-light)}
+.gate-hint{
+  font-size:.95rem;color:rgba(255,255,255,.62);
+  margin-bottom:2rem;line-height:1.6;
+}
+.gate-field{position:relative;margin-bottom:1rem}
+.gate-field input{
+  width:100%;
+  padding:1rem 1.15rem;
+  font-family:var(--font-body);font-size:1rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;
+  color:#fff;
+  transition:border-color .25s, background-color .25s;
+}
+.gate-field input::placeholder{color:rgba(255,255,255,.35)}
+.gate-field input:focus{
+  outline:none;
+  border-color:var(--pink);
+  background:rgba(255,255,255,.08);
+}
+.gate-submit{
+  width:100%;
+  padding:1rem 1.25rem;
+  background:var(--accent);
+  color:#fff;
+  border-radius:12px;
+  font-family:var(--font-body);font-size:.78rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:background-color .25s, transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.7rem;
+}
+.gate-submit:hover{background:var(--accent-deep)}
+.gate-submit:active{transform:scale(.985)}
+.gate-submit:disabled{opacity:.55;cursor:not-allowed}
+.gate-error{
+  margin-top:1rem;
+  font-size:.88rem;color:#FF6EC7;
+  min-height:1.2em;
+  font-weight:500;
+}
+.gate-foot{
+  margin-top:2rem;
+  font-family:var(--font-mono);font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.dash{display:none;padding:0 0 5rem}
+.dash.is-visible{display:block}
+
+.dash-top{
+  background:var(--dark);
+  color:#fff;
+  padding:1.5rem 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.dash-top-brand{
+  font-family:var(--font-display);
+  font-size:1rem;font-weight:700;
+  letter-spacing:-.02em;
+}
+.dash-top-brand em{font-style:italic;color:var(--accent-light)}
+.dash-top-meta{
+  display:flex;align-items:center;gap:1.25rem;
+  font-family:var(--font-mono);font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+}
+.live-dot{
+  display:inline-block;width:.55rem;height:.55rem;border-radius:50%;
+  background:var(--pink);margin-right:.5rem;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.4)}
+}
+.dash-top button{
+  padding:.6rem 1.1rem;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  color:rgba(255,255,255,.75);
+  font-family:var(--font-mono);font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:border-color .25s, color .25s;
+}
+.dash-top button:hover{border-color:var(--pink);color:#fff}
+
+.dash-inner{
+  max-width:1400px;margin-inline:auto;
+  padding:3rem 5vw 0;
+}
+
+/* Hero stat */
+.stat-hero{
+  display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;
+  margin-bottom:2.5rem;
+}
+.stat-num{
+  font-family:var(--font-display);
+  font-size:clamp(4rem,10vw,8rem);
+  font-weight:800;letter-spacing:-.055em;line-height:.85;
+  color:var(--accent);
+}
+.stat-label{
+  padding-bottom:1rem;
+}
+.stat-label strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:1.1rem;font-weight:700;
+  letter-spacing:-.01em;color:var(--ink);
+  text-transform:uppercase;
+}
+.stat-label span{
+  font-family:var(--font-mono);font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Controls */
+.controls{
+  display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;
+  margin-bottom:2rem;
+  padding:1rem;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+}
+.search-wrap{
+  position:relative;flex:1 1 260px;min-width:0;
+}
+.search-wrap .icon{
+  position:absolute;left:1rem;top:50%;transform:translateY(-50%);
+  color:var(--muted);pointer-events:none;
+  width:1rem;height:1rem;
+}
+.search-input{
+  width:100%;
+  padding:.75rem 1rem .75rem 2.75rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--bg);
+  font-size:.92rem;
+  transition:border-color .25s, background-color .25s;
+}
+.search-input:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:var(--surface);
+}
+.filter-pills{
+  display:flex;gap:.4rem;flex-wrap:wrap;
+}
+.pill{
+  padding:.55rem 1rem;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  font-family:var(--font-body);font-size:.78rem;font-weight:600;
+  letter-spacing:.02em;
+  color:var(--muted);
+  transition:all .2s;
+}
+.pill:hover{border-color:var(--accent-light);color:var(--ink)}
+.pill.is-active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  gap:1.25rem;
+}
+@media(min-width:1200px){
+  .grid{grid-template-columns:repeat(4, 1fr)}
+}
+@media(min-width:900px) and (max-width:1199px){
+  .grid{grid-template-columns:repeat(3, 1fr)}
+}
+@media(min-width:600px) and (max-width:899px){
+  .grid{grid-template-columns:repeat(2, 1fr)}
+}
+
+/* Card */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.5rem 1.35rem 1.35rem;
+  box-shadow:var(--shadow-card);
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .25s;
+  display:flex;flex-direction:column;gap:1rem;
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;left:0;top:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--accent), var(--pink));
+  opacity:0;transition:opacity .3s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--accent-light);
+}
+.card:hover::before{opacity:1}
+.card.is-new{
+  animation:cardNew 3s ease-out;
+}
+@keyframes cardNew{
+  0%{box-shadow:0 0 0 0 rgba(245,0,224,.5)}
+  100%{box-shadow:var(--shadow-card)}
+}
+.card.is-new::before{opacity:1}
+
+.card-head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+}
+.card-name{
+  font-family:var(--font-display);
+  font-size:1.15rem;font-weight:700;
+  letter-spacing:-.015em;line-height:1.2;
+  color:var(--ink);
+  word-break:break-word;
+}
+.card-date{
+  font-family:var(--font-mono);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+  padding-top:.2rem;
+}
+
+.tag-row{
+  display:flex;flex-wrap:wrap;gap:.35rem;
+}
+.tag{
+  font-family:var(--font-mono);font-size:.6rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem .6rem;border-radius:6px;
+  background:var(--bg);
+  color:var(--muted);
+  border:1px solid var(--border-soft);
+}
+.tag.accent{background:rgba(74,13,143,.06);color:var(--accent);border-color:rgba(74,13,143,.14)}
+
+.card-actions{
+  display:flex;gap:.5rem;
+  padding-top:.25rem;
+}
+.btn-wa{
+  flex:1;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.7rem 1rem;
+  background:var(--accent);
+  color:#fff;
+  border-radius:10px;
+  font-family:var(--font-body);font-size:.72rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  transition:background-color .25s;
+}
+.btn-wa:hover{background:var(--accent-deep)}
+.btn-wa .icon{width:.95rem;height:.95rem}
+.btn-copy{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:.7rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:var(--muted);
+  transition:border-color .25s, color .25s;
+}
+.btn-copy:hover{border-color:var(--accent);color:var(--accent)}
+.btn-copy .icon{width:1rem;height:1rem}
+
+.card-answers{
+  display:flex;flex-direction:column;gap:.9rem;
+  padding-top:.5rem;
+  border-top:1px solid var(--border-soft);
+}
+.qa{display:flex;flex-direction:column;gap:.3rem}
+.qa-label{
+  font-family:var(--font-mono);font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);
+}
+.qa-body{
+  font-size:.88rem;line-height:1.6;
+  color:var(--ink);
+  word-break:break-word;
+  white-space:pre-wrap;
+}
+.qa-body.clamped{
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.qa-toggle{
+  align-self:flex-start;
+  font-family:var(--font-mono);font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);
+  padding:.2rem 0;
+  border-bottom:1px solid transparent;
+  transition:border-color .2s;
+}
+.qa-toggle:hover{border-bottom-color:var(--accent)}
+
+/* Empty state */
+.empty{
+  grid-column:1 / -1;
+  text-align:center;
+  padding:5rem 2rem;
+  background:var(--surface);
+  border:1px dashed var(--border);
+  border-radius:var(--radius);
+}
+.empty h2{
+  font-family:var(--font-display);
+  font-size:1.5rem;font-weight:700;
+  letter-spacing:-.02em;color:var(--ink);
+  margin-bottom:.5rem;
+}
+.empty p{color:var(--muted);font-size:.95rem}
+
+/* Loader */
+.loading{
+  text-align:center;padding:3rem 1rem;
+  font-family:var(--font-mono);font-size:.7rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Toast for copy */
+.toast{
+  position:fixed;
+  bottom:2rem;left:50%;transform:translateX(-50%) translateY(150%);
+  background:var(--ink);color:#fff;
+  padding:.85rem 1.5rem;border-radius:10px;
+  font-family:var(--font-body);font-size:.85rem;
+  box-shadow:0 20px 40px -12px rgba(0,0,0,.4);
+  z-index:999;
+  transition:transform .4s cubic-bezier(.25,.46,.45,.94);
+  pointer-events:none;
+}
+.toast.is-visible{transform:translateX(-50%) translateY(0)}
+
+/* Mobile */
+@media(max-width:600px){
+  .dash-top{padding:1rem 5vw}
+  .dash-top-meta{gap:.75rem;font-size:.6rem}
+  .dash-inner{padding:2rem 5vw 0}
+  .stat-hero{margin-bottom:1.75rem}
+  .card{padding:1.25rem 1.15rem 1.15rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN GATE
+     ============================================================ -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-brand">Start <em>with</em> Kunmi</div>
+    <h1>Applications <em>access.</em></h1>
+    <p class="gate-hint">Enter the team password to view submissions.</p>
+    <form id="gateForm">
+      <div class="gate-field">
+        <input type="password" id="gateInput" placeholder="Password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="gate-submit" id="gateSubmit">
+        <span id="gateBtnText">Enter</span>
+        <svg class="icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <p class="gate-error" id="gateError"></p>
+    </form>
+    <p class="gate-foot">Private · Team only</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD
+     ============================================================ -->
+<div class="dash" id="dash">
+  <div class="dash-top">
+    <div class="dash-top-brand">Start <em>with</em> Kunmi · Applications</div>
+    <div class="dash-top-meta">
+      <span><span class="live-dot"></span>Live</span>
+      <span id="lastUpdate">—</span>
+    </div>
+    <button id="logoutBtn">Log out</button>
+  </div>
+
+  <div class="dash-inner">
+    <div class="stat-hero">
+      <div class="stat-num" id="countNum">0</div>
+      <div class="stat-label">
+        <strong>Applications received</strong>
+        <span id="countSub">Loading…</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search name, country, role…" autocomplete="off">
+      </div>
+      <div class="filter-pills" id="filterPills">
+        <button class="pill is-active" data-filter="all">All</button>
+        <button class="pill" data-filter="Student">Students</button>
+        <button class="pill" data-filter="Business Owner">Business Owners</button>
+        <button class="pill" data-filter="Creator">Creators</button>
+        <button class="pill" data-filter="Freelancer">Freelancers</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+      <div class="loading" id="loading">Loading applications…</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var STORAGE_KEY = 'swk_admin_pw';
+  var gate = document.getElementById('gate');
+  var dash = document.getElementById('dash');
+  var gateForm = document.getElementById('gateForm');
+  var gateInput = document.getElementById('gateInput');
+  var gateError = document.getElementById('gateError');
+  var gateSubmit = document.getElementById('gateSubmit');
+  var gateBtnText = document.getElementById('gateBtnText');
+  var grid = document.getElementById('grid');
+  var loading = document.getElementById('loading');
+  var countNum = document.getElementById('countNum');
+  var countSub = document.getElementById('countSub');
+  var lastUpdate = document.getElementById('lastUpdate');
+  var searchInput = document.getElementById('searchInput');
+  var filterPills = document.getElementById('filterPills');
+  var logoutBtn = document.getElementById('logoutBtn');
+  var toast = document.getElementById('toast');
+
+  var password = null;
+  var allApps = [];
+  var seenIds = new Set();
+  var currentFilter = 'all';
+  var currentQuery = '';
+  var pollTimer = null;
+  var firstLoad = true;
+
+  /* ---------- Auto-login if password saved in session ---------- */
+  var saved = null;
+  try { saved = sessionStorage.getItem(STORAGE_KEY); } catch(e){}
+  if (saved) {
+    password = saved;
+    tryLoad();
+  }
+
+  /* ---------- Gate submit ---------- */
+  gateForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var val = gateInput.value.trim();
+    if (!val) return;
+    password = val;
+    gateError.textContent = '';
+    gateBtnText.textContent = 'Checking…';
+    gateSubmit.disabled = true;
+    tryLoad(true);
+  });
+
+  /* ---------- Load data from API ---------- */
+  function tryLoad(fromGate){
+    fetch('/api/submissions', {
+      headers: { 'x-admin-password': password }
+    })
+    .then(function(res){
+      if (res.status === 401) throw new Error('wrong');
+      if (!res.ok) throw new Error('fail');
+      return res.json();
+    })
+    .then(function(data){
+      // Success
+      try { sessionStorage.setItem(STORAGE_KEY, password); } catch(e){}
+      gate.style.display = 'none';
+      dash.classList.add('is-visible');
+      handleData(data);
+      startPolling();
+    })
+    .catch(function(err){
+      if (fromGate) {
+        gateBtnText.textContent = 'Enter';
+        gateSubmit.disabled = false;
+        if (err.message === 'wrong') {
+          gateError.textContent = 'Wrong password. Try again.';
+          gateInput.value = '';
+          gateInput.focus();
+        } else {
+          gateError.textContent = 'Could not connect. Try again.';
+        }
+      } else {
+        // Silent fail on auto-login — show gate
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
+        password = null;
+      }
+    });
+  }
+
+  /* ---------- Polling every 30 seconds ---------- */
+  function startPolling(){
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(function(){
+      fetch('/api/submissions', {
+        headers: { 'x-admin-password': password }
+      })
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){ if (data) handleData(data, true); })
+      .catch(function(){ /* silent */ });
+    }, 30000);
+  }
+
+  /* ---------- Handle incoming data ---------- */
+  function handleData(data, isRefresh){
+    var incoming = data.applications || [];
+
+    // Detect new IDs
+    var newIds = new Set();
+    if (!firstLoad) {
+      incoming.forEach(function(app){
+        if (!seenIds.has(app.id)) newIds.add(app.id);
+      });
+    }
+
+    seenIds.clear();
+    incoming.forEach(function(app){ seenIds.add(app.id); });
+
+    allApps = incoming;
+
+    // Update count
+    countNum.textContent = data.count.toLocaleString();
+    countSub.textContent = data.count === 0
+      ? 'No applications yet'
+      : (data.count === 1 ? '1 person has applied' : data.count + ' people have applied');
+
+    // Update timestamp
+    var now = new Date();
+    lastUpdate.textContent = 'Updated ' + now.toLocaleTimeString('en-NG', { hour:'2-digit', minute:'2-digit' });
+
+    render(newIds);
+    firstLoad = false;
+  }
+
+  /* ---------- Render grid ---------- */
+  function render(newIds){
+    newIds = newIds || new Set();
+
+    var filtered = allApps.filter(function(app){
+      if (currentFilter !== 'all' && app.role !== currentFilter) return false;
+      if (currentQuery) {
+        var q = currentQuery.toLowerCase();
+        var hay = [
+          app.name, app.country, app.role, app.what_building,
+          app.current_challenge, app.final_response
+        ].filter(Boolean).join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="empty">' +
+        '<h2>' + (allApps.length === 0 ? 'No applications yet.' : 'Nothing matches.') + '</h2>' +
+        '<p>' + (allApps.length === 0
+          ? 'New submissions will appear here automatically.'
+          : 'Try clearing your search or filters.') + '</p>' +
+        '</div>';
+      return;
+    }
+
+    // Preserve scroll — we rebuild but the browser keeps scroll position
+    var scrollY = window.scrollY;
+
+    var html = filtered.map(function(app){
+      return renderCard(app, newIds.has(app.id));
+    }).join('');
+
+    grid.innerHTML = html;
+
+    // Restore scroll
+    window.scrollTo(0, scrollY);
+
+    // Wire toggles
+    grid.querySelectorAll('.qa-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var body = btn.previousElementSibling;
+        var isClamped = body.classList.contains('clamped');
+        body.classList.toggle('clamped');
+        btn.textContent = isClamped ? 'Show less' : 'Read more';
+      });
+    });
+
+    // Wire copy buttons
+    grid.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var text = btn.getAttribute('data-copy');
+        copyToClipboard(text);
+      });
+    });
+  }
+
+  /* ---------- Card HTML ---------- */
+  function renderCard(app, isNew){
+    var initials = getInitials(app.name);
+    var waNumber = sanitizeWA(app.whatsapp);
+    var waHref = 'https://wa.me/' + waNumber + '?text=' +
+      encodeURIComponent('Hi ' + (app.name || '').split(' ')[0] + ', this is Kunmi. Thanks for applying to Start With Kunmi!');
+
+    var date = '';
+    if (app.submitted_at) {
+      var d = new Date(app.submitted_at);
+      date = d.toLocaleDateString('en-NG', { day:'numeric', month:'short' });
+    }
+
+    return '' +
+      '<article class="card' + (isNew ? ' is-new' : '') + '">' +
+        '<div class="card-head">' +
+          '<div class="card-name">' + esc(app.name) + '</div>' +
+          '<div class="card-date">' + esc(date) + '</div>' +
+        '</div>' +
+        '<div class="tag-row">' +
+          (app.country ? '<span class="tag accent">' + esc(app.country) + '</span>' : '') +
+          (app.age_range ? '<span class="tag">' + esc(app.age_range) + '</span>' : '') +
+          (app.role ? '<span class="tag">' + esc(app.role) + '</span>' : '') +
+        '</div>' +
+        '<div class="card-answers">' +
+          qa('Working on', app.what_building) +
+          qa('Stuck on', app.current_challenge) +
+          qa('Wants to leave with', app.final_response) +
+        '</div>' +
+        '<div class="card-actions">' +
+          '<a class="btn-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
+            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
+            'WhatsApp' +
+          '</a>' +
+          '<button class="btn-copy" data-copy="' + escAttr(app.whatsapp) + '" title="Copy number">' +
+            '<svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+          '</button>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function qa(label, value){
+    if (!value) return '';
+    var long = String(value).length > 180;
+    return '' +
+      '<div class="qa">' +
+        '<div class="qa-label">' + esc(label) + '</div>' +
+        '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(value) + '</div>' +
+        (long ? '<button type="button" class="qa-toggle">Read more</button>' : '') +
+      '</div>';
+  }
+
+  function getInitials(name){
+    if (!name) return '?';
+    return name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
+  }
+
+  /* ---------- Utils ---------- */
+  function esc(s){
+    if (s === null || s === undefined) return '';
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function escAttr(s){ return esc(s); }
+
+  function sanitizeWA(num){
+    if (!num) return '';
+    var digits = String(num).replace(/\D/g, '');
+    // Nigeria: if starts with 0, replace with 234
+    if (digits.length === 11 && digits.charAt(0) === '0') {
+      digits = '234' + digits.slice(1);
+    } else if (digits.length === 10) {
+      digits = '234' + digits;
+    }
+    return digits;
+  }
+
+  function copyToClipboard(text){
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('Number copied');
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast('Number copied'); } catch(e){}
+      document.body.removeChild(ta);
+    }
+  }
+
+  var toastTimer = null;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      toast.classList.remove('is-visible');
+    }, 2000);
+  }
+
+  /* ---------- Search & filter ---------- */
+  var searchDebounce = null;
+  searchInput.addEventListener('input', function(){
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(function(){
+      currentQuery = searchInput.value.trim();
+      render();
+    }, 180);
+  });
+
+  filterPills.addEventListener('click', function(e){
+    var pill = e.target.closest('.pill');
+    if (!pill) return;
+    filterPills.querySelectorAll('.pill').forEach(function(p){ p.classList.remove('is-active'); });
+    pill.classList.add('is-active');
+    currentFilter = pill.getAttribute('data-filter');
+    render();
+  });
+
+  /* ---------- Log out ---------- */
+  logoutBtn.addEventListener('click', function(){
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
+    password = null;
+    if (pollTimer) clearInterval(pollTimer);
+    dash.classList.remove('is-visible');
+    gate.style.display = 'flex';
+    gateInput.value = '';
+    gateError.textContent = '';
+    gateBtnText.textContent = 'Enter';
+    gateSubmit.disabled = false;
+    gateInput.focus();
+  });
+
+})();
+</script>
+</body>
+</html>
