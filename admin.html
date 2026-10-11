@@ -19,6 +19,9 @@
   --accent-deep:#35066B;
   --accent-light:#7B4BC9;
   --pink:#F500E0;
+  --green:#0F8A4C;
+  --amber:#B8791F;
+  --red:#B7291F;
   --border:#E8E4DC;
   --border-soft:#F0EBF5;
   --radius:15px;
@@ -29,14 +32,10 @@
   --shadow-hover:0 4px 8px rgba(28,16,56,.04), 0 20px 40px -18px rgba(74,13,143,.28);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
 body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--font-body);
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh;
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);line-height:1.55;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
 }
 img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
@@ -50,15 +49,11 @@ a{color:inherit;text-decoration:none}
   stroke-linecap:round;stroke-linejoin:round;
 }
 
-/* ============================================================
-   LOGIN GATE
-   ============================================================ */
+/* ==== LOGIN GATE ==== */
 .gate{
   position:fixed;inset:0;z-index:100;
   display:flex;align-items:center;justify-content:center;
-  background:var(--dark);
-  padding:2rem;
-  overflow:hidden;
+  background:var(--dark);padding:2rem;overflow:hidden;
 }
 .gate::before,.gate::after{
   content:'';position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
@@ -74,12 +69,10 @@ a{color:inherit;text-decoration:none}
   background:radial-gradient(circle,rgba(245,0,224,.22) 0%,rgba(245,0,224,0) 70%);
 }
 .gate-card{
-  position:relative;z-index:2;
-  width:100%;max-width:440px;
+  position:relative;z-index:2;width:100%;max-width:440px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-radius:var(--radius);
   padding:3rem 2.5rem 2.5rem;
   box-shadow:0 40px 80px -40px rgba(0,0,0,.6);
@@ -87,8 +80,7 @@ a{color:inherit;text-decoration:none}
 .gate-brand{
   font-family:var(--font-display);
   font-size:1.15rem;font-weight:700;
-  letter-spacing:-.02em;color:#fff;
-  margin-bottom:2.5rem;
+  letter-spacing:-.02em;color:#fff;margin-bottom:2.5rem;
 }
 .gate-brand em{font-style:italic;color:var(--accent-light)}
 .gate h1{
@@ -104,27 +96,20 @@ a{color:inherit;text-decoration:none}
 }
 .gate-field{position:relative;margin-bottom:1rem}
 .gate-field input{
-  width:100%;
-  padding:1rem 1.15rem;
+  width:100%;padding:1rem 1.15rem;
   font-family:var(--font-body);font-size:1rem;
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.16);
-  border-radius:12px;
-  color:#fff;
+  border-radius:12px;color:#fff;
   transition:border-color .25s, background-color .25s;
 }
 .gate-field input::placeholder{color:rgba(255,255,255,.35)}
 .gate-field input:focus{
-  outline:none;
-  border-color:var(--pink);
-  background:rgba(255,255,255,.08);
+  outline:none;border-color:var(--pink);background:rgba(255,255,255,.08);
 }
 .gate-submit{
-  width:100%;
-  padding:1rem 1.25rem;
-  background:var(--accent);
-  color:#fff;
-  border-radius:12px;
+  width:100%;padding:1rem 1.25rem;
+  background:var(--accent);color:#fff;border-radius:12px;
   font-family:var(--font-body);font-size:.78rem;font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;
   transition:background-color .25s, transform .15s;
@@ -133,37 +118,25 @@ a{color:inherit;text-decoration:none}
 .gate-submit:hover{background:var(--accent-deep)}
 .gate-submit:active{transform:scale(.985)}
 .gate-submit:disabled{opacity:.55;cursor:not-allowed}
-.gate-error{
-  margin-top:1rem;
-  font-size:.88rem;color:#FF6EC7;
-  min-height:1.2em;
-  font-weight:500;
-}
+.gate-error{margin-top:1rem;font-size:.88rem;color:#FF6EC7;min-height:1.2em;font-weight:500}
 .gate-foot{
-  margin-top:2rem;
-  font-family:var(--font-mono);font-size:.68rem;
-  letter-spacing:.14em;text-transform:uppercase;
+  margin-top:2rem;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.35);
 }
 
-/* ============================================================
-   DASHBOARD
-   ============================================================ */
+/* ==== DASHBOARD ==== */
 .dash{display:none;padding:0 0 5rem}
 .dash.is-visible{display:block}
 
 .dash-top{
-  background:var(--dark);
-  color:#fff;
-  padding:1.5rem 5vw;
+  background:var(--dark);color:#fff;padding:1.5rem 5vw;
   display:flex;align-items:center;justify-content:space-between;
-  gap:1.5rem;
-  flex-wrap:wrap;
+  gap:1.5rem;flex-wrap:wrap;
 }
 .dash-top-brand{
   font-family:var(--font-display);
-  font-size:1rem;font-weight:700;
-  letter-spacing:-.02em;
+  font-size:1rem;font-weight:700;letter-spacing:-.02em;
 }
 .dash-top-brand em{font-style:italic;color:var(--accent-light)}
 .dash-top-meta{
@@ -181,116 +154,83 @@ a{color:inherit;text-decoration:none}
   0%,100%{opacity:1;transform:scale(1)}
   50%{opacity:.5;transform:scale(1.4)}
 }
-.dash-top button{
-  padding:.6rem 1.1rem;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:10px;
-  color:rgba(255,255,255,.75);
+.dash-top-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.dash-top-actions button, .dash-top-actions a{
+  padding:.6rem 1.1rem;border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;color:rgba(255,255,255,.75);
   font-family:var(--font-mono);font-size:.66rem;
   letter-spacing:.14em;text-transform:uppercase;
-  transition:border-color .25s, color .25s;
+  transition:border-color .25s, color .25s, background-color .25s;
+  display:inline-flex;align-items:center;gap:.5rem;
 }
-.dash-top button:hover{border-color:var(--pink);color:#fff}
+.dash-top-actions button:hover, .dash-top-actions a:hover{
+  border-color:var(--pink);color:#fff;
+}
+.dash-top-actions .export-btn{border-color:rgba(245,0,224,.4);color:#FFB8F0}
 
-.dash-inner{
-  max-width:1400px;margin-inline:auto;
-  padding:3rem 5vw 0;
-}
+.dash-inner{max-width:1400px;margin-inline:auto;padding:3rem 5vw 0}
 
-/* Hero stat */
-.stat-hero{
-  display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;
-  margin-bottom:2.5rem;
-}
+.stat-hero{display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
 .stat-num{
   font-family:var(--font-display);
   font-size:clamp(4rem,10vw,8rem);
   font-weight:800;letter-spacing:-.055em;line-height:.85;
   color:var(--accent);
 }
-.stat-label{
-  padding-bottom:1rem;
-}
+.stat-label{padding-bottom:1rem}
 .stat-label strong{
-  display:block;
-  font-family:var(--font-display);
-  font-size:1.1rem;font-weight:700;
-  letter-spacing:-.01em;color:var(--ink);
-  text-transform:uppercase;
+  display:block;font-family:var(--font-display);
+  font-size:1.1rem;font-weight:700;letter-spacing:-.01em;
+  color:var(--ink);text-transform:uppercase;
 }
 .stat-label span{
   font-family:var(--font-mono);font-size:.7rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.stat-label .new-badge{
+  display:inline-block;margin-left:.6rem;padding:.15rem .55rem;
+  background:var(--pink);color:#fff;border-radius:999px;
+  font-size:.6rem;letter-spacing:.1em;
 }
 
 /* Controls */
 .controls{
   display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;
-  margin-bottom:2rem;
-  padding:1rem;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow-card);
+  margin-bottom:2rem;padding:1rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow-card);
 }
-.search-wrap{
-  position:relative;flex:1 1 260px;min-width:0;
-}
+.search-wrap{position:relative;flex:1 1 260px;min-width:0}
 .search-wrap .icon{
   position:absolute;left:1rem;top:50%;transform:translateY(-50%);
-  color:var(--muted);pointer-events:none;
-  width:1rem;height:1rem;
+  color:var(--muted);pointer-events:none;width:1rem;height:1rem;
 }
 .search-input{
-  width:100%;
-  padding:.75rem 1rem .75rem 2.75rem;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:var(--bg);
-  font-size:.92rem;
+  width:100%;padding:.75rem 1rem .75rem 2.75rem;
+  border:1px solid var(--border);border-radius:10px;
+  background:var(--bg);font-size:.92rem;
   transition:border-color .25s, background-color .25s;
 }
-.search-input:focus{
-  outline:none;
-  border-color:var(--accent);
-  background:var(--surface);
-}
-.filter-pills{
-  display:flex;gap:.4rem;flex-wrap:wrap;
-}
+.search-input:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+.filter-pills{display:flex;gap:.4rem;flex-wrap:wrap}
 .pill{
-  padding:.55rem 1rem;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--surface);
+  padding:.55rem 1rem;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);
   font-family:var(--font-body);font-size:.78rem;font-weight:600;
-  letter-spacing:.02em;
-  color:var(--muted);
+  letter-spacing:.02em;color:var(--muted);
   transition:all .2s;
 }
 .pill:hover{border-color:var(--accent-light);color:var(--ink)}
-.pill.is-active{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#fff;
-}
+.pill.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
 
 /* Grid */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
   gap:1.25rem;
 }
-@media(min-width:1200px){
-  .grid{grid-template-columns:repeat(4, 1fr)}
-}
-@media(min-width:900px) and (max-width:1199px){
-  .grid{grid-template-columns:repeat(3, 1fr)}
-}
-@media(min-width:600px) and (max-width:899px){
-  .grid{grid-template-columns:repeat(2, 1fr)}
-}
+@media(min-width:1200px){.grid{grid-template-columns:repeat(3, 1fr)}}
+@media(min-width:900px) and (max-width:1199px){.grid{grid-template-columns:repeat(2, 1fr)}}
 
 /* Card */
 .card{
@@ -301,8 +241,7 @@ a{color:inherit;text-decoration:none}
   box-shadow:var(--shadow-card);
   transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .25s;
   display:flex;flex-direction:column;gap:1rem;
-  position:relative;
-  overflow:hidden;
+  position:relative;overflow:hidden;
 }
 .card::before{
   content:'';position:absolute;left:0;top:0;right:0;height:3px;
@@ -315,14 +254,21 @@ a{color:inherit;text-decoration:none}
   border-color:var(--accent-light);
 }
 .card:hover::before{opacity:1}
-.card.is-new{
-  animation:cardNew 3s ease-out;
+
+.card.is-unseen::after{
+  content:'';position:absolute;top:1rem;right:1rem;
+  width:.5rem;height:.5rem;border-radius:50%;
+  background:var(--pink);
+  box-shadow:0 0 0 3px rgba(245,0,224,.18);
 }
+.card.is-accepted{border-left:3px solid var(--green)}
+.card.is-maybe{border-left:3px solid var(--amber)}
+.card.is-rejected{border-left:3px solid var(--red)}
+.card.is-new{animation:cardNew 3s ease-out}
 @keyframes cardNew{
   0%{box-shadow:0 0 0 0 rgba(245,0,224,.5)}
   100%{box-shadow:var(--shadow-card)}
 }
-.card.is-new::before{opacity:1}
 
 .card-head{
   display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
@@ -331,145 +277,151 @@ a{color:inherit;text-decoration:none}
   font-family:var(--font-display);
   font-size:1.15rem;font-weight:700;
   letter-spacing:-.015em;line-height:1.2;
-  color:var(--ink);
-  word-break:break-word;
+  color:var(--ink);word-break:break-word;
 }
 .card-date{
   font-family:var(--font-mono);font-size:.62rem;
   letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);white-space:nowrap;
-  padding-top:.2rem;
+  color:var(--muted);white-space:nowrap;padding-top:.2rem;
+}
+.dup-badge{
+  display:inline-block;margin-top:.3rem;padding:.15rem .5rem;
+  background:rgba(245,0,224,.1);color:var(--pink);
+  border-radius:6px;font-family:var(--font-mono);
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
 }
 
-.tag-row{
-  display:flex;flex-wrap:wrap;gap:.35rem;
-}
+.tag-row{display:flex;flex-wrap:wrap;gap:.35rem}
 .tag{
   font-family:var(--font-mono);font-size:.6rem;
   letter-spacing:.12em;text-transform:uppercase;
   padding:.3rem .6rem;border-radius:6px;
-  background:var(--bg);
-  color:var(--muted);
+  background:var(--bg);color:var(--muted);
   border:1px solid var(--border-soft);
 }
 .tag.accent{background:rgba(74,13,143,.06);color:var(--accent);border-color:rgba(74,13,143,.14)}
+.tag.status-accepted{background:rgba(15,138,76,.1);color:var(--green);border-color:rgba(15,138,76,.2)}
+.tag.status-maybe{background:rgba(184,121,31,.1);color:var(--amber);border-color:rgba(184,121,31,.2)}
+.tag.status-rejected{background:rgba(183,41,31,.08);color:var(--red);border-color:rgba(183,41,31,.16)}
 
-.card-actions{
-  display:flex;gap:.5rem;
-  padding-top:.25rem;
+/* Action buttons */
+.action-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
 }
-.btn-wa{
-  flex:1;
+.btn-action{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   padding:.7rem 1rem;
-  background:var(--accent);
-  color:#fff;
   border-radius:10px;
   font-family:var(--font-body);font-size:.72rem;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;
-  transition:background-color .25s;
+  letter-spacing:.08em;text-transform:uppercase;
+  transition:background-color .25s, color .25s, border-color .25s;
 }
-.btn-wa:hover{background:var(--accent-deep)}
-.btn-wa .icon{width:.95rem;height:.95rem}
-.btn-copy{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:.7rem;
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:var(--muted);
-  transition:border-color .25s, color .25s;
-}
-.btn-copy:hover{border-color:var(--accent);color:var(--accent)}
-.btn-copy .icon{width:1rem;height:1rem}
+.btn-wa{background:#25D366;color:#fff;border:1px solid #25D366}
+.btn-wa:hover{background:#1eaa52;border-color:#1eaa52}
+.btn-mail{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn-mail:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn-action .icon{width:.95rem;height:.95rem}
 
-.card-answers{
-  display:flex;flex-direction:column;gap:.9rem;
-  padding-top:.5rem;
+/* Status pills */
+.status-row{
+  display:flex;gap:.4rem;padding-top:.5rem;
   border-top:1px solid var(--border-soft);
+  align-items:center;
 }
+.status-label{
+  font-family:var(--font-mono);font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-right:.25rem;
+}
+.status-pill{
+  padding:.4rem .75rem;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);
+  font-family:var(--font-body);font-size:.7rem;font-weight:600;
+  letter-spacing:.04em;color:var(--muted);
+  transition:all .2s;
+}
+.status-pill:hover{border-color:var(--accent-light)}
+.status-pill.is-on-accepted{background:var(--green);color:#fff;border-color:var(--green)}
+.status-pill.is-on-maybe{background:var(--amber);color:#fff;border-color:var(--amber)}
+.status-pill.is-on-rejected{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* Answers */
+.card-answers{display:flex;flex-direction:column;gap:.9rem;padding-top:.5rem;border-top:1px solid var(--border-soft)}
 .qa{display:flex;flex-direction:column;gap:.3rem}
 .qa-label{
   font-family:var(--font-mono);font-size:.6rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  display:flex;justify-content:space-between;align-items:center;
 }
-.qa-body{
-  font-size:.88rem;line-height:1.6;
-  color:var(--ink);
-  word-break:break-word;
-  white-space:pre-wrap;
-}
+.qa-words{color:var(--muted);font-size:.58rem;letter-spacing:.1em}
+.qa-body{font-size:.88rem;line-height:1.6;color:var(--ink);word-break:break-word;white-space:pre-wrap}
 .qa-body.clamped{
-  display:-webkit-box;
-  -webkit-line-clamp:4;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
 }
 .qa-toggle{
-  align-self:flex-start;
-  font-family:var(--font-mono);font-size:.62rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);
-  padding:.2rem 0;
-  border-bottom:1px solid transparent;
+  align-self:flex-start;font-family:var(--font-mono);
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);padding:.2rem 0;border-bottom:1px solid transparent;
   transition:border-color .2s;
 }
 .qa-toggle:hover{border-bottom-color:var(--accent)}
 
-/* Empty state */
+/* Empty, loading, footer */
 .empty{
-  grid-column:1 / -1;
-  text-align:center;
-  padding:5rem 2rem;
-  background:var(--surface);
-  border:1px dashed var(--border);
+  grid-column:1 / -1;text-align:center;padding:5rem 2rem;
+  background:var(--surface);border:1px dashed var(--border);
   border-radius:var(--radius);
 }
 .empty h2{
   font-family:var(--font-display);
   font-size:1.5rem;font-weight:700;
-  letter-spacing:-.02em;color:var(--ink);
-  margin-bottom:.5rem;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:.5rem;
 }
 .empty p{color:var(--muted);font-size:.95rem}
 
-/* Loader */
 .loading{
   text-align:center;padding:3rem 1rem;
   font-family:var(--font-mono);font-size:.7rem;
-  letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
 }
 
-/* Toast for copy */
+.load-more-wrap{
+  text-align:center;padding:3rem 0 1rem;
+}
+.load-more-btn{
+  padding:.9rem 2rem;border-radius:999px;
+  background:var(--accent);color:#fff;border:1px solid var(--accent);
+  font-family:var(--font-body);font-size:.78rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  transition:background-color .25s, transform .15s;
+}
+.load-more-btn:hover{background:var(--accent-deep)}
+.load-more-btn:disabled{opacity:.55;cursor:not-allowed}
+
 .toast{
-  position:fixed;
-  bottom:2rem;left:50%;transform:translateX(-50%) translateY(150%);
+  position:fixed;bottom:2rem;left:50%;
+  transform:translateX(-50%) translateY(150%);
   background:var(--ink);color:#fff;
   padding:.85rem 1.5rem;border-radius:10px;
   font-family:var(--font-body);font-size:.85rem;
   box-shadow:0 20px 40px -12px rgba(0,0,0,.4);
-  z-index:999;
-  transition:transform .4s cubic-bezier(.25,.46,.45,.94);
+  z-index:999;transition:transform .4s cubic-bezier(.25,.46,.45,.94);
   pointer-events:none;
 }
 .toast.is-visible{transform:translateX(-50%) translateY(0)}
 
-/* Mobile */
 @media(max-width:600px){
   .dash-top{padding:1rem 5vw}
   .dash-top-meta{gap:.75rem;font-size:.6rem}
   .dash-inner{padding:2rem 5vw 0}
   .stat-hero{margin-bottom:1.75rem}
   .card{padding:1.25rem 1.15rem 1.15rem}
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     LOGIN GATE
-     ============================================================ -->
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="gate-brand">Start <em>with</em> Kunmi</div>
@@ -489,9 +441,6 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<!-- ============================================================
-     DASHBOARD
-     ============================================================ -->
 <div class="dash" id="dash">
   <div class="dash-top">
     <div class="dash-top-brand">Start <em>with</em> Kunmi · Applications</div>
@@ -499,7 +448,13 @@ a{color:inherit;text-decoration:none}
       <span><span class="live-dot"></span>Live</span>
       <span id="lastUpdate">—</span>
     </div>
-    <button id="logoutBtn">Log out</button>
+    <div class="dash-top-actions">
+      <a id="exportLink" href="#" class="export-btn" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12M6 11l6 6 6-6M5 21h14"/></svg>
+        Export CSV
+      </a>
+      <button id="logoutBtn">Log out</button>
+    </div>
   </div>
 
   <div class="dash-inner">
@@ -518,15 +473,19 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="filter-pills" id="filterPills">
         <button class="pill is-active" data-filter="all">All</button>
-        <button class="pill" data-filter="Student">Students</button>
-        <button class="pill" data-filter="Business Owner">Business Owners</button>
-        <button class="pill" data-filter="Creator">Creators</button>
-        <button class="pill" data-filter="Freelancer">Freelancers</button>
+        <button class="pill" data-filter="unseen">New</button>
+        <button class="pill" data-filter="accepted">Accepted</button>
+        <button class="pill" data-filter="maybe">Maybe</button>
+        <button class="pill" data-filter="rejected">Rejected</button>
       </div>
     </div>
 
     <div class="grid" id="grid">
       <div class="loading" id="loading">Loading applications…</div>
+    </div>
+
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+      <button class="load-more-btn" id="loadMoreBtn">Load more</button>
     </div>
   </div>
 </div>
@@ -538,6 +497,8 @@ a{color:inherit;text-decoration:none}
   'use strict';
 
   var STORAGE_KEY = 'swk_admin_pw';
+  var PAGE_SIZE = 20;
+
   var gate = document.getElementById('gate');
   var dash = document.getElementById('dash');
   var gateForm = document.getElementById('gateForm');
@@ -546,7 +507,6 @@ a{color:inherit;text-decoration:none}
   var gateSubmit = document.getElementById('gateSubmit');
   var gateBtnText = document.getElementById('gateBtnText');
   var grid = document.getElementById('grid');
-  var loading = document.getElementById('loading');
   var countNum = document.getElementById('countNum');
   var countSub = document.getElementById('countSub');
   var lastUpdate = document.getElementById('lastUpdate');
@@ -554,24 +514,25 @@ a{color:inherit;text-decoration:none}
   var filterPills = document.getElementById('filterPills');
   var logoutBtn = document.getElementById('logoutBtn');
   var toast = document.getElementById('toast');
+  var loadMoreWrap = document.getElementById('loadMoreWrap');
+  var loadMoreBtn = document.getElementById('loadMoreBtn');
+  var exportLink = document.getElementById('exportLink');
 
   var password = null;
-  var allApps = [];
-  var seenIds = new Set();
+  var allApps = [];         // everything currently loaded into the DOM
+  var totalCount = 0;       // total rows on the server (respecting current server-side filter)
+  var unseenCount = 0;
+  var seenIds = new Set();  // ids we've ever rendered (for new-card highlight)
   var currentFilter = 'all';
   var currentQuery = '';
-  var pollTimer = null;
+  var hasMore = false;
   var firstLoad = true;
+  var pollTimer = null;
 
-  /* ---------- Auto-login if password saved in session ---------- */
   var saved = null;
   try { saved = sessionStorage.getItem(STORAGE_KEY); } catch(e){}
-  if (saved) {
-    password = saved;
-    tryLoad();
-  }
+  if (saved) { password = saved; tryLoad(); }
 
-  /* ---------- Gate submit ---------- */
   gateForm.addEventListener('submit', function(e){
     e.preventDefault();
     var val = gateInput.value.trim();
@@ -583,93 +544,147 @@ a{color:inherit;text-decoration:none}
     tryLoad(true);
   });
 
-  /* ---------- Load data from API ---------- */
+  function serverStatusFilter(){
+    if (currentFilter === 'accepted' || currentFilter === 'maybe' || currentFilter === 'rejected') {
+      return currentFilter;
+    }
+    return null;
+  }
+
+  function buildUrl(offset){
+    var url = '/api/submissions?limit=' + PAGE_SIZE + '&offset=' + (offset || 0);
+    var sf = serverStatusFilter();
+    if (sf) url += '&status=' + encodeURIComponent(sf);
+    return url;
+  }
+
   function tryLoad(fromGate){
-    fetch('/api/submissions', {
-      headers: { 'x-admin-password': password }
-    })
-    .then(function(res){
-      if (res.status === 401) throw new Error('wrong');
-      if (!res.ok) throw new Error('fail');
-      return res.json();
-    })
-    .then(function(data){
-      // Success
-      try { sessionStorage.setItem(STORAGE_KEY, password); } catch(e){}
-      gate.style.display = 'none';
-      dash.classList.add('is-visible');
-      handleData(data);
-      startPolling();
-    })
-    .catch(function(err){
-      if (fromGate) {
-        gateBtnText.textContent = 'Enter';
-        gateSubmit.disabled = false;
-        if (err.message === 'wrong') {
-          gateError.textContent = 'Wrong password. Try again.';
+    fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
+      .then(function(res){
+        if (res.status === 401) throw new Error('wrong');
+        if (!res.ok) throw new Error('fail');
+        return res.json();
+      })
+      .then(function(data){
+        try { sessionStorage.setItem(STORAGE_KEY, password); } catch(e){}
+        gate.style.display = 'none';
+        dash.classList.add('is-visible');
+        if (exportLink) {
+          exportLink.href = '/api/export?code=' + encodeURIComponent(password);
+        }
+        firstLoad = false;
+        seenIds = new Set();
+        allApps = data.applications || [];
+        allApps.forEach(function(a){ seenIds.add(a.id); });
+        totalCount = data.total;
+        unseenCount = data.unseenCount || 0;
+        hasMore = !!data.hasMore;
+        updateHeader();
+        render();
+        startPolling();
+      })
+      .catch(function(err){
+        if (fromGate) {
+          gateBtnText.textContent = 'Enter';
+          gateSubmit.disabled = false;
+          gateError.textContent = (err.message === 'wrong')
+            ? 'Wrong password. Try again.'
+            : 'Could not connect. Try again.';
           gateInput.value = '';
           gateInput.focus();
         } else {
-          gateError.textContent = 'Could not connect. Try again.';
+          try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
+          password = null;
         }
-      } else {
-        // Silent fail on auto-login — show gate
-        try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
-        password = null;
-      }
-    });
+      });
   }
 
-  /* ---------- Polling every 30 seconds ---------- */
   function startPolling(){
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(function(){
-      fetch('/api/submissions', {
-        headers: { 'x-admin-password': password }
-      })
-      .then(function(res){ return res.ok ? res.json() : null; })
-      .then(function(data){ if (data) handleData(data, true); })
-      .catch(function(){ /* silent */ });
+      // Refresh page 0 only; merge new ids that we don't have yet.
+      fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
+        .then(function(res){ return res.ok ? res.json() : null; })
+        .then(function(data){
+          if (!data) return;
+          var incoming = data.applications || [];
+          var freshIds = new Set();
+          incoming.forEach(function(a){ if (!seenIds.has(a.id)) freshIds.add(a.id); });
+
+          // Merge: keep any rows we already had further down the list (from load-more)
+          var byId = {};
+          allApps.forEach(function(a){ byId[a.id] = a; });
+          incoming.forEach(function(a){ byId[a.id] = a; });
+
+          // Re-order: incoming first (they're the newest), then the rest by last_submitted_at desc
+          var merged = [];
+          incoming.forEach(function(a){ merged.push(a); });
+          Object.keys(byId).forEach(function(k){
+            var id = parseInt(k, 10);
+            if (!incoming.some(function(a){ return a.id === id; })) {
+              merged.push(byId[k]);
+            }
+          });
+
+          // Store which are new for the highlight
+          merged.forEach(function(a){ if (freshIds.has(a.id)) a.__isNew = true; });
+
+          allApps = merged;
+          merged.forEach(function(a){ seenIds.add(a.id); });
+          totalCount = data.total;
+          unseenCount = data.unseenCount || 0;
+          hasMore = merged.length < totalCount;
+          updateHeader();
+          render();
+        })
+        .catch(function(){});
     }, 30000);
   }
 
-  /* ---------- Handle incoming data ---------- */
-  function handleData(data, isRefresh){
-    var incoming = data.applications || [];
-
-    // Detect new IDs
-    var newIds = new Set();
-    if (!firstLoad) {
-      incoming.forEach(function(app){
-        if (!seenIds.has(app.id)) newIds.add(app.id);
+  function loadMore(){
+    if (!hasMore) return;
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.textContent = 'Loading…';
+    fetch(buildUrl(allApps.length), { headers: { 'x-admin-password': password } })
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){
+        if (!data) return;
+        var existingIds = new Set(allApps.map(function(a){ return a.id; }));
+        (data.applications || []).forEach(function(a){
+          if (!existingIds.has(a.id)) allApps.push(a);
+          seenIds.add(a.id);
+        });
+        totalCount = data.total;
+        hasMore = !!data.hasMore;
+        updateHeader();
+        render();
+      })
+      .catch(function(){})
+      .then(function(){
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.textContent = 'Load more';
       });
-    }
-
-    seenIds.clear();
-    incoming.forEach(function(app){ seenIds.add(app.id); });
-
-    allApps = incoming;
-
-    // Update count
-    countNum.textContent = data.count.toLocaleString();
-    countSub.textContent = data.count === 0
-      ? 'No applications yet'
-      : (data.count === 1 ? '1 person has applied' : data.count + ' people have applied');
-
-    // Update timestamp
-    var now = new Date();
-    lastUpdate.textContent = 'Updated ' + now.toLocaleTimeString('en-NG', { hour:'2-digit', minute:'2-digit' });
-
-    render(newIds);
-    firstLoad = false;
   }
 
-  /* ---------- Render grid ---------- */
-  function render(newIds){
-    newIds = newIds || new Set();
+  loadMoreBtn.addEventListener('click', loadMore);
 
+  function updateHeader(){
+    countNum.textContent = totalCount.toLocaleString();
+    var label = totalCount === 0
+      ? 'No applications yet'
+      : (totalCount === 1 ? '1 person has applied' : totalCount + ' people have applied');
+    if (unseenCount > 0) {
+      label += ' · <span class="new-badge">' + unseenCount + ' new</span>';
+    }
+    countSub.innerHTML = label;
+
+    var now = new Date();
+    lastUpdate.textContent = 'Updated ' + now.toLocaleTimeString('en-NG', { hour:'2-digit', minute:'2-digit' });
+  }
+
+  function render(){
     var filtered = allApps.filter(function(app){
-      if (currentFilter !== 'all' && app.role !== currentFilter) return false;
+      if (currentFilter === 'unseen' && app.seen) return false;
       if (currentQuery) {
         var q = currentQuery.toLowerCase();
         var hay = [
@@ -688,22 +703,14 @@ a{color:inherit;text-decoration:none}
           ? 'New submissions will appear here automatically.'
           : 'Try clearing your search or filters.') + '</p>' +
         '</div>';
+      loadMoreWrap.style.display = 'none';
       return;
     }
 
-    // Preserve scroll — we rebuild but the browser keeps scroll position
     var scrollY = window.scrollY;
-
-    var html = filtered.map(function(app){
-      return renderCard(app, newIds.has(app.id));
-    }).join('');
-
-    grid.innerHTML = html;
-
-    // Restore scroll
+    grid.innerHTML = filtered.map(renderCard).join('');
     window.scrollTo(0, scrollY);
 
-    // Wire toggles
     grid.querySelectorAll('.qa-toggle').forEach(function(btn){
       btn.addEventListener('click', function(){
         var body = btn.previousElementSibling;
@@ -713,107 +720,180 @@ a{color:inherit;text-decoration:none}
       });
     });
 
-    // Wire copy buttons
-    grid.querySelectorAll('[data-copy]').forEach(function(btn){
+    grid.querySelectorAll('.status-pill').forEach(function(btn){
       btn.addEventListener('click', function(){
-        var text = btn.getAttribute('data-copy');
-        copyToClipboard(text);
+        var id = parseInt(btn.getAttribute('data-id'), 10);
+        var target = btn.getAttribute('data-status');
+        var app = allApps.find(function(a){ return a.id === id; });
+        if (!app) return;
+        var newStatus = (app.status === target) ? null : target;
+        setStatus(id, newStatus);
       });
     });
+
+    grid.querySelectorAll('.card').forEach(function(cardEl){
+      cardEl.addEventListener('click', function(e){
+        // Ignore if user clicked a button or link inside the card
+        if (e.target.closest('a, button')) return;
+        var id = parseInt(cardEl.getAttribute('data-id'), 10);
+        var app = allApps.find(function(a){ return a.id === id; });
+        if (app && !app.seen) {
+          markSeen(id);
+        }
+      });
+    });
+
+    loadMoreWrap.style.display = hasMore ? 'block' : 'none';
   }
 
-  /* ---------- Card HTML ---------- */
-  function renderCard(app, isNew){
-    var initials = getInitials(app.name);
+  function renderCard(app){
     var waNumber = sanitizeWA(app.whatsapp);
-    var waHref = 'https://wa.me/' + waNumber + '?text=' +
-      encodeURIComponent('Hi ' + (app.name || '').split(' ')[0] + ', this is Kunmi. Thanks for applying to Start With Kunmi!');
+    var firstName = (app.name || '').split(' ')[0];
+    var waMsg = "Hi " + firstName + ", this is Kunmi. Thanks for applying to Start With Kunmi — I'd love to talk more about what you're building.";
+    var waHref = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
+
+    var emailSubject = 'Your application to Start With Kunmi';
+    var emailBody = "Hi " + firstName + ",\n\nThank you for applying to Start With Kunmi. Your answers stood out, and I'd love to talk more about what you're working on.\n\nWhen you have a moment, could you share a bit more about what you're building and where you are right now?\n\nTalk soon,\nKunmi";
+    var mailHref = 'mailto:' + encodeURIComponent(app.email) +
+      '?subject=' + encodeURIComponent(emailSubject) +
+      '&body=' + encodeURIComponent(emailBody);
 
     var date = '';
-    if (app.submitted_at) {
-      var d = new Date(app.submitted_at);
+    if (app.last_submitted_at || app.submitted_at) {
+      var d = new Date(app.last_submitted_at || app.submitted_at);
       date = d.toLocaleDateString('en-NG', { day:'numeric', month:'short' });
     }
 
+    var cardClasses = ['card'];
+    if (!app.seen) cardClasses.push('is-unseen');
+    if (app.status) cardClasses.push('is-' + app.status);
+    if (app.__isNew) {
+      cardClasses.push('is-new');
+      delete app.__isNew;
+    }
+
+    var dupHtml = (app.submission_count && app.submission_count > 1)
+      ? '<span class="dup-badge">Applied ' + app.submission_count + ' times</span>'
+      : '';
+
+    var statusTag = '';
+    if (app.status === 'accepted') statusTag = '<span class="tag status-accepted">Accepted</span>';
+    if (app.status === 'maybe')    statusTag = '<span class="tag status-maybe">Maybe</span>';
+    if (app.status === 'rejected') statusTag = '<span class="tag status-rejected">Rejected</span>';
+
     return '' +
-      '<article class="card' + (isNew ? ' is-new' : '') + '">' +
+      '<article class="' + cardClasses.join(' ') + '" data-id="' + app.id + '">' +
         '<div class="card-head">' +
-          '<div class="card-name">' + esc(app.name) + '</div>' +
+          '<div>' +
+            '<div class="card-name">' + esc(app.name) + '</div>' +
+            dupHtml +
+          '</div>' +
           '<div class="card-date">' + esc(date) + '</div>' +
         '</div>' +
         '<div class="tag-row">' +
           (app.country ? '<span class="tag accent">' + esc(app.country) + '</span>' : '') +
           (app.age_range ? '<span class="tag">' + esc(app.age_range) + '</span>' : '') +
           (app.role ? '<span class="tag">' + esc(app.role) + '</span>' : '') +
+          statusTag +
+        '</div>' +
+        '<div class="action-row">' +
+          '<a class="btn-action btn-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
+            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
+            'WhatsApp' +
+          '</a>' +
+          '<a class="btn-action btn-mail" href="' + mailHref + '">' +
+            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
+            'Email' +
+          '</a>' +
+        '</div>' +
+        '<div class="status-row">' +
+          '<span class="status-label">Mark:</span>' +
+          statusPill(app.id, 'accepted', 'Accept', app.status === 'accepted') +
+          statusPill(app.id, 'maybe', 'Maybe', app.status === 'maybe') +
+          statusPill(app.id, 'rejected', 'No', app.status === 'rejected') +
         '</div>' +
         '<div class="card-answers">' +
           qa('Working on', app.what_building) +
           qa('Stuck on', app.current_challenge) +
           qa('Wants to leave with', app.final_response) +
         '</div>' +
-        '<div class="card-actions">' +
-          '<a class="btn-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
-            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-            'WhatsApp' +
-          '</a>' +
-          '<button class="btn-copy" data-copy="' + escAttr(app.whatsapp) + '" title="Copy number">' +
-            '<svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
-          '</button>' +
-        '</div>' +
       '</article>';
+  }
+
+  function statusPill(id, status, label, isOn){
+    var cls = 'status-pill' + (isOn ? ' is-on-' + status : '');
+    return '<button type="button" class="' + cls + '" data-id="' + id + '" data-status="' + status + '">' + label + '</button>';
   }
 
   function qa(label, value){
     if (!value) return '';
-    var long = String(value).length > 180;
+    var text = String(value);
+    var words = text.trim().split(/\s+/).filter(Boolean).length;
+    var long = text.length > 180;
     return '' +
       '<div class="qa">' +
-        '<div class="qa-label">' + esc(label) + '</div>' +
-        '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(value) + '</div>' +
+        '<div class="qa-label">' +
+          '<span>' + esc(label) + '</span>' +
+          '<span class="qa-words">' + words + ' word' + (words === 1 ? '' : 's') + '</span>' +
+        '</div>' +
+        '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(text) + '</div>' +
         (long ? '<button type="button" class="qa-toggle">Read more</button>' : '') +
       '</div>';
   }
 
-  function getInitials(name){
-    if (!name) return '?';
-    return name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
+  function setStatus(id, status){
+    fetch('/api/status', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': password,
+      },
+      body: JSON.stringify({ id: id, status: status }),
+    })
+    .then(function(res){ return res.ok ? res.json() : null; })
+    .then(function(data){
+      if (!data || !data.success) return;
+      var app = allApps.find(function(a){ return a.id === id; });
+      if (app) app.status = data.status;
+      render();
+    })
+    .catch(function(){});
   }
 
-  /* ---------- Utils ---------- */
+  function markSeen(id){
+    fetch('/api/seen', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': password,
+      },
+      body: JSON.stringify({ id: id, seen: true }),
+    })
+    .then(function(res){ return res.ok ? res.json() : null; })
+    .then(function(data){
+      if (!data || !data.success) return;
+      var app = allApps.find(function(a){ return a.id === id; });
+      if (app) app.seen = true;
+      if (unseenCount > 0) unseenCount -= 1;
+      updateHeader();
+      render();
+    })
+    .catch(function(){});
+  }
+
+  function sanitizeWA(num){
+    if (!num) return '';
+    var digits = String(num).replace(/\D/g, '');
+    if (digits.length === 11 && digits.charAt(0) === '0') digits = '234' + digits.slice(1);
+    else if (digits.length === 10) digits = '234' + digits;
+    return digits;
+  }
+
   function esc(s){
     if (s === null || s === undefined) return '';
     return String(s)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-  function escAttr(s){ return esc(s); }
-
-  function sanitizeWA(num){
-    if (!num) return '';
-    var digits = String(num).replace(/\D/g, '');
-    // Nigeria: if starts with 0, replace with 234
-    if (digits.length === 11 && digits.charAt(0) === '0') {
-      digits = '234' + digits.slice(1);
-    } else if (digits.length === 10) {
-      digits = '234' + digits;
-    }
-    return digits;
-  }
-
-  function copyToClipboard(text){
-    if (!text) return;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){
-        showToast('Number copied');
-      });
-    } else {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand('copy'); showToast('Number copied'); } catch(e){}
-      document.body.removeChild(ta);
-    }
   }
 
   var toastTimer = null;
@@ -821,12 +901,9 @@ a{color:inherit;text-decoration:none}
     toast.textContent = msg;
     toast.classList.add('is-visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){
-      toast.classList.remove('is-visible');
-    }, 2000);
+    toastTimer = setTimeout(function(){ toast.classList.remove('is-visible'); }, 2000);
   }
 
-  /* ---------- Search & filter ---------- */
   var searchDebounce = null;
   searchInput.addEventListener('input', function(){
     clearTimeout(searchDebounce);
@@ -842,10 +919,30 @@ a{color:inherit;text-decoration:none}
     filterPills.querySelectorAll('.pill').forEach(function(p){ p.classList.remove('is-active'); });
     pill.classList.add('is-active');
     currentFilter = pill.getAttribute('data-filter');
-    render();
+
+    // Status filters go to the server (different result set). Others are client-side.
+    if (currentFilter === 'accepted' || currentFilter === 'maybe' || currentFilter === 'rejected') {
+      // reload from server with this filter
+      allApps = [];
+      seenIds = new Set();
+      fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
+        .then(function(res){ return res.ok ? res.json() : null; })
+        .then(function(data){
+          if (!data) return;
+          allApps = data.applications || [];
+          allApps.forEach(function(a){ seenIds.add(a.id); });
+          totalCount = data.total;
+          unseenCount = data.unseenCount || 0;
+          hasMore = !!data.hasMore;
+          updateHeader();
+          render();
+        })
+        .catch(function(){});
+    } else {
+      render();
+    }
   });
 
-  /* ---------- Log out ---------- */
   logoutBtn.addEventListener('click', function(){
     try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
     password = null;
