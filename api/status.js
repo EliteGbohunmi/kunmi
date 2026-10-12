@@ -4,7 +4,8 @@ export const config = { runtime: 'edge' };
 
 const sql = neon(process.env.DATABASE_URL);
 
-const VALID = new Set(['accepted', 'maybe', 'rejected', null]);
+// Only these statuses are allowed now (plus null to clear)
+const VALID = new Set(['accepted', 'rejected', null]);
 
 export default async function handler(req) {
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
