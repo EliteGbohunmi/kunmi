@@ -4,12 +4,27 @@ export const config = { runtime: 'edge' };
 
 const sql = neon(process.env.DATABASE_URL);
 
+// Persistent keyboard shown at the bottom of the chat
+const MAIN_KEYBOARD = {
+  keyboard: [
+    [
+      { text: 'Stats' },
+      { text: 'Today' },
+      { text: 'Week' },
+      { text: 'Help' },
+    ],
+  ],
+  resize_keyboard: true,
+  is_persistent: true,
+};
+
 async function sendMessage(token, chatId, text, replyToMessageId) {
   const body = {
     chat_id: chatId,
     text: text,
     parse_mode: 'Markdown',
     disable_web_page_preview: true,
+    reply_markup: MAIN_KEYBOARD,
   };
   if (replyToMessageId) body.reply_to_message_id = replyToMessageId;
 
@@ -43,7 +58,7 @@ async function getTodayCount() {
   const rows = await sql`
     SELECT COUNT(*)::int AS n
     FROM applications
-    WHERE (last_submitted_at >= CURRENT_DATE OR submitted_at >= CURRENT_DATE)
+    WHERE COALESCE(last_submitted_at, submitted_at) >= CURRENT_DATE
   `;
   return rows[0].n;
 }
@@ -58,42 +73,84 @@ async function getWeekCount() {
 }
 
 function formatStats(s, todayN, weekN) {
+  const lines = [];
+  lines.push('*Application snapshot*');
+  lines.push('');
+  lines.push(`Total · ${s.total}`);
+  lines.push(`Today · ${todayN}`);
+  lines.push(`This week · ${weekN}`);
+  lines.push('');
+  lines.push('*By status*');
+  lines.push(`Inbox ${s.inbox} · Accepted ${s.accepted} · Rejected ${s.rejected}`);
+  lines.push('');
+
+  if (s.unseen > 0) {
+    lines.push(`${s.unseen} unseen — open the admin page to review.`);
+  } else {
+    lines.push('All seen. Nothing waiting.');
+  }
+
+  return lines.join('\n');
+}
+
+function formatToday(n) {
+  if (n === 0) {
+    return [
+      '*Today · nothing yet.*',
+      '',
+      "I'll let you know the moment one comes in.",
+    ].join('\n');
+  }
+  const word = n === 1 ? 'new application' : 'new applications';
   return [
-    '*📊 Start With Kunmi — Stats*',
+    `*Today · ${n} ${word}.*`,
     '',
-    `*Total applications:* ${s.total}`,
-    `*Today:* ${todayN}`,
-    `*This week:* ${weekN}`,
+    'Take a look when you have a moment.',
+  ].join('\n');
+}
+
+function formatWeek(n) {
+  if (n === 0) {
+    return [
+      '*Last 7 days · nothing.*',
+      '',
+      'Quiet week. Hope you enjoyed it.',
+    ].join('\n');
+  }
+  const word = n === 1 ? 'application' : 'applications';
+  return [
+    `*Last 7 days · ${n} ${word}.*`,
     '',
-    '*By status:*',
-    `• Inbox (unreviewed): ${s.inbox}`,
-    `• Accepted: ${s.accepted}`,
-    `• Rejected: ${s.rejected}`,
-    '',
-    `*Unseen:* ${s.unseen}`,
+    'Good pace. Keep an eye on the Inbox.',
   ].join('\n');
 }
 
 function helpText() {
   return [
-    '*📋 Available commands*',
+    '*Commands*',
     '',
-    '/stats — full snapshot of applications',
-    '/today — how many applied today',
-    '/week — how many applied in the last 7 days',
-    '/help — this message',
+    'Tap the buttons below, or type any of these:',
     '',
-    '_More commands coming soon._',
+    '/stats — full snapshot',
+    "/today — today's count",
+    '/week — last 7 days',
+    '/help — this list',
+  ].join('\n');
+}
+
+function startText() {
+  return [
+    '*Welcome to the Start With Kunmi bot.*',
+    '',
+    "I'll ping you when someone applies. Use the buttons below for stats.",
   ].join('\n');
 }
 
 export default async function handler(req) {
-  // Telegram only sends POSTs to this endpoint
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
   }
 
-  // Verify the secret header that Telegram sends on every call
   const secret = req.headers.get('x-telegram-bot-api-secret-token');
   const expected = process.env.TELEGRAM_WEBHOOK_SECRET;
   if (!expected || secret !== expected) {
@@ -121,8 +178,6 @@ export default async function handler(req) {
   const text = message.text.trim();
   const messageId = message.message_id;
 
-  // Only allow registered recipients (safety measure — a stranger could
-  // theoretically reach the bot if BotFather restriction isn't enforced)
   const allowed = (process.env.TELEGRAM_CHAT_IDS || process.env.TELEGRAM_CHAT_ID || '')
     .split(',').map(function(s){ return s.trim(); }).filter(Boolean);
   if (allowed.length > 0 && !allowed.includes(String(chatId))) {
@@ -130,14 +185,22 @@ export default async function handler(req) {
     return new Response('OK', { status: 200 });
   }
 
-  // Match the command (ignore any /command@botname suffix)
-  const command = (text.split(/\s+/)[0] || '').split('@')[0].toLowerCase();
+  // Normalize: strip /command@botname suffixes, lowercase, and treat
+  // button labels ("Stats", "Today", etc.) the same as commands.
+  const raw = (text.split(/\s+/)[0] || '');
+  const base = raw.split('@')[0].toLowerCase();
+  const lower = text.toLowerCase();
+
+  let command = base;
+  if (command === 'stats' || lower === 'stats') command = '/stats';
+  else if (command === 'today' || lower === 'today') command = '/today';
+  else if (command === 'week' || lower === 'week') command = '/week';
+  else if (command === 'help' || lower === 'help') command = '/help';
+  else if (command === 'start' || lower === 'start') command = '/start';
 
   try {
     if (command === '/start') {
-      await sendMessage(botToken, chatId,
-        '*Welcome to the Start With Kunmi bot.*\n\nUse /help to see what I can do.',
-        messageId);
+      await sendMessage(botToken, chatId, startText(), messageId);
       return new Response('OK', { status: 200 });
     }
 
@@ -154,21 +217,16 @@ export default async function handler(req) {
 
     if (command === '/today') {
       const n = await getTodayCount();
-      await sendMessage(botToken, chatId,
-        `*Today:* ${n} application${n === 1 ? '' : 's'} received.`,
-        messageId);
+      await sendMessage(botToken, chatId, formatToday(n), messageId);
       return new Response('OK', { status: 200 });
     }
 
     if (command === '/week') {
       const n = await getWeekCount();
-      await sendMessage(botToken, chatId,
-        `*This week:* ${n} application${n === 1 ? '' : 's'} received in the last 7 days.`,
-        messageId);
+      await sendMessage(botToken, chatId, formatWeek(n), messageId);
       return new Response('OK', { status: 200 });
     }
 
-    // Unknown command — ignore silently. Nothing worse than an error reply.
     return new Response('OK', { status: 200 });
   } catch (err) {
     console.error('[webhook] error:', err);
