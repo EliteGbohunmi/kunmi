@@ -12,22 +12,23 @@ const redis = (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_R
     })
   : null;
 
+// Reads TELEGRAM_CHAT_IDS (comma-separated). Falls back to TELEGRAM_CHAT_ID (single) if needed.
+function getRecipientIds() {
+  const multi = process.env.TELEGRAM_CHAT_IDS;
+  if (multi && multi.trim() !== '') {
+    return multi.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+  }
+  const single = process.env.TELEGRAM_CHAT_ID;
+  if (single && single.trim() !== '') return [single.trim()];
+  return [];
+}
+
 async function notifyTelegram(payload) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const recipients = getRecipientIds();
 
-  console.log('[TG CHECK]', JSON.stringify({
-    hasToken: !!token,
-    tokenLen: token ? token.length : 0,
-    tokenStart: token ? token.slice(0, 4) : null,
-    tokenEnd: token ? token.slice(-4) : null,
-    hasChatId: !!chatId,
-    chatIdLen: chatId ? String(chatId).length : 0,
-    chatIdStart: chatId ? String(chatId).slice(0, 3) : null,
-  }));
-
-  if (!token || !chatId) {
-    console.log('[TG SKIP] missing env vars');
+  if (!token || recipients.length === 0) {
+    console.log('[TG SKIP] missing token or recipients');
     return;
   }
 
@@ -41,24 +42,31 @@ async function notifyTelegram(payload) {
     '',
     `*Working on:* ${truncate(payload.whatBuilding, 200)}`,
     `*Stuck on:* ${escapeMd(payload.currentChallenge || '—')}`,
+    '',
+    `_Open the admin page to review._`
   ];
 
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: lines.join('\n'),
-        parse_mode: 'Markdown',
-        disable_web_page_preview: true,
-      }),
-    });
-    const body = await res.text();
-    console.log('[TG RESULT]', res.status, body.slice(0, 300));
-  } catch (err) {
-    console.error('[TG FAIL]', err);
-  }
+  const text = lines.join('\n');
+
+  // Send to every recipient, in parallel. Each can fail independently.
+  await Promise.all(recipients.map(async function(chatId){
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+        }),
+      });
+      const body = await res.text();
+      console.log('[TG RESULT]', chatId, res.status, body.slice(0, 200));
+    } catch (err) {
+      console.error('[TG FAIL]', chatId, err);
+    }
+  }));
 }
 
 function escapeMd(s) {
