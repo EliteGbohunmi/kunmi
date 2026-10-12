@@ -43,40 +43,35 @@ export default async function handler(req) {
   }
 
   const url = new URL(req.url);
-  const view = url.searchParams.get('view'); // 'inbox' | 'accepted' | 'maybe' | 'rejected' | 'table' | null
+  const view = url.searchParams.get('view'); // 'inbox' | 'accepted' | 'rejected' | 'table' | null
   const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') || '20', 10), 1), 500);
   const offset = Math.max(parseInt(url.searchParams.get('offset') || '0', 10), 0);
 
   try {
-    // Counts for the tab badges — always returned
+    // Counts for the three tabs, always returned
     const countsRes = await sql`
       SELECT
         COUNT(*)::int AS total,
         COUNT(*) FILTER (WHERE seen = false)::int AS unseen,
         COUNT(*) FILTER (WHERE status IS NULL)::int AS unreviewed,
         COUNT(*) FILTER (WHERE status = 'accepted')::int AS accepted,
-        COUNT(*) FILTER (WHERE status = 'maybe')::int AS maybe,
         COUNT(*) FILTER (WHERE status = 'rejected')::int AS rejected
       FROM applications
     `;
 
     const c = countsRes[0];
     const counts = {
-      // Inbox = unreviewed + maybe
-      inbox: (c.unreviewed || 0) + (c.maybe || 0),
+      inbox: c.unreviewed || 0,
       accepted: c.accepted || 0,
-      maybe: c.maybe || 0,
       rejected: c.rejected || 0,
       unseen: c.unseen || 0,
       total: c.total || 0,
     };
 
-    // Build the WHERE clause per view
     let rows;
     let totalForView;
 
     if (view === 'table') {
-      // All rows, no pagination
       rows = await sql`
         SELECT
           id, name, email, whatsapp, country,
@@ -96,11 +91,11 @@ export default async function handler(req) {
           final_response, submitted_at, seen, status,
           submission_count, last_submitted_at
         FROM applications
-        WHERE status IS NULL OR status = 'maybe'
+        WHERE status IS NULL
         ORDER BY COALESCE(last_submitted_at, submitted_at) DESC, id DESC
         LIMIT ${limit} OFFSET ${offset}
       `;
-    } else if (view === 'accepted' || view === 'maybe' || view === 'rejected') {
+    } else if (view === 'accepted' || view === 'rejected') {
       totalForView = counts[view];
       rows = await sql`
         SELECT
@@ -114,7 +109,6 @@ export default async function handler(req) {
         LIMIT ${limit} OFFSET ${offset}
       `;
     } else {
-      // No view specified — everything, paginated (legacy fallback)
       totalForView = counts.total;
       rows = await sql`
         SELECT
