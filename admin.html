@@ -21,9 +21,7 @@
   --accent-light:#7B4BC9;
   --pink:#F500E0;
   --green:#0F8A4C;
-  --amber:#B8791F;
   --red:#B7291F;
-  --whatsapp:#25D366;
   --border:#E8E4DC;
   --border-soft:#F0EBF5;
   --radius:15px;
@@ -50,7 +48,7 @@ a{color:inherit;text-decoration:none}
   stroke-linecap:round;stroke-linejoin:round;
 }
 
-/* ============ LOGIN GATE ============ */
+/* LOGIN GATE */
 .gate{
   position:fixed;inset:0;z-index:100;
   display:flex;align-items:center;justify-content:center;
@@ -116,11 +114,10 @@ a{color:inherit;text-decoration:none}
   font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);
 }
 
-/* ============ DASHBOARD ============ */
+/* DASHBOARD */
 .dash{display:none;padding:0 0 5rem}
 .dash.is-visible{display:block}
 
-/* TOP BAR — dark purple, but calm */
 .dash-top{
   background:var(--dark);color:#fff;
   padding:1.15rem 5vw;
@@ -140,16 +137,6 @@ a{color:inherit;text-decoration:none}
 .dash-top-brand .section-name{
   font-weight:400;color:rgba(255,255,255,.55);font-size:.88rem;
 }
-.live-dot{
-  display:inline-block;width:.45rem;height:.45rem;border-radius:50%;
-  background:var(--pink);
-  animation:pulse 2s infinite;
-  margin-right:.35rem;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.5;transform:scale(1.4)}
-}
 .dash-top-actions{display:flex;gap:.4rem;flex-wrap:wrap}
 .dash-top-actions button, .dash-top-actions a{
   padding:.5rem .9rem;
@@ -157,21 +144,18 @@ a{color:inherit;text-decoration:none}
   border-radius:8px;
   color:rgba(255,255,255,.7);
   font-family:var(--font-body);font-size:.72rem;font-weight:500;
-  letter-spacing:.02em;
-  transition:border-color .2s, color .2s, background-color .2s;
+  transition:border-color .2s, color .2s;
   display:inline-flex;align-items:center;gap:.45rem;
 }
 .dash-top-actions button:hover, .dash-top-actions a:hover{
   border-color:rgba(255,255,255,.4);color:#fff;
 }
 .dash-top-actions .export-btn{color:rgba(255,255,255,.85)}
-.dash-top-actions .export-btn:hover{
-  border-color:var(--pink);color:#fff;
-}
+.dash-top-actions .export-btn:hover{border-color:var(--pink);color:#fff}
 
 .dash-inner{max-width:1400px;margin-inline:auto;padding:2.75rem 5vw 0}
 
-/* HERO STAT — the anchor */
+/* HERO STAT */
 .stat-hero{margin-bottom:2.25rem}
 .stat-hero-label{
   font-family:var(--font-body);
@@ -180,9 +164,7 @@ a{color:inherit;text-decoration:none}
   color:var(--muted);
   margin-bottom:.4rem;
 }
-.stat-hero-row{
-  display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;
-}
+.stat-hero-row{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
 .stat-num{
   font-family:var(--font-display);
   font-size:clamp(3.5rem,8vw,6rem);
@@ -195,16 +177,12 @@ a{color:inherit;text-decoration:none}
   background:var(--pink);color:#fff;
   border-radius:999px;
   font-family:var(--font-body);font-size:.75rem;font-weight:600;
-  letter-spacing:.01em;
   margin-bottom:.6rem;
 }
 .stat-new-pill.is-empty{display:none}
-.stat-hero-sub{
-  margin-top:.5rem;
-  font-size:.9rem;color:var(--muted);
-}
+.stat-hero-sub{margin-top:.5rem;font-size:.9rem;color:var(--muted)}
 
-/* SEARCH — clean, full-width, on its own row */
+/* SEARCH */
 .search-row{margin-bottom:1rem}
 .search-wrap{position:relative;width:100%}
 .search-wrap .icon{
@@ -227,7 +205,7 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 0 0 3px rgba(74,13,143,.1);
 }
 
-/* VIEW TOGGLE — quiet, small */
+/* VIEW TOGGLE */
 .view-row{margin-bottom:1.35rem}
 .view-toggle{
   display:inline-flex;
@@ -243,28 +221,18 @@ a{color:inherit;text-decoration:none}
   display:inline-flex;align-items:center;gap:.45rem;
 }
 .view-toggle button:hover{color:var(--ink)}
-.view-toggle button.is-active{
-  background:var(--dark);color:#fff;
-}
+.view-toggle button.is-active{background:var(--dark);color:#fff}
 .view-toggle button .icon{width:.95rem;height:.95rem}
 
-/* FILTER TABS — pills, active one purple, others grey */
+/* TABS */
 .tabs-wrap{
   margin-bottom:1.75rem;
-  overflow-x:auto;
-  overflow-y:hidden;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-  margin-inline:-5vw;
-  padding-inline:5vw;
-  padding-bottom:2px;
+  overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+  margin-inline:-5vw;padding-inline:5vw;padding-bottom:2px;
 }
 .tabs-wrap::-webkit-scrollbar{display:none}
-.tabs{
-  display:flex;gap:.5rem;
-  min-width:max-content;
-  padding:.15rem 0;
-}
+.tabs{display:flex;gap:.5rem;min-width:max-content;padding:.15rem 0}
 .pill{
   display:inline-flex;align-items:center;gap:.55rem;
   padding:.6rem 1rem;
@@ -282,22 +250,17 @@ a{color:inherit;text-decoration:none}
   font-weight:600;
 }
 .pill .count{
-  display:inline-block;
-  min-width:1.5rem;
+  display:inline-block;min-width:1.5rem;
   padding:.1rem .45rem;
-  background:var(--bg);
-  border-radius:999px;
+  background:var(--bg);border-radius:999px;
   font-family:var(--font-body);font-size:.7rem;font-weight:600;
-  color:var(--muted);
-  text-align:center;
-  line-height:1.3;
+  color:var(--muted);text-align:center;line-height:1.3;
 }
 .pill.is-active .count{
-  background:rgba(255,255,255,.22);
-  color:#fff;
+  background:rgba(255,255,255,.22);color:#fff;
 }
 
-/* ============ CARDS ============ */
+/* CARDS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
@@ -312,35 +275,26 @@ a{color:inherit;text-decoration:none}
   border-radius:var(--radius);
   padding:1.5rem 1.35rem 1.35rem;
   box-shadow:var(--shadow-card);
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .25s;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .25s, opacity .35s;
   display:flex;flex-direction:column;gap:1rem;
   position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;left:0;top:0;right:0;height:3px;
-  background:linear-gradient(90deg, var(--accent), var(--pink));
-  opacity:0;transition:opacity .3s;
 }
 .card:hover{
   transform:translateY(-4px);
   box-shadow:var(--shadow-hover);
   border-color:var(--accent-light);
 }
-.card:hover::before{opacity:1}
 
-.card.is-unseen::after{
-  content:'';position:absolute;top:1rem;right:1rem;
-  width:.5rem;height:.5rem;border-radius:50%;
-  background:var(--pink);
-  box-shadow:0 0 0 3px rgba(245,0,224,.18);
-}
 .card.is-accepted{border-left:3px solid var(--green)}
-.card.is-maybe{border-left:3px solid var(--amber)}
 .card.is-rejected{border-left:3px solid var(--red)}
-.card.is-new{animation:cardNew 3s ease-out}
-@keyframes cardNew{
-  0%{box-shadow:0 0 0 0 rgba(245,0,224,.5)}
-  100%{box-shadow:var(--shadow-card)}
+.card.is-rejected .card-head,
+.card.is-rejected .tag-row,
+.card.is-rejected .card-answers{opacity:.55}
+
+.card.is-removing{
+  transform:translateY(-6px) scale(.96);
+  opacity:0;
+  pointer-events:none;
 }
 
 .card-head{
@@ -349,74 +303,74 @@ a{color:inherit;text-decoration:none}
 .card-name{
   font-family:var(--font-display);
   font-size:1.35rem;font-weight:700;
-  letter-spacing:-.02em;line-height:1.2;
+  letter-spacing:-.01em;line-height:1.15;
   color:var(--ink);word-break:break-word;
+  text-transform:uppercase;
 }
+.card-meta-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;
+  flex-shrink:0;
+}
+.new-label{
+  font-family:var(--font-display);
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--pink);
+  display:none;
+}
+.card.is-unseen .new-label{display:block}
 .card-date{
   font-family:var(--font-body);font-size:.72rem;font-weight:500;
-  letter-spacing:.02em;
-  color:var(--muted-soft);white-space:nowrap;padding-top:.3rem;
+  color:var(--muted-soft);white-space:nowrap;
 }
 .dup-badge{
   display:inline-block;margin-top:.35rem;padding:.2rem .55rem;
   background:rgba(245,0,224,.1);color:var(--pink);
   border-radius:6px;font-family:var(--font-body);
-  font-size:.68rem;font-weight:600;letter-spacing:.02em;
+  font-size:.68rem;font-weight:600;
 }
 
-.tag-row{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:.3rem}
 .tag{
-  font-family:var(--font-body);font-size:.7rem;
-  letter-spacing:.02em;font-weight:500;
-  padding:.3rem .65rem;border-radius:6px;
+  font-family:var(--font-body);font-size:.66rem;
+  font-weight:500;
+  letter-spacing:.01em;
+  padding:.22rem .55rem;border-radius:6px;
   background:var(--bg);color:var(--muted);
   border:1px solid var(--border-soft);
 }
 .tag.accent{background:rgba(74,13,143,.06);color:var(--accent);border-color:rgba(74,13,143,.14)}
-.tag.status-accepted{background:rgba(15,138,76,.1);color:var(--green);border-color:rgba(15,138,76,.2)}
-.tag.status-maybe{background:rgba(184,121,31,.1);color:var(--amber);border-color:rgba(184,121,31,.2)}
-.tag.status-rejected{background:rgba(183,41,31,.08);color:var(--red);border-color:rgba(183,41,31,.16)}
 
-/* Action buttons */
-.action-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
-}
-.btn-action{
+/* CTA row — two buttons */
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.25rem}
+.cta-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.7rem 1rem;
+  padding:.85rem 1rem;
   border-radius:10px;
-  font-family:var(--font-body);font-size:.76rem;font-weight:600;
+  font-family:var(--font-body);font-size:.82rem;font-weight:600;
   letter-spacing:.01em;
-  transition:background-color .25s, color .25s, border-color .25s;
+  transition:background-color .25s, color .25s, border-color .25s, transform .15s;
+  text-decoration:none;
 }
-.btn-wa{background:var(--whatsapp);color:#fff;border:1px solid var(--whatsapp)}
-.btn-wa:hover{background:#1eaa52;border-color:#1eaa52}
-.btn-mail{background:var(--accent);color:#fff;border:1px solid var(--accent)}
-.btn-mail:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
-.btn-action .icon{width:.95rem;height:.95rem}
+.cta-btn:active{transform:scale(.985)}
+.cta-btn .icon{width:1rem;height:1rem}
 
-/* Status pills */
-.status-row{
-  display:flex;gap:.4rem;padding-top:.5rem;
-  border-top:1px solid var(--border-soft);
-  align-items:center;flex-wrap:wrap;
+.cta-accept{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.cta-accept:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+
+.cta-reject{
+  background:transparent;color:var(--red);
+  border:1px solid rgba(183,41,31,.35);
 }
-.status-label{
-  font-family:var(--font-body);font-size:.7rem;font-weight:500;
-  letter-spacing:.04em;
-  color:var(--muted-soft);margin-right:.25rem;
+.cta-reject:hover{background:rgba(183,41,31,.06);border-color:var(--red)}
+
+.card.is-accepted .cta-accept{
+  background:var(--green);border-color:var(--green);
 }
-.status-pill{
-  padding:.4rem .8rem;border-radius:999px;
-  border:1px solid var(--border);background:var(--surface);
-  font-family:var(--font-body);font-size:.74rem;font-weight:500;
-  letter-spacing:.01em;color:var(--muted);
-  transition:all .2s;
+.card.is-accepted .cta-accept:hover{background:#0d7340;border-color:#0d7340}
+.card.is-rejected .cta-reject{
+  background:var(--red);color:#fff;border-color:var(--red);
 }
-.status-pill:hover{border-color:var(--accent-light);color:var(--ink)}
-.status-pill.is-on-accepted{background:var(--green);color:#fff;border-color:var(--green)}
-.status-pill.is-on-maybe{background:var(--amber);color:#fff;border-color:var(--amber)}
-.status-pill.is-on-rejected{background:var(--red);color:#fff;border-color:var(--red)}
 
 /* Answers */
 .card-answers{
@@ -427,16 +381,14 @@ a{color:inherit;text-decoration:none}
 .qa{display:flex;flex-direction:column;gap:.35rem}
 .qa-label{
   font-family:var(--font-display);
-  font-size:.8rem;font-weight:600;
+  font-size:.92rem;font-weight:600;
   letter-spacing:-.005em;
+  color:var(--ink);
 }
-.qa-label.qa-work{color:var(--accent)}
-.qa-label.qa-stuck{color:var(--amber)}
-.qa-label.qa-leave{color:var(--pink)}
 .qa-body{
   font-family:var(--font-body);
-  font-size:.92rem;line-height:1.62;
-  color:var(--ink);
+  font-size:.88rem;line-height:1.6;
+  color:var(--muted);
   word-break:break-word;white-space:pre-wrap;
 }
 .qa-body.clamped{
@@ -450,7 +402,7 @@ a{color:inherit;text-decoration:none}
 }
 .qa-toggle:hover{border-bottom-color:var(--accent)}
 
-/* Empty, loading, footer */
+/* Empty, loading */
 .empty{
   grid-column:1 / -1;text-align:center;padding:5rem 2rem;
   background:var(--surface);border:1px dashed var(--border);
@@ -461,20 +413,18 @@ a{color:inherit;text-decoration:none}
   letter-spacing:-.02em;color:var(--ink);margin-bottom:.5rem;
 }
 .empty p{color:var(--muted);font-size:.95rem}
-
 .loading{
   text-align:center;padding:3rem 1rem;
   font-family:var(--font-body);font-size:.8rem;font-weight:500;
   letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
 }
-
 .load-more-wrap{text-align:center;padding:3rem 0 1rem}
 .load-more-btn{
   padding:.9rem 2rem;border-radius:999px;
   background:var(--accent);color:#fff;border:1px solid var(--accent);
   font-family:var(--font-body);font-size:.78rem;font-weight:600;
   letter-spacing:.04em;text-transform:uppercase;
-  transition:background-color .25s, transform .15s;
+  transition:background-color .25s;
 }
 .load-more-btn:hover{background:var(--accent-deep)}
 .load-more-btn:disabled{opacity:.55;cursor:not-allowed}
@@ -488,10 +438,7 @@ a{color:inherit;text-decoration:none}
   overflow:hidden;
 }
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table.leads{
-  width:100%;border-collapse:collapse;font-size:.88rem;
-  min-width:900px;
-}
+table.leads{width:100%;border-collapse:collapse;font-size:.88rem;min-width:900px}
 table.leads thead{position:sticky;top:0;z-index:2}
 table.leads th{
   background:var(--dark);color:#fff;
@@ -511,34 +458,29 @@ table.leads td{
 table.leads tr:last-child td{border-bottom:0}
 table.leads tbody tr{transition:background-color .2s;cursor:default}
 table.leads tbody tr:hover{background:rgba(74,13,143,.04)}
-
 table.leads tbody tr.row-accepted{background:rgba(15,138,76,.05)}
-table.leads tbody tr.row-maybe{background:rgba(184,121,31,.06)}
 table.leads tbody tr.row-rejected{background:rgba(183,41,31,.045)}
 table.leads tbody tr.row-rejected td:not(.td-status){opacity:.6}
-
 table.leads td.td-num{
   font-family:var(--font-mono);font-size:.72rem;color:var(--muted);
   width:3rem;text-align:right;
 }
-table.leads td.td-name{font-weight:600;min-width:160px}
+table.leads td.td-name{font-weight:600;min-width:160px;text-transform:uppercase}
 table.leads td.td-muted{
   font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;
   color:var(--muted);white-space:nowrap;
 }
-
 .status-cell{
   display:inline-flex;align-items:center;gap:.35rem;
   padding:.35rem .75rem;border-radius:999px;
   border:1px solid var(--border);background:var(--surface);
   font-family:var(--font-body);font-size:.74rem;font-weight:500;
-  letter-spacing:.01em;color:var(--muted);
-  cursor:pointer;position:relative;
+  color:var(--muted);
+  cursor:pointer;
   transition:all .2s;
 }
 .status-cell:hover{border-color:var(--accent-light);color:var(--ink)}
 .status-cell.s-accepted{background:var(--green);color:#fff;border-color:var(--green)}
-.status-cell.s-maybe{background:var(--amber);color:#fff;border-color:var(--amber)}
 .status-cell.s-rejected{background:var(--red);color:#fff;border-color:var(--red)}
 
 .status-popup{
@@ -557,22 +499,8 @@ table.leads td.td-muted{
 }
 .status-popup button:hover{background:var(--bg)}
 .status-popup button.p-accepted{color:var(--green)}
-.status-popup button.p-maybe{color:var(--amber)}
 .status-popup button.p-rejected{color:var(--red)}
 .status-popup button.p-clear{color:var(--muted);font-style:italic}
-
-.row-actions{display:inline-flex;gap:.4rem;align-items:center}
-.row-action{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:32px;height:32px;border-radius:8px;
-  border:1px solid var(--border);background:var(--surface);
-  color:var(--muted);
-  transition:all .2s;
-}
-.row-action:hover{border-color:var(--accent-light);color:var(--ink)}
-.row-action.a-wa:hover{background:var(--whatsapp);border-color:var(--whatsapp);color:#fff}
-.row-action.a-mail:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.row-action .icon{width:.9rem;height:.9rem}
 
 .toast{
   position:fixed;left:50%;bottom:calc(1.25rem + env(safe-area-inset-bottom, 0px));
@@ -595,7 +523,7 @@ table.leads td.td-muted{
   .dash-inner{padding:2rem 5vw 0}
   .stat-num{font-size:clamp(3rem,14vw,4.5rem)}
   .card{padding:1.25rem 1.15rem 1.15rem}
-  .card-name{font-size:1.25rem}
+  .card-name{font-size:1.2rem}
   .grid{grid-template-columns:1fr}
   .tabs-wrap{margin-inline:-5vw;padding-inline:5vw}
 }
@@ -676,7 +604,6 @@ table.leads td.td-muted{
       <div class="tabs" id="filterPills">
         <button class="pill is-active" data-filter="inbox">Inbox<span class="count" id="cInbox">—</span></button>
         <button class="pill" data-filter="accepted">Accepted<span class="count" id="cAccepted">—</span></button>
-        <button class="pill" data-filter="maybe">Maybe<span class="count" id="cMaybe">—</span></button>
         <button class="pill" data-filter="rejected">Rejected<span class="count" id="cRejected">—</span></button>
       </div>
     </div>
@@ -742,11 +669,11 @@ table.leads td.td-muted{
   var viewToggle = el('viewToggle');
   var leadsBody = el('leadsBody');
   var leadsTable = el('leadsTable');
-  var cInbox = el('cInbox'), cAccepted = el('cAccepted'), cMaybe = el('cMaybe'), cRejected = el('cRejected');
+  var cInbox = el('cInbox'), cAccepted = el('cAccepted'), cRejected = el('cRejected');
 
   var password = null;
   var allApps = [];
-  var counts = { inbox:0, accepted:0, maybe:0, rejected:0, unseen:0, total:0 };
+  var counts = { inbox:0, accepted:0, rejected:0, unseen:0, total:0 };
   var seenIds = new Set();
   var currentFilter = 'inbox';
   var currentView = 'cards';
@@ -874,7 +801,6 @@ table.leads td.td-muted{
   function updateCounts(){
     cInbox.textContent = counts.inbox;
     cAccepted.textContent = counts.accepted;
-    cMaybe.textContent = counts.maybe;
     cRejected.textContent = counts.rejected;
   }
   function updateHeader(){
@@ -996,42 +922,33 @@ table.leads td.td-muted{
     grid.querySelectorAll('.card').forEach(function(card){
       var id = parseInt(card.getAttribute('data-id'), 10);
 
-      card.querySelectorAll('.cta-wa, .cta-mail, .btn-wa, .btn-mail').forEach(function(a){
-        a.addEventListener('click', function(){
+      // Accept + Email
+      var acceptBtn = card.querySelector('.cta-accept');
+      if (acceptBtn){
+        acceptBtn.addEventListener('click', function(){
           if (statusOf(card) !== 'accepted') {
             setStatus(card, 'accepted', true);
             if (currentFilter === 'inbox') {
-              setTimeout(function(){ removeCardVisually(card); }, 60);
+              removeCardVisually(card);
             }
           }
           card.classList.remove('is-unseen');
         });
-      });
+      }
 
-      var declineBtn = card.querySelector('.cta-decline');
-      if (declineBtn) declineBtn.addEventListener('click', function(){
-        if (currentFilter === 'inbox') {
-          setTimeout(function(){ removeCardVisually(card); }, 60);
-        }
-      });
-
-      card.querySelectorAll('.ghost, .status-pill').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          var s = btn.getAttribute('data-status');
-          var next = statusOf(card) === s ? null : s;
-          setStatus(card, next, !!next);
-          card.classList.remove('is-unseen');
-          if (currentFilter === 'inbox' && next === 'rejected') {
-            setTimeout(function(){ removeCardVisually(card); }, 60);
+      // Reject
+      var rejectBtn = card.querySelector('.cta-reject');
+      if (rejectBtn){
+        rejectBtn.addEventListener('click', function(){
+          if (statusOf(card) !== 'rejected') {
+            setStatus(card, 'rejected', true);
+            if (currentFilter === 'inbox') {
+              removeCardVisually(card);
+            }
           }
+          card.classList.remove('is-unseen');
         });
-      });
-
-      var undo = card.querySelector('.note-undo');
-      if (undo) undo.addEventListener('click', function(){
-        setStatus(card, null, false);
-        if (currentFilter === 'inbox') setFilter('inbox');
-      });
+      }
 
       card.addEventListener('click', function(e){
         if (e.target.closest('a, button')) return;
@@ -1040,8 +957,6 @@ table.leads td.td-muted{
           markSeen(id);
         }
       });
-
-      applyStatusClasses(card);
     });
 
     loadMoreWrap.style.display = hasMore ? 'block' : 'none';
@@ -1049,41 +964,34 @@ table.leads td.td-muted{
 
   function statusOf(card){
     if (card.classList.contains('is-accepted')) return 'accepted';
-    if (card.classList.contains('is-maybe')) return 'maybe';
     if (card.classList.contains('is-rejected')) return 'rejected';
     return null;
-  }
-
-  function applyStatusClasses(card){
-    var s = statusOf(card);
-    var noteText = card.querySelector('.note-text');
-    if (noteText) noteText.textContent = s === 'accepted' ? 'Accepted' : (s === 'rejected' ? 'Rejected' : '');
-    card.querySelectorAll('.ghost, .status-pill').forEach(function(g){
-      var st = g.getAttribute('data-status');
-      if (!st) return;
-      g.classList.toggle('is-on-' + st, st === s);
-    });
   }
 
   function setStatus(card, next, withToast){
     var id = parseInt(card.getAttribute('data-id'), 10);
     var prev = statusOf(card);
-    ['accepted','maybe','rejected'].forEach(function(s){ card.classList.remove('is-' + s); });
+    ['accepted','rejected'].forEach(function(s){ card.classList.remove('is-' + s); });
     if (next) card.classList.add('is-' + next);
-    applyStatusClasses(card);
     saveStatus(id, next);
     var app = allApps.find(function(a){ return a.id === id; });
     if (app) app.status = next;
     if (prev !== next) {
-      if (prev) counts[prev] = Math.max(0, counts[prev] - 1);
-      if (next) counts[next] = counts[next] + 1;
-      if (prev === 'maybe' && next === null) counts.inbox += 1;
-      if (prev === null && next === 'maybe') counts.inbox -= 1;
-      if (prev === 'maybe' && (next === 'accepted' || next === 'rejected')) counts.inbox -= 1;
-      if ((prev === 'accepted' || prev === 'rejected') && next === 'maybe') counts.inbox += 1;
+      // Update counts optimistically
+      if (prev === null && (next === 'accepted' || next === 'rejected')) counts.inbox = Math.max(0, counts.inbox - 1);
+      if ((prev === 'accepted' || prev === 'rejected') && next === null) counts.inbox += 1;
+      if (prev === 'accepted' && next === 'rejected') { counts.accepted = Math.max(0, counts.accepted - 1); counts.rejected += 1; }
+      if (prev === 'rejected' && next === 'accepted') { counts.rejected = Math.max(0, counts.rejected - 1); counts.accepted += 1; }
+      if (next === 'accepted' && prev !== 'accepted') counts.accepted += 1;
+      if (next === 'rejected' && prev !== 'rejected') counts.rejected += 1;
+      if (prev === 'accepted' && next === null) counts.accepted = Math.max(0, counts.accepted - 1);
+      if (prev === 'rejected' && next === null) counts.rejected = Math.max(0, counts.rejected - 1);
       updateCounts();
     }
-    if (withToast && next) showToast('Marked ' + next, function(){ setStatus(card, prev, false); });
+    if (withToast && next) showToast('Marked ' + next, function(){
+      setStatus(card, prev, false);
+      if (currentFilter === 'inbox') setFilter('inbox');
+    });
     else hideToast();
   }
 
@@ -1105,15 +1013,13 @@ table.leads td.td-muted{
   });
 
   function removeCardVisually(card){
-    card.style.transition = 'transform .3s, opacity .3s';
-    card.style.transform = 'translateY(-6px) scale(.97)';
-    card.style.opacity = '0';
+    card.classList.add('is-removing');
     setTimeout(function(){
       card.remove();
-      if (grid.children.length === 0) {
+      if (grid.querySelectorAll('.card').length === 0) {
         grid.innerHTML = '<div class="empty"><h2>Inbox is clear.</h2><p>Every application has been reviewed.</p></div>';
       }
-    }, 300);
+    }, 320);
   }
 
   function saveStatus(id, status){
@@ -1134,10 +1040,7 @@ table.leads td.td-muted{
   }
 
   function renderCard(app){
-    var waNumber = sanitizeWA(app.whatsapp);
     var firstName = (app.name || '').split(' ')[0];
-    var waMsg = "Hi " + firstName + ", this is Kunmi. Thanks for applying to Start With Kunmi — I'd love to talk more about what you're building.";
-    var waHref = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
     var emailSubject = 'Your application to Start With Kunmi';
     var emailBody = "Hi " + firstName + ",\n\nThank you for applying to Start With Kunmi. Your answers stood out, and I'd love to talk more about what you're working on.\n\nTalk soon,\nKunmi";
     var mailHref = 'mailto:' + encodeURIComponent(app.email) +
@@ -1164,49 +1067,38 @@ table.leads td.td-muted{
             '<div class="card-name">' + esc(app.name) + '</div>' +
             dupHtml +
           '</div>' +
-          '<div class="card-date">' + esc(date) + '</div>' +
+          '<div class="card-meta-right">' +
+            '<span class="new-label">New</span>' +
+            '<span class="card-date">' + esc(date) + '</span>' +
+          '</div>' +
         '</div>' +
         '<div class="tag-row">' +
           (app.country ? '<span class="tag accent">' + esc(app.country) + '</span>' : '') +
           (app.age_range ? '<span class="tag">' + esc(app.age_range) + '</span>' : '') +
           (app.role ? '<span class="tag">' + esc(app.role) + '</span>' : '') +
         '</div>' +
-        '<div class="action-row">' +
-          '<a class="btn-action btn-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
-            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-            'WhatsApp' +
-          '</a>' +
-          '<a class="btn-action btn-mail" href="' + mailHref + '">' +
-            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
-            'Email' +
-          '</a>' +
-        '</div>' +
-        '<div class="status-row">' +
-          '<span class="status-label">Mark:</span>' +
-          statusPill(app.id, 'accepted', 'Accept', app.status === 'accepted') +
-          statusPill(app.id, 'maybe', 'Maybe', app.status === 'maybe') +
-          statusPill(app.id, 'rejected', 'No', app.status === 'rejected') +
-        '</div>' +
         '<div class="card-answers">' +
-          qa('Working on', app.what_building, 'qa-work') +
-          qa('Stuck on', app.current_challenge, 'qa-stuck') +
-          qa('Wants to leave with', app.final_response, 'qa-leave') +
+          qa('Working on', app.what_building) +
+          qa('Stuck on', app.current_challenge) +
+          qa('Wants to leave with', app.final_response) +
+        '</div>' +
+        '<div class="cta-row">' +
+          '<a class="cta-btn cta-accept" href="' + mailHref + '">' +
+            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
+            'Accept + Email' +
+          '</a>' +
+          '<button type="button" class="cta-btn cta-reject">Reject</button>' +
         '</div>' +
       '</article>';
   }
 
-  function statusPill(id, status, label, isOn){
-    var cls = 'status-pill' + (isOn ? ' is-on-' + status : '');
-    return '<button type="button" class="' + cls + '" data-id="' + id + '" data-status="' + status + '">' + label + '</button>';
-  }
-
-  function qa(label, value, cls){
+  function qa(label, value){
     if (!value) return '';
     var text = String(value);
     var long = text.length > 170;
     return '' +
       '<div class="qa">' +
-        '<div class="qa-label ' + cls + '">' + esc(label) + '</div>' +
+        '<div class="qa-label">' + esc(label) + '</div>' +
         '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(text) + '</div>' +
         (long ? '<button type="button" class="qa-toggle">Read more</button>' : '') +
       '</div>';
@@ -1221,7 +1113,7 @@ table.leads td.td-muted{
         updateCounts();
         updateHeader();
         var rows = (data.applications || []).filter(function(a){
-          if (currentFilter === 'inbox') return !a.status || a.status === 'maybe';
+          if (currentFilter === 'inbox') return !a.status;
           return a.status === currentFilter;
         }).filter(matchesQuery);
         renderTable(rows);
@@ -1253,13 +1145,11 @@ table.leads td.td-muted{
     leadsBody.innerHTML = rows.map(function(app, i){
       var rowCls = '';
       if (app.status === 'accepted') rowCls = 'row-accepted';
-      else if (app.status === 'maybe') rowCls = 'row-maybe';
       else if (app.status === 'rejected') rowCls = 'row-rejected';
 
       var statusCls = '';
       var statusText = 'Not reviewed';
       if (app.status === 'accepted') { statusCls = 's-accepted'; statusText = 'Accepted'; }
-      if (app.status === 'maybe') { statusCls = 's-maybe'; statusText = 'Maybe'; }
       if (app.status === 'rejected') { statusCls = 's-rejected'; statusText = 'Rejected'; }
 
       var appliedDate = '';
@@ -1269,11 +1159,6 @@ table.leads td.td-muted{
       }
 
       var times = (app.submission_count && app.submission_count > 1) ? app.submission_count + '×' : '';
-
-      var waNumber = sanitizeWA(app.whatsapp);
-      var firstName = (app.name || '').split(' ')[0];
-      var waMsg = "Hi " + firstName + ", this is Kunmi. Thanks for applying to Start With Kunmi — I'd love to talk more about what you're building.";
-      var waHref = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
       var mailHref = 'mailto:' + encodeURIComponent(app.email);
 
       return '' +
@@ -1290,9 +1175,6 @@ table.leads td.td-muted{
           '<td class="td-muted">' + esc(times) + '</td>' +
           '<td>' +
             '<div class="row-actions">' +
-              '<a class="row-action a-wa" href="' + waHref + '" target="_blank" rel="noopener" title="WhatsApp">' +
-                '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-              '</a>' +
               '<a class="row-action a-mail" href="' + mailHref + '" title="Email">' +
                 '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
               '</a>' +
@@ -1317,8 +1199,7 @@ table.leads td.td-muted{
     popup.className = 'status-popup';
     popup.innerHTML =
       '<button class="p-accepted" data-set="accepted">Accept</button>' +
-      '<button class="p-maybe" data-set="maybe">Maybe</button>' +
-      '<button class="p-rejected" data-set="rejected">No</button>' +
+      '<button class="p-rejected" data-set="rejected">Reject</button>' +
       '<button class="p-clear" data-set="">Clear</button>';
     document.body.appendChild(popup);
     popup.style.top = (rect.bottom + window.scrollY + 6) + 'px';
@@ -1331,11 +1212,11 @@ table.leads td.td-muted{
         saveStatus(id, s);
         var tr = leadsBody.querySelector('tr[data-id="' + id + '"]');
         if (tr) {
-          tr.classList.remove('row-accepted','row-maybe','row-rejected');
+          tr.classList.remove('row-accepted','row-rejected');
           if (s) tr.classList.add('row-' + s);
           var cell = tr.querySelector('.status-cell');
           if (cell) {
-            cell.classList.remove('s-accepted','s-maybe','s-rejected');
+            cell.classList.remove('s-accepted','s-rejected');
             if (s) cell.classList.add('s-' + s);
             cell.textContent = s ? s.charAt(0).toUpperCase() + s.slice(1) : 'Not reviewed';
           }
@@ -1368,13 +1249,6 @@ table.leads td.td-muted{
     });
   });
 
-  function sanitizeWA(num){
-    if (!num) return '';
-    var digits = String(num).replace(/\D/g, '');
-    if (digits.length === 11 && digits.charAt(0) === '0') digits = '234' + digits.slice(1);
-    else if (digits.length === 10) digits = '234' + digits;
-    return digits;
-  }
   function esc(s){
     if (s === null || s === undefined) return '';
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
