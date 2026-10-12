@@ -341,8 +341,11 @@ a{color:inherit;text-decoration:none}
 }
 .tag.accent{background:rgba(74,13,143,.06);color:var(--accent);border-color:rgba(74,13,143,.14)}
 
-/* CTA row — two buttons */
+/* CTA row */
 .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.25rem}
+.card.is-accepted .cta-row,
+.card.is-rejected .cta-row{display:none}
+
 .cta-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   padding:.85rem 1rem;
@@ -364,13 +367,24 @@ a{color:inherit;text-decoration:none}
 }
 .cta-reject:hover{background:rgba(183,41,31,.06);border-color:var(--red)}
 
-.card.is-accepted .cta-accept{
-  background:var(--green);border-color:var(--green);
+/* Move back to Inbox */
+.reset-row{
+  display:none;
+  margin-top:.25rem;
+  padding-top:.85rem;
+  border-top:1px solid var(--border-soft);
 }
-.card.is-accepted .cta-accept:hover{background:#0d7340;border-color:#0d7340}
-.card.is-rejected .cta-reject{
-  background:var(--red);color:#fff;border-color:var(--red);
+.card.is-accepted .reset-row,
+.card.is-rejected .reset-row{display:block}
+.reset-link{
+  font-family:var(--font-body);font-size:.76rem;font-weight:500;
+  color:var(--muted-soft);
+  background:none;border:0;padding:.35rem 0;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:color .2s;
 }
+.reset-link:hover{color:var(--accent)}
+.reset-link .icon{width:.9rem;height:.9rem}
 
 /* Answers */
 .card-answers{
@@ -386,13 +400,18 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);
 }
 .qa-body{
+  display:block;
   font-family:var(--font-body);
   font-size:.88rem;line-height:1.6;
   color:var(--muted);
   word-break:break-word;white-space:pre-wrap;
 }
 .qa-body.clamped{
-  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  max-height:calc(1.6em * 4);
 }
 .qa-toggle{
   align-self:flex-start;font-family:var(--font-body);
@@ -532,7 +551,6 @@ table.leads td.td-muted{
 </head>
 <body>
 
-<!-- LOGIN GATE -->
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="gate-brand">Start <em>with</em> Kunmi</div>
@@ -552,7 +570,6 @@ table.leads td.td-muted{
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div class="dash" id="dash">
   <div class="dash-top">
     <div class="dash-top-brand">
@@ -901,28 +918,55 @@ table.leads td.td-muted{
     grid.innerHTML = filtered.map(renderCard).join('');
     window.scrollTo(0, scrollY);
 
+    // Clamping + Read more toggles
     grid.querySelectorAll('.qa').forEach(function(qa){
       var body = qa.querySelector('.qa-body');
       if (!body) return;
-      var text = body.textContent.trim();
-      if (text.length > 170 && !qa.querySelector('.qa-toggle')){
-        body.classList.add('clamped');
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'qa-toggle';
-        btn.textContent = 'Read more';
-        btn.addEventListener('click', function(){
-          var clamped = body.classList.toggle('clamped');
-          btn.textContent = clamped ? 'Read more' : 'Show less';
-        });
-        qa.appendChild(btn);
+
+      // Make sure it starts unclamped for measurement
+      body.classList.remove('clamped');
+      body.style.display = 'block';
+      void body.offsetHeight;
+
+      // Measure: does it overflow 4 lines?
+      var lineHeight = parseFloat(getComputedStyle(body).lineHeight) || 22;
+      var maxHeight = lineHeight * 4;
+      var overflows = body.scrollHeight > (maxHeight + 4);
+
+      // Fallback: if measurement failed or was borderline, use character count
+      if (!overflows) {
+        var text = body.textContent.trim();
+        overflows = text.length > 170;
       }
+
+      if (!overflows) return;
+
+      body.classList.add('clamped');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'qa-toggle';
+      btn.textContent = 'Read more';
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        var isClamped = body.classList.contains('clamped');
+        if (isClamped) {
+          body.classList.remove('clamped');
+          // Force reflow so the browser definitely repaints
+          void body.offsetHeight;
+          btn.textContent = 'Show less';
+        } else {
+          body.classList.add('clamped');
+          void body.offsetHeight;
+          btn.textContent = 'Read more';
+        }
+      });
+      qa.appendChild(btn);
     });
 
     grid.querySelectorAll('.card').forEach(function(card){
       var id = parseInt(card.getAttribute('data-id'), 10);
 
-      // Accept + Email
       var acceptBtn = card.querySelector('.cta-accept');
       if (acceptBtn){
         acceptBtn.addEventListener('click', function(){
@@ -936,7 +980,6 @@ table.leads td.td-muted{
         });
       }
 
-      // Reject
       var rejectBtn = card.querySelector('.cta-reject');
       if (rejectBtn){
         rejectBtn.addEventListener('click', function(){
@@ -947,6 +990,16 @@ table.leads td.td-muted{
             }
           }
           card.classList.remove('is-unseen');
+        });
+      }
+
+      var resetBtn = card.querySelector('.reset-link');
+      if (resetBtn){
+        resetBtn.addEventListener('click', function(){
+          setStatus(card, null, false);
+          if (currentFilter !== 'inbox') {
+            removeCardVisually(card);
+          }
         });
       }
 
@@ -977,7 +1030,6 @@ table.leads td.td-muted{
     var app = allApps.find(function(a){ return a.id === id; });
     if (app) app.status = next;
     if (prev !== next) {
-      // Update counts optimistically
       if (prev === null && (next === 'accepted' || next === 'rejected')) counts.inbox = Math.max(0, counts.inbox - 1);
       if ((prev === 'accepted' || prev === 'rejected') && next === null) counts.inbox += 1;
       if (prev === 'accepted' && next === 'rejected') { counts.accepted = Math.max(0, counts.accepted - 1); counts.rejected += 1; }
@@ -1017,7 +1069,11 @@ table.leads td.td-muted{
     setTimeout(function(){
       card.remove();
       if (grid.querySelectorAll('.card').length === 0) {
-        grid.innerHTML = '<div class="empty"><h2>Inbox is clear.</h2><p>Every application has been reviewed.</p></div>';
+        grid.innerHTML = '<div class="empty"><h2>' +
+          (currentFilter === 'inbox' ? 'Inbox is clear.' : 'No applications in this view.') +
+          '</h2><p>' +
+          (currentFilter === 'inbox' ? 'Every application has been reviewed.' : 'Nothing to show here yet.') +
+          '</p></div>';
       }
     }, 320);
   }
@@ -1060,6 +1116,25 @@ table.leads td.td-muted{
     var dupHtml = (app.submission_count && app.submission_count > 1)
       ? '<span class="dup-badge">Applied ' + app.submission_count + ' times</span>' : '';
 
+    var ctaHtml = app.status
+      ? ''
+      : '<div class="cta-row">' +
+          '<a class="cta-btn cta-accept" href="' + mailHref + '">' +
+            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
+            'Accept + Email' +
+          '</a>' +
+          '<button type="button" class="cta-btn cta-reject">Reject</button>' +
+        '</div>';
+
+    var resetHtml = app.status
+      ? '<div class="reset-row">' +
+          '<button type="button" class="reset-link">' +
+            '<svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 5v4h4"/></svg>' +
+            'Move back to Inbox' +
+          '</button>' +
+        '</div>'
+      : '';
+
     return '' +
       '<article class="' + cls.join(' ') + '" data-id="' + app.id + '">' +
         '<div class="card-head">' +
@@ -1082,25 +1157,19 @@ table.leads td.td-muted{
           qa('Stuck on', app.current_challenge) +
           qa('Wants to leave with', app.final_response) +
         '</div>' +
-        '<div class="cta-row">' +
-          '<a class="cta-btn cta-accept" href="' + mailHref + '">' +
-            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
-            'Accept + Email' +
-          '</a>' +
-          '<button type="button" class="cta-btn cta-reject">Reject</button>' +
-        '</div>' +
+        ctaHtml +
+        resetHtml +
       '</article>';
   }
 
   function qa(label, value){
     if (!value) return '';
     var text = String(value);
-    var long = text.length > 170;
+    // No clamping class in HTML — the render() pass adds it based on measured overflow
     return '' +
       '<div class="qa">' +
         '<div class="qa-label">' + esc(label) + '</div>' +
-        '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(text) + '</div>' +
-        (long ? '<button type="button" class="qa-toggle">Read more</button>' : '') +
+        '<div class="qa-body">' + esc(text) + '</div>' +
       '</div>';
   }
 
