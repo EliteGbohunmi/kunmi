@@ -22,6 +22,7 @@
   --green:#0F8A4C;
   --amber:#B8791F;
   --red:#B7291F;
+  --whatsapp:#25D366;
   --border:#E8E4DC;
   --border-soft:#F0EBF5;
   --radius:15px;
@@ -42,14 +43,13 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 input{font:inherit;color:inherit}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--pink);color:#fff}
-
 .icon{
   width:1.1rem;height:1.1rem;flex:0 0 auto;
   fill:none;stroke:currentColor;stroke-width:2.25;
   stroke-linecap:round;stroke-linejoin:round;
 }
 
-/* ==== LOGIN GATE ==== */
+/* ============ LOGIN GATE ============ */
 .gate{
   position:fixed;inset:0;z-index:100;
   display:flex;align-items:center;justify-content:center;
@@ -73,27 +73,20 @@ a{color:inherit;text-decoration:none}
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.14);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-radius:var(--radius);
-  padding:3rem 2.5rem 2.5rem;
+  border-radius:var(--radius);padding:3rem 2.5rem 2.5rem;
   box-shadow:0 40px 80px -40px rgba(0,0,0,.6);
 }
 .gate-brand{
-  font-family:var(--font-display);
-  font-size:1.15rem;font-weight:700;
+  font-family:var(--font-display);font-size:1.15rem;font-weight:700;
   letter-spacing:-.02em;color:#fff;margin-bottom:2.5rem;
 }
 .gate-brand em{font-style:italic;color:var(--accent-light)}
 .gate h1{
-  font-family:var(--font-display);
-  font-size:clamp(1.6rem,4vw,2rem);
-  font-weight:800;letter-spacing:-.02em;line-height:1.1;
-  color:#fff;margin-bottom:.65rem;
+  font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2rem);
+  font-weight:800;letter-spacing:-.02em;line-height:1.1;color:#fff;margin-bottom:.65rem;
 }
 .gate h1 em{font-style:italic;font-weight:400;color:var(--accent-light)}
-.gate-hint{
-  font-size:.95rem;color:rgba(255,255,255,.62);
-  margin-bottom:2rem;line-height:1.6;
-}
+.gate-hint{font-size:.95rem;color:rgba(255,255,255,.62);margin-bottom:2rem;line-height:1.6}
 .gate-field{position:relative;margin-bottom:1rem}
 .gate-field input{
   width:100%;padding:1rem 1.15rem;
@@ -104,9 +97,7 @@ a{color:inherit;text-decoration:none}
   transition:border-color .25s, background-color .25s;
 }
 .gate-field input::placeholder{color:rgba(255,255,255,.35)}
-.gate-field input:focus{
-  outline:none;border-color:var(--pink);background:rgba(255,255,255,.08);
-}
+.gate-field input:focus{outline:none;border-color:var(--pink);background:rgba(255,255,255,.08)}
 .gate-submit{
   width:100%;padding:1rem 1.25rem;
   background:var(--accent);color:#fff;border-radius:12px;
@@ -121,11 +112,10 @@ a{color:inherit;text-decoration:none}
 .gate-error{margin-top:1rem;font-size:.88rem;color:#FF6EC7;min-height:1.2em;font-weight:500}
 .gate-foot{
   margin-top:2rem;font-family:var(--font-mono);
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.35);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);
 }
 
-/* ==== DASHBOARD ==== */
+/* ============ DASHBOARD ============ */
 .dash{display:none;padding:0 0 5rem}
 .dash.is-visible{display:block}
 
@@ -135,15 +125,13 @@ a{color:inherit;text-decoration:none}
   gap:1.5rem;flex-wrap:wrap;
 }
 .dash-top-brand{
-  font-family:var(--font-display);
-  font-size:1rem;font-weight:700;letter-spacing:-.02em;
+  font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:-.02em;
 }
 .dash-top-brand em{font-style:italic;color:var(--accent-light)}
 .dash-top-meta{
   display:flex;align-items:center;gap:1.25rem;
   font-family:var(--font-mono);font-size:.68rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.55);
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);
 }
 .live-dot{
   display:inline-block;width:.55rem;height:.55rem;border-radius:50%;
@@ -163,25 +151,20 @@ a{color:inherit;text-decoration:none}
   transition:border-color .25s, color .25s, background-color .25s;
   display:inline-flex;align-items:center;gap:.5rem;
 }
-.dash-top-actions button:hover, .dash-top-actions a:hover{
-  border-color:var(--pink);color:#fff;
-}
+.dash-top-actions button:hover, .dash-top-actions a:hover{border-color:var(--pink);color:#fff}
 .dash-top-actions .export-btn{border-color:rgba(245,0,224,.4);color:#FFB8F0}
 
 .dash-inner{max-width:1400px;margin-inline:auto;padding:3rem 5vw 0}
 
 .stat-hero{display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
 .stat-num{
-  font-family:var(--font-display);
-  font-size:clamp(4rem,10vw,8rem);
-  font-weight:800;letter-spacing:-.055em;line-height:.85;
-  color:var(--accent);
+  font-family:var(--font-display);font-size:clamp(4rem,10vw,8rem);
+  font-weight:800;letter-spacing:-.055em;line-height:.85;color:var(--accent);
 }
 .stat-label{padding-bottom:1rem}
 .stat-label strong{
-  display:block;font-family:var(--font-display);
-  font-size:1.1rem;font-weight:700;letter-spacing:-.01em;
-  color:var(--ink);text-transform:uppercase;
+  display:block;font-family:var(--font-display);font-size:1.1rem;font-weight:700;
+  letter-spacing:-.01em;color:var(--ink);text-transform:uppercase;
 }
 .stat-label span{
   font-family:var(--font-mono);font-size:.7rem;
@@ -200,7 +183,7 @@ a{color:inherit;text-decoration:none}
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);box-shadow:var(--shadow-card);
 }
-.search-wrap{position:relative;flex:1 1 260px;min-width:0}
+.search-wrap{position:relative;flex:1 1 240px;min-width:0}
 .search-wrap .icon{
   position:absolute;left:1rem;top:50%;transform:translateY(-50%);
   color:var(--muted);pointer-events:none;width:1rem;height:1rem;
@@ -212,18 +195,40 @@ a{color:inherit;text-decoration:none}
   transition:border-color .25s, background-color .25s;
 }
 .search-input:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+
+.view-toggle{
+  display:inline-flex;background:var(--bg);
+  border:1px solid var(--border);border-radius:10px;padding:.2rem;
+}
+.view-toggle button{
+  padding:.5rem .9rem;border-radius:8px;
+  font-family:var(--font-mono);font-size:.66rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);transition:background-color .2s, color .2s;
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.view-toggle button.is-active{background:var(--accent);color:#fff}
+.view-toggle button:hover:not(.is-active){color:var(--ink)}
+
 .filter-pills{display:flex;gap:.4rem;flex-wrap:wrap}
 .pill{
   padding:.55rem 1rem;border-radius:999px;
   border:1px solid var(--border);background:var(--surface);
   font-family:var(--font-body);font-size:.78rem;font-weight:600;
   letter-spacing:.02em;color:var(--muted);
-  transition:all .2s;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;
 }
 .pill:hover{border-color:var(--accent-light);color:var(--ink)}
 .pill.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+.pill .count{
+  display:inline-block;min-width:1.4rem;padding:.05rem .4rem;
+  background:rgba(0,0,0,.08);border-radius:999px;
+  font-family:var(--font-mono);font-size:.62rem;font-weight:600;
+  text-align:center;
+}
+.pill.is-active .count{background:rgba(255,255,255,.2)}
 
-/* Grid */
+/* ============ CARDS VIEW ============ */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
@@ -232,149 +237,235 @@ a{color:inherit;text-decoration:none}
 @media(min-width:1200px){.grid{grid-template-columns:repeat(3, 1fr)}}
 @media(min-width:900px) and (max-width:1199px){.grid{grid-template-columns:repeat(2, 1fr)}}
 
-/* Card */
 .card{
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:1.5rem 1.35rem 1.35rem;
   box-shadow:var(--shadow-card);
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .25s;
+  transition:box-shadow .3s, border-color .25s, opacity .25s, transform .35s cubic-bezier(.25,.46,.45,.94);
   display:flex;flex-direction:column;gap:1rem;
   position:relative;overflow:hidden;
 }
-.card::before{
-  content:'';position:absolute;left:0;top:0;right:0;height:3px;
-  background:linear-gradient(90deg, var(--accent), var(--pink));
-  opacity:0;transition:opacity .3s;
-}
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-  border-color:var(--accent-light);
-}
-.card:hover::before{opacity:1}
-
-.card.is-unseen::after{
-  content:'';position:absolute;top:1rem;right:1rem;
-  width:.5rem;height:.5rem;border-radius:50%;
-  background:var(--pink);
-  box-shadow:0 0 0 3px rgba(245,0,224,.18);
-}
+.card:hover{box-shadow:var(--shadow-hover);border-color:var(--accent-light)}
 .card.is-accepted{border-left:3px solid var(--green)}
 .card.is-maybe{border-left:3px solid var(--amber)}
 .card.is-rejected{border-left:3px solid var(--red)}
-.card.is-new{animation:cardNew 3s ease-out}
-@keyframes cardNew{
-  0%{box-shadow:0 0 0 0 rgba(245,0,224,.5)}
-  100%{box-shadow:var(--shadow-card)}
+.card.is-rejected .card-head,
+.card.is-rejected .tag-row,
+.card.is-rejected .card-answers{opacity:.55}
+
+.card.is-removing{
+  transform:translateY(-6px) scale(.97);
+  opacity:0;
+  pointer-events:none;
 }
 
-.card-head{
-  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
-}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.card-name-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .card-name{
-  font-family:var(--font-display);
-  font-size:1.15rem;font-weight:700;
-  letter-spacing:-.015em;line-height:1.2;
-  color:var(--ink);word-break:break-word;
+  font-family:var(--font-display);font-size:1.15rem;font-weight:700;
+  letter-spacing:-.015em;line-height:1.2;color:var(--ink);word-break:break-word;
 }
+.new-badge{
+  display:none;padding:.12rem .45rem;border-radius:999px;
+  background:var(--pink);color:#fff;
+  font-size:.64rem;font-weight:700;letter-spacing:.04em;
+}
+.card.is-unseen .new-badge{display:inline-block}
 .card-date{
-  font-family:var(--font-mono);font-size:.62rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);white-space:nowrap;padding-top:.2rem;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:.2rem;
 }
 .dup-badge{
   display:inline-block;margin-top:.3rem;padding:.15rem .5rem;
-  background:rgba(245,0,224,.1);color:var(--pink);
-  border-radius:6px;font-family:var(--font-mono);
-  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(245,0,224,.1);color:var(--pink);border-radius:6px;
+  font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
 }
 
 .tag-row{display:flex;flex-wrap:wrap;gap:.35rem}
 .tag{
-  font-family:var(--font-mono);font-size:.6rem;
-  letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
   padding:.3rem .6rem;border-radius:6px;
-  background:var(--bg);color:var(--muted);
-  border:1px solid var(--border-soft);
+  background:var(--bg);color:var(--muted);border:1px solid var(--border-soft);
 }
 .tag.accent{background:rgba(74,13,143,.06);color:var(--accent);border-color:rgba(74,13,143,.14)}
-.tag.status-accepted{background:rgba(15,138,76,.1);color:var(--green);border-color:rgba(15,138,76,.2)}
-.tag.status-maybe{background:rgba(184,121,31,.1);color:var(--amber);border-color:rgba(184,121,31,.2)}
-.tag.status-rejected{background:rgba(183,41,31,.08);color:var(--red);border-color:rgba(183,41,31,.16)}
 
-/* Action buttons */
-.action-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
+.card-answers{
+  display:flex;flex-direction:column;gap:.9rem;
+  padding-top:1rem;border-top:1px solid var(--border-soft);
 }
-.btn-action{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.7rem 1rem;
-  border-radius:10px;
-  font-family:var(--font-body);font-size:.72rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  transition:background-color .25s, color .25s, border-color .25s;
-}
-.btn-wa{background:#25D366;color:#fff;border:1px solid #25D366}
-.btn-wa:hover{background:#1eaa52;border-color:#1eaa52}
-.btn-mail{background:var(--accent);color:#fff;border:1px solid var(--accent)}
-.btn-mail:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
-.btn-action .icon{width:.95rem;height:.95rem}
-
-/* Status pills */
-.status-row{
-  display:flex;gap:.4rem;padding-top:.5rem;
-  border-top:1px solid var(--border-soft);
-  align-items:center;
-}
-.status-label{
-  font-family:var(--font-mono);font-size:.6rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);margin-right:.25rem;
-}
-.status-pill{
-  padding:.4rem .75rem;border-radius:999px;
-  border:1px solid var(--border);background:var(--surface);
-  font-family:var(--font-body);font-size:.7rem;font-weight:600;
-  letter-spacing:.04em;color:var(--muted);
-  transition:all .2s;
-}
-.status-pill:hover{border-color:var(--accent-light)}
-.status-pill.is-on-accepted{background:var(--green);color:#fff;border-color:var(--green)}
-.status-pill.is-on-maybe{background:var(--amber);color:#fff;border-color:var(--amber)}
-.status-pill.is-on-rejected{background:var(--red);color:#fff;border-color:var(--red)}
-
-/* Answers */
-.card-answers{display:flex;flex-direction:column;gap:.9rem;padding-top:.5rem;border-top:1px solid var(--border-soft)}
 .qa{display:flex;flex-direction:column;gap:.3rem}
 .qa-label{
-  font-family:var(--font-mono);font-size:.6rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);
   display:flex;justify-content:space-between;align-items:center;
 }
 .qa-words{color:var(--muted);font-size:.58rem;letter-spacing:.1em}
+.qa-words.is-short{color:var(--amber)}
 .qa-body{font-size:.88rem;line-height:1.6;color:var(--ink);word-break:break-word;white-space:pre-wrap}
-.qa-body.clamped{
-  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
-}
+.qa-body.clamped{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .qa-toggle{
-  align-self:flex-start;font-family:var(--font-mono);
-  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);padding:.2rem 0;border-bottom:1px solid transparent;
-  transition:border-color .2s;
+  align-self:flex-start;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);padding:.2rem 0;
+  background:none;border:0;border-bottom:1px solid transparent;transition:border-color .2s;
 }
 .qa-toggle:hover{border-bottom-color:var(--accent)}
 
-/* Empty, loading, footer */
+.status-note{
+  display:none;align-items:center;justify-content:space-between;gap:.75rem;
+  padding:.55rem .75rem;border-radius:10px;font-size:.8rem;font-weight:600;
+}
+.card.is-accepted .status-note{display:flex;background:rgba(15,138,76,.08);color:var(--green)}
+.card.is-rejected .status-note{display:flex;background:rgba(183,41,31,.07);color:var(--red)}
+.note-undo{
+  background:none;border:0;color:inherit;font-size:.8rem;font-weight:700;
+  text-decoration:underline;text-underline-offset:3px;padding:.5rem .25rem;
+}
+
+.secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ghost{
+  min-height:44px;border-radius:10px;
+  border:1px solid var(--border);background:transparent;
+  font-size:.8rem;font-weight:600;color:var(--muted);
+  transition:background-color .2s, color .2s, border-color .2s;
+}
+.ghost:hover{border-color:var(--accent-light);color:var(--ink)}
+.ghost.is-on-maybe{background:var(--amber);border-color:var(--amber);color:#fff}
+.ghost.is-on-rejected{background:var(--red);border-color:var(--red);color:#fff}
+
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.cta{
+  min-height:50px;padding:.7rem .75rem;border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-size:.82rem;font-weight:700;letter-spacing:.01em;text-decoration:none;text-align:center;
+  border:1px solid transparent;transition:background-color .2s, border-color .2s, color .2s;
+}
+.cta-wa{background:var(--whatsapp);color:#0B3B1E;border-color:var(--whatsapp)}
+.cta-wa:hover{background:#1eaa52;border-color:#1eaa52;color:#fff}
+.cta-mail{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cta-mail:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.cta-decline{display:none;grid-column:1 / -1;background:var(--surface);color:var(--red);border-color:rgba(183,41,31,.35)}
+.cta-decline:hover{background:rgba(183,41,31,.06)}
+.card.is-rejected .cta-wa,
+.card.is-rejected .cta-mail{display:none}
+.card.is-rejected .cta-decline{display:inline-flex}
+
+/* ============ TABLE VIEW ============ */
+.table-wrap{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.leads{
+  width:100%;border-collapse:collapse;font-size:.88rem;
+  min-width:900px;
+}
+table.leads thead{
+  position:sticky;top:0;z-index:2;
+}
+table.leads th{
+  background:var(--dark);color:#fff;
+  font-family:var(--font-mono);font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.9rem 1rem;text-align:left;white-space:nowrap;
+  cursor:pointer;user-select:none;
+  transition:background-color .2s;
+}
+table.leads th:hover{background:#2a1a55}
+table.leads th .sort-arrow{
+  display:inline-block;margin-left:.4rem;opacity:.35;
+  transition:opacity .2s;
+}
+table.leads th.is-sorted .sort-arrow{opacity:1;color:var(--pink)}
+table.leads td{
+  padding:.85rem 1rem;border-bottom:1px solid var(--border-soft);
+  vertical-align:middle;color:var(--ink);
+}
+table.leads tr:last-child td{border-bottom:0}
+table.leads tbody tr{
+  transition:background-color .2s;
+  cursor:default;
+}
+table.leads tbody tr:hover{background:rgba(74,13,143,.04)}
+
+/* row status colors */
+table.leads tbody tr.row-accepted{background:rgba(15,138,76,.05)}
+table.leads tbody tr.row-maybe{background:rgba(184,121,31,.06)}
+table.leads tbody tr.row-rejected{background:rgba(183,41,31,.045)}
+table.leads tbody tr.row-rejected td:not(.td-status){opacity:.6}
+
+table.leads td.td-num{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--muted);
+  width:3rem;text-align:right;
+}
+table.leads td.td-name{font-weight:600;min-width:160px}
+table.leads td.td-muted{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;
+  color:var(--muted);white-space:nowrap;
+}
+
+.status-cell{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.35rem .75rem;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);
+  font-family:var(--font-body);font-size:.72rem;font-weight:600;
+  letter-spacing:.02em;color:var(--muted);
+  cursor:pointer;position:relative;
+  transition:all .2s;
+}
+.status-cell:hover{border-color:var(--accent-light);color:var(--ink)}
+.status-cell.s-accepted{background:var(--green);color:#fff;border-color:var(--green)}
+.status-cell.s-maybe{background:var(--amber);color:#fff;border-color:var(--amber)}
+.status-cell.s-rejected{background:var(--red);color:#fff;border-color:var(--red)}
+.status-cell .caret{width:.55rem;height:.55rem;opacity:.7}
+
+.status-popup{
+  position:absolute;z-index:30;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 12px 30px -12px rgba(28,16,56,.3);
+  padding:.35rem;display:flex;flex-direction:column;gap:.15rem;
+  min-width:140px;
+}
+.status-popup button{
+  padding:.55rem .75rem;border-radius:6px;text-align:left;
+  font-size:.8rem;font-weight:600;color:var(--ink);
+  transition:background-color .15s;
+}
+.status-popup button:hover{background:var(--bg)}
+.status-popup button.p-accepted{color:var(--green)}
+.status-popup button.p-maybe{color:var(--amber)}
+.status-popup button.p-rejected{color:var(--red)}
+.status-popup button.p-clear{color:var(--muted);font-style:italic}
+
+.row-actions{
+  display:inline-flex;gap:.4rem;align-items:center;
+}
+.row-action{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);
+  transition:all .2s;
+}
+.row-action:hover{border-color:var(--accent-light);color:var(--ink)}
+.row-action.a-wa:hover{background:var(--whatsapp);border-color:var(--whatsapp);color:#fff}
+.row-action.a-mail:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.row-action .icon{width:.9rem;height:.9rem}
+
+/* Empty / loading */
 .empty{
-  grid-column:1 / -1;text-align:center;padding:5rem 2rem;
+  text-align:center;padding:5rem 2rem;
   background:var(--surface);border:1px dashed var(--border);
   border-radius:var(--radius);
 }
 .empty h2{
-  font-family:var(--font-display);
-  font-size:1.5rem;font-weight:700;
+  font-family:var(--font-display);font-size:1.5rem;font-weight:700;
   letter-spacing:-.02em;color:var(--ink);margin-bottom:.5rem;
 }
 .empty p{color:var(--muted);font-size:.95rem}
@@ -385,9 +476,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
 }
 
-.load-more-wrap{
-  text-align:center;padding:3rem 0 1rem;
-}
+.load-more-wrap{text-align:center;padding:3rem 0 1rem}
 .load-more-btn{
   padding:.9rem 2rem;border-radius:999px;
   background:var(--accent);color:#fff;border:1px solid var(--accent);
@@ -399,16 +488,18 @@ a{color:inherit;text-decoration:none}
 .load-more-btn:disabled{opacity:.55;cursor:not-allowed}
 
 .toast{
-  position:fixed;bottom:2rem;left:50%;
-  transform:translateX(-50%) translateY(150%);
-  background:var(--ink);color:#fff;
-  padding:.85rem 1.5rem;border-radius:10px;
-  font-family:var(--font-body);font-size:.85rem;
-  box-shadow:0 20px 40px -12px rgba(0,0,0,.4);
-  z-index:999;transition:transform .4s cubic-bezier(.25,.46,.45,.94);
-  pointer-events:none;
+  position:fixed;left:50%;bottom:calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  transform:translate(-50%, 140%);
+  display:flex;align-items:center;gap:1rem;
+  background:var(--ink);color:#fff;padding:.4rem .5rem .4rem 1rem;border-radius:12px;
+  font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.45);
+  transition:transform .3s cubic-bezier(.25,.46,.45,.94);z-index:999;
+  max-width:calc(100vw - 2rem);
 }
-.toast.is-visible{transform:translateX(-50%) translateY(0)}
+.toast.show{transform:translate(-50%, 0)}
+.toast button{background:none;border:0;color:#CDB6F5;font-weight:700;font-size:.85rem;padding:.6rem .75rem}
+
+.view-hidden{display:none !important}
 
 @media(max-width:600px){
   .dash-top{padding:1rem 5vw}
@@ -418,10 +509,12 @@ a{color:inherit;text-decoration:none}
   .card{padding:1.25rem 1.15rem 1.15rem}
   .grid{grid-template-columns:1fr}
 }
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
 </style>
 </head>
 <body>
 
+<!-- ============ LOGIN GATE ============ -->
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="gate-brand">Start <em>with</em> Kunmi</div>
@@ -441,6 +534,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<!-- ============ DASHBOARD ============ -->
 <div class="dash" id="dash">
   <div class="dash-top">
     <div class="dash-top-brand">Start <em>with</em> Kunmi · Applications</div>
@@ -471,26 +565,67 @@ a{color:inherit;text-decoration:none}
         <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
         <input type="text" class="search-input" id="searchInput" placeholder="Search name, country, role…" autocomplete="off">
       </div>
+
+      <div class="view-toggle" id="viewToggle" role="tablist">
+        <button type="button" data-view="cards" class="is-active" id="vtCards">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Cards
+        </button>
+        <button type="button" data-view="table" id="vtTable">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18M3 3h18v18H3z"/></svg>
+          Table
+        </button>
+      </div>
+
       <div class="filter-pills" id="filterPills">
-        <button class="pill is-active" data-filter="all">All</button>
-        <button class="pill" data-filter="unseen">New</button>
-        <button class="pill" data-filter="accepted">Accepted</button>
-        <button class="pill" data-filter="maybe">Maybe</button>
-        <button class="pill" data-filter="rejected">Rejected</button>
+        <button class="pill is-active" data-filter="inbox">Inbox<span class="count" id="cInbox">—</span></button>
+        <button class="pill" data-filter="accepted">Accepted<span class="count" id="cAccepted">—</span></button>
+        <button class="pill" data-filter="maybe">Maybe<span class="count" id="cMaybe">—</span></button>
+        <button class="pill" data-filter="rejected">Rejected<span class="count" id="cRejected">—</span></button>
       </div>
     </div>
 
-    <div class="grid" id="grid">
-      <div class="loading" id="loading">Loading applications…</div>
+    <!-- Cards view -->
+    <div id="cardsView">
+      <div class="grid" id="grid">
+        <div class="loading" id="loading">Loading applications…</div>
+      </div>
+      <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+        <button class="load-more-btn" id="loadMoreBtn">Load more</button>
+      </div>
     </div>
 
-    <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
-      <button class="load-more-btn" id="loadMoreBtn">Load more</button>
+    <!-- Table view -->
+    <div id="tableView" class="view-hidden">
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table class="leads" id="leadsTable">
+            <thead>
+              <tr>
+                <th data-sort="id">#<span class="sort-arrow">↓</span></th>
+                <th data-sort="name">Name<span class="sort-arrow">↓</span></th>
+                <th data-sort="age_range">Age<span class="sort-arrow">↓</span></th>
+                <th data-sort="country">Country<span class="sort-arrow">↓</span></th>
+                <th data-sort="role">Role<span class="sort-arrow">↓</span></th>
+                <th data-sort="status">Status<span class="sort-arrow">↓</span></th>
+                <th data-sort="submitted_at">Applied<span class="sort-arrow">↓</span></th>
+                <th data-sort="submission_count">Times<span class="sort-arrow">↓</span></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leadsBody"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
-<div class="toast" id="toast">Copied</div>
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span id="toastMsg"></span>
+  <button type="button" id="toastUndo">Undo</button>
+</div>
 
 <script>
 (function(){
@@ -499,36 +634,37 @@ a{color:inherit;text-decoration:none}
   var STORAGE_KEY = 'swk_admin_pw';
   var PAGE_SIZE = 20;
 
-  var gate = document.getElementById('gate');
-  var dash = document.getElementById('dash');
-  var gateForm = document.getElementById('gateForm');
-  var gateInput = document.getElementById('gateInput');
-  var gateError = document.getElementById('gateError');
-  var gateSubmit = document.getElementById('gateSubmit');
-  var gateBtnText = document.getElementById('gateBtnText');
-  var grid = document.getElementById('grid');
-  var countNum = document.getElementById('countNum');
-  var countSub = document.getElementById('countSub');
-  var lastUpdate = document.getElementById('lastUpdate');
-  var searchInput = document.getElementById('searchInput');
-  var filterPills = document.getElementById('filterPills');
-  var logoutBtn = document.getElementById('logoutBtn');
-  var toast = document.getElementById('toast');
-  var loadMoreWrap = document.getElementById('loadMoreWrap');
-  var loadMoreBtn = document.getElementById('loadMoreBtn');
-  var exportLink = document.getElementById('exportLink');
+  var el = function(id){ return document.getElementById(id); };
+  var gate = el('gate'), dash = el('dash');
+  var gateForm = el('gateForm'), gateInput = el('gateInput');
+  var gateError = el('gateError'), gateSubmit = el('gateSubmit'), gateBtnText = el('gateBtnText');
+  var grid = el('grid'), countNum = el('countNum'), countSub = el('countSub');
+  var lastUpdate = el('lastUpdate'), searchInput = el('searchInput');
+  var filterPills = el('filterPills'), logoutBtn = el('logoutBtn');
+  var toast = el('toast'), toastMsg = el('toastMsg'), toastUndo = el('toastUndo');
+  var loadMoreWrap = el('loadMoreWrap'), loadMoreBtn = el('loadMoreBtn');
+  var exportLink = el('exportLink');
+  var cardsView = el('cardsView'), tableView = el('tableView');
+  var viewToggle = el('viewToggle');
+  var leadsBody = el('leadsBody');
+  var leadsTable = el('leadsTable');
+  var cInbox = el('cInbox'), cAccepted = el('cAccepted'), cMaybe = el('cMaybe'), cRejected = el('cRejected');
 
   var password = null;
-  var allApps = [];         // everything currently loaded into the DOM
-  var totalCount = 0;       // total rows on the server (respecting current server-side filter)
-  var unseenCount = 0;
-  var seenIds = new Set();  // ids we've ever rendered (for new-card highlight)
-  var currentFilter = 'all';
+  var allApps = [];
+  var counts = { inbox:0, accepted:0, maybe:0, rejected:0, unseen:0, total:0 };
+  var seenIds = new Set();
+  var currentFilter = 'inbox';
+  var currentView = 'cards';
   var currentQuery = '';
   var hasMore = false;
-  var firstLoad = true;
+  var sortKey = 'id';
+  var sortDir = 'desc';
   var pollTimer = null;
+  var toastTimer = null;
+  var lastUndo = null;
 
+  // ================== auth ==================
   var saved = null;
   try { saved = sessionStorage.getItem(STORAGE_KEY); } catch(e){}
   if (saved) { password = saved; tryLoad(); }
@@ -544,18 +680,9 @@ a{color:inherit;text-decoration:none}
     tryLoad(true);
   });
 
-  function serverStatusFilter(){
-    if (currentFilter === 'accepted' || currentFilter === 'maybe' || currentFilter === 'rejected') {
-      return currentFilter;
-    }
-    return null;
-  }
-
   function buildUrl(offset){
-    var url = '/api/submissions?limit=' + PAGE_SIZE + '&offset=' + (offset || 0);
-    var sf = serverStatusFilter();
-    if (sf) url += '&status=' + encodeURIComponent(sf);
-    return url;
+    var u = '/api/submissions?view=' + encodeURIComponent(currentFilter) + '&limit=' + PAGE_SIZE + '&offset=' + (offset || 0);
+    return u;
   }
 
   function tryLoad(fromGate){
@@ -569,16 +696,12 @@ a{color:inherit;text-decoration:none}
         try { sessionStorage.setItem(STORAGE_KEY, password); } catch(e){}
         gate.style.display = 'none';
         dash.classList.add('is-visible');
-        if (exportLink) {
-          exportLink.href = '/api/export?code=' + encodeURIComponent(password);
-        }
-        firstLoad = false;
-        seenIds = new Set();
+        exportLink.href = '/api/export?code=' + encodeURIComponent(password);
         allApps = data.applications || [];
         allApps.forEach(function(a){ seenIds.add(a.id); });
-        totalCount = data.total;
-        unseenCount = data.unseenCount || 0;
+        counts = data.counts || counts;
         hasMore = !!data.hasMore;
+        updateCounts();
         updateHeader();
         render();
         startPolling();
@@ -602,7 +725,7 @@ a{color:inherit;text-decoration:none}
   function startPolling(){
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(function(){
-      // Refresh page 0 only; merge new ids that we don't have yet.
+      if (currentView !== 'cards') return;
       fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
         .then(function(res){ return res.ok ? res.json() : null; })
         .then(function(data){
@@ -610,30 +733,19 @@ a{color:inherit;text-decoration:none}
           var incoming = data.applications || [];
           var freshIds = new Set();
           incoming.forEach(function(a){ if (!seenIds.has(a.id)) freshIds.add(a.id); });
-
-          // Merge: keep any rows we already had further down the list (from load-more)
+          // Merge: keep any older rows we've loaded, put new ones first
           var byId = {};
           allApps.forEach(function(a){ byId[a.id] = a; });
-          incoming.forEach(function(a){ byId[a.id] = a; });
-
-          // Re-order: incoming first (they're the newest), then the rest by last_submitted_at desc
-          var merged = [];
-          incoming.forEach(function(a){ merged.push(a); });
+          var merged = incoming.slice();
           Object.keys(byId).forEach(function(k){
             var id = parseInt(k, 10);
-            if (!incoming.some(function(a){ return a.id === id; })) {
-              merged.push(byId[k]);
-            }
+            if (!incoming.some(function(a){ return a.id === id; })) merged.push(byId[k]);
           });
-
-          // Store which are new for the highlight
           merged.forEach(function(a){ if (freshIds.has(a.id)) a.__isNew = true; });
-
           allApps = merged;
           merged.forEach(function(a){ seenIds.add(a.id); });
-          totalCount = data.total;
-          unseenCount = data.unseenCount || 0;
-          hasMore = merged.length < totalCount;
+          counts = data.counts || counts;
+          updateCounts();
           updateHeader();
           render();
         })
@@ -654,8 +766,9 @@ a{color:inherit;text-decoration:none}
           if (!existingIds.has(a.id)) allApps.push(a);
           seenIds.add(a.id);
         });
-        totalCount = data.total;
+        counts = data.counts || counts;
         hasMore = !!data.hasMore;
+        updateCounts();
         updateHeader();
         render();
       })
@@ -665,44 +778,105 @@ a{color:inherit;text-decoration:none}
         loadMoreBtn.textContent = 'Load more';
       });
   }
-
   loadMoreBtn.addEventListener('click', loadMore);
 
+  // ================== counts / header ==================
+  function updateCounts(){
+    cInbox.textContent = counts.inbox;
+    cAccepted.textContent = counts.accepted;
+    cMaybe.textContent = counts.maybe;
+    cRejected.textContent = counts.rejected;
+  }
   function updateHeader(){
-    countNum.textContent = totalCount.toLocaleString();
-    var label = totalCount === 0
+    countNum.textContent = counts.total.toLocaleString();
+    var label = counts.total === 0
       ? 'No applications yet'
-      : (totalCount === 1 ? '1 person has applied' : totalCount + ' people have applied');
-    if (unseenCount > 0) {
-      label += ' · <span class="new-badge">' + unseenCount + ' new</span>';
-    }
+      : (counts.total === 1 ? '1 person has applied' : counts.total + ' people have applied');
+    if (counts.unseen > 0) label += ' · <span class="new-badge">' + counts.unseen + ' new</span>';
     countSub.innerHTML = label;
-
     var now = new Date();
     lastUpdate.textContent = 'Updated ' + now.toLocaleTimeString('en-NG', { hour:'2-digit', minute:'2-digit' });
   }
 
-  function render(){
-    var filtered = allApps.filter(function(app){
-      if (currentFilter === 'unseen' && app.seen) return false;
-      if (currentQuery) {
-        var q = currentQuery.toLowerCase();
-        var hay = [
-          app.name, app.country, app.role, app.what_building,
-          app.current_challenge, app.final_response
-        ].filter(Boolean).join(' ').toLowerCase();
-        if (hay.indexOf(q) === -1) return false;
-      }
-      return true;
-    });
+  // ================== filter / search / view ==================
+  function matchesQuery(app){
+    if (!currentQuery) return true;
+    var q = currentQuery.toLowerCase();
+    var hay = [app.name, app.country, app.role, app.what_building, app.current_challenge, app.final_response]
+      .filter(Boolean).join(' ').toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
 
+  function setFilter(next){
+    if (next === currentFilter) return;
+    currentFilter = next;
+    filterPills.querySelectorAll('.pill').forEach(function(p){
+      p.classList.toggle('is-active', p.getAttribute('data-filter') === next);
+    });
+    // Reload from server with new filter
+    allApps = [];
+    seenIds = new Set();
+    fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){
+        if (!data) return;
+        allApps = data.applications || [];
+        allApps.forEach(function(a){ seenIds.add(a.id); });
+        counts = data.counts || counts;
+        hasMore = !!data.hasMore;
+        updateCounts();
+        updateHeader();
+        render();
+      })
+      .catch(function(){});
+  }
+
+  filterPills.addEventListener('click', function(e){
+    var pill = e.target.closest('.pill');
+    if (!pill) return;
+    setFilter(pill.getAttribute('data-filter'));
+  });
+
+  viewToggle.addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-view]');
+    if (!btn) return;
+    var next = btn.getAttribute('data-view');
+    if (next === currentView) return;
+    currentView = next;
+    viewToggle.querySelectorAll('button').forEach(function(b){ b.classList.toggle('is-active', b === btn); });
+    if (currentView === 'table') {
+      cardsView.classList.add('view-hidden');
+      tableView.classList.remove('view-hidden');
+      loadTable();
+    } else {
+      tableView.classList.add('view-hidden');
+      cardsView.classList.remove('view-hidden');
+      render();
+    }
+  });
+
+  var searchDebounce = null;
+  searchInput.addEventListener('input', function(){
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(function(){
+      currentQuery = searchInput.value.trim();
+      if (currentView === 'table') loadTable();
+      else render();
+    }, 180);
+  });
+
+  // ================== cards view ==================
+  function render(){
+    if (currentView !== 'cards') return;
+    var filtered = allApps.filter(matchesQuery);
     if (filtered.length === 0) {
-      grid.innerHTML = '<div class="empty">' +
-        '<h2>' + (allApps.length === 0 ? 'No applications yet.' : 'Nothing matches.') + '</h2>' +
-        '<p>' + (allApps.length === 0
-          ? 'New submissions will appear here automatically.'
-          : 'Try clearing your search or filters.') + '</p>' +
-        '</div>';
+      grid.innerHTML = '<div class="empty"><h2>' +
+        (allApps.length === 0 ? 'Inbox is clear.' : 'Nothing matches.') +
+        '</h2><p>' +
+        (allApps.length === 0
+          ? (currentFilter === 'inbox' ? 'Every application has been reviewed.' : 'No applications in this view yet.')
+          : 'Try clearing your search.') +
+        '</p></div>';
       loadMoreWrap.style.display = 'none';
       return;
     }
@@ -711,39 +885,175 @@ a{color:inherit;text-decoration:none}
     grid.innerHTML = filtered.map(renderCard).join('');
     window.scrollTo(0, scrollY);
 
-    grid.querySelectorAll('.qa-toggle').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var body = btn.previousElementSibling;
-        var isClamped = body.classList.contains('clamped');
-        body.classList.toggle('clamped');
-        btn.textContent = isClamped ? 'Show less' : 'Read more';
-      });
+    grid.querySelectorAll('.qa').forEach(function(qa){
+      var body = qa.querySelector('.qa-body');
+      var wordsEl = qa.querySelector('.qa-words');
+      if (!body) return;
+      var text = body.textContent.trim();
+      var count = text.split(/\s+/).filter(Boolean).length;
+      if (count < 8){
+        wordsEl.textContent = 'Short answer · ' + count + (count === 1 ? ' word' : ' words');
+        wordsEl.classList.add('is-short');
+      }
+      if (text.length > 170 && !qa.querySelector('.qa-toggle')){
+        body.classList.add('clamped');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'qa-toggle';
+        btn.textContent = 'Read more';
+        btn.addEventListener('click', function(){
+          var clamped = body.classList.toggle('clamped');
+          btn.textContent = clamped ? 'Read more' : 'Show less';
+        });
+        qa.appendChild(btn);
+      }
     });
 
-    grid.querySelectorAll('.status-pill').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = parseInt(btn.getAttribute('data-id'), 10);
-        var target = btn.getAttribute('data-status');
-        var app = allApps.find(function(a){ return a.id === id; });
-        if (!app) return;
-        var newStatus = (app.status === target) ? null : target;
-        setStatus(id, newStatus);
-      });
-    });
+    grid.querySelectorAll('.card').forEach(function(card){
+      var id = parseInt(card.getAttribute('data-id'), 10);
 
-    grid.querySelectorAll('.card').forEach(function(cardEl){
-      cardEl.addEventListener('click', function(e){
-        // Ignore if user clicked a button or link inside the card
+      card.querySelectorAll('.cta-wa, .cta-mail').forEach(function(a){
+        a.addEventListener('click', function(){
+          if (statusOf(card) !== 'accepted') {
+            setStatus(card, 'accepted', true);
+            var wasInbox = (currentFilter === 'inbox');
+            if (wasInbox) {
+              setTimeout(function(){ removeCardVisually(card); }, 60);
+            }
+          }
+          card.classList.remove('is-unseen');
+        });
+      });
+
+      var declineBtn = card.querySelector('.cta-decline');
+      if (declineBtn) declineBtn.addEventListener('click', function(){
+        if (currentFilter === 'inbox') {
+          setTimeout(function(){ removeCardVisually(card); }, 60);
+        }
+      });
+
+      card.querySelectorAll('.ghost').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var s = btn.getAttribute('data-status');
+          var next = statusOf(card) === s ? null : s;
+          setStatus(card, next, !!next);
+          card.classList.remove('is-unseen');
+          // If we're in Inbox and set to rejected, remove the card
+          if (currentFilter === 'inbox' && next === 'rejected') {
+            setTimeout(function(){ removeCardVisually(card); }, 60);
+          }
+        });
+      });
+
+      var undo = card.querySelector('.note-undo');
+      if (undo) undo.addEventListener('click', function(){
+        setStatus(card, null, false);
+        // Reload so it comes back to Inbox
+        if (currentFilter === 'inbox') setFilter('inbox');
+      });
+
+      card.addEventListener('click', function(e){
         if (e.target.closest('a, button')) return;
-        var id = parseInt(cardEl.getAttribute('data-id'), 10);
-        var app = allApps.find(function(a){ return a.id === id; });
-        if (app && !app.seen) {
+        if (card.classList.contains('is-unseen')) {
+          card.classList.remove('is-unseen');
           markSeen(id);
         }
       });
+
+      // Initial render state
+      applyStatusClasses(card);
     });
 
     loadMoreWrap.style.display = hasMore ? 'block' : 'none';
+  }
+
+  function statusOf(card){
+    if (card.classList.contains('is-accepted')) return 'accepted';
+    if (card.classList.contains('is-maybe')) return 'maybe';
+    if (card.classList.contains('is-rejected')) return 'rejected';
+    return null;
+  }
+
+  function applyStatusClasses(card){
+    var s = statusOf(card);
+    var wa = card.querySelector('.cta-wa .cta-label');
+    var mail = card.querySelector('.cta-mail .cta-label');
+    var noteText = card.querySelector('.note-text');
+    var accepted = s === 'accepted';
+    if (wa) wa.textContent = accepted ? 'WhatsApp' : 'Accept and WhatsApp';
+    if (mail) mail.textContent = accepted ? 'Email' : 'Accept and Email';
+    if (noteText) noteText.textContent = s === 'accepted' ? 'Accepted' : (s === 'rejected' ? 'Rejected' : '');
+    card.querySelectorAll('.ghost').forEach(function(g){
+      g.classList.toggle('is-on-' + g.getAttribute('data-status'), g.getAttribute('data-status') === s);
+    });
+  }
+
+  function setStatus(card, next, withToast){
+    var id = parseInt(card.getAttribute('data-id'), 10);
+    var prev = statusOf(card);
+    ['accepted','maybe','rejected'].forEach(function(s){ card.classList.remove('is-' + s); });
+    if (next) card.classList.add('is-' + next);
+    applyStatusClasses(card);
+    saveStatus(id, next);
+    var app = allApps.find(function(a){ return a.id === id; });
+    if (app) app.status = next;
+    // Update counts client-side (optimistic)
+    if (prev !== next) {
+      if (prev) counts[prev] = Math.max(0, counts[prev] - 1);
+      if (next) counts[next] = counts[next] + 1;
+      // Inbox changes for accepted/rejected transitions
+      if (prev === 'maybe' && next === null) counts.inbox += 1;
+      if (prev === null && next === 'maybe') counts.inbox -= 1;
+      if (prev === 'maybe' && (next === 'accepted' || next === 'rejected')) counts.inbox -= 1;
+      if ((prev === 'accepted' || prev === 'rejected') && next === 'maybe') counts.inbox += 1;
+      updateCounts();
+    }
+    if (withToast && next) showToast('Marked ' + next, function(){ setStatus(card, prev, false); });
+    else hideToast();
+  }
+
+  function showToast(msg, undoFn){
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    lastUndo = undoFn;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 5000);
+  }
+  function hideToast(){
+    toast.classList.remove('show');
+    lastUndo = null;
+    clearTimeout(toastTimer);
+  }
+  toastUndo.addEventListener('click', function(){
+    if (lastUndo) lastUndo();
+    hideToast();
+  });
+
+  function removeCardVisually(card){
+    card.classList.add('is-removing');
+    setTimeout(function(){
+      card.remove();
+      if (grid.children.length === 0) {
+        grid.innerHTML = '<div class="empty"><h2>Inbox is clear.</h2><p>Every application has been reviewed.</p></div>';
+      }
+    }, 300);
+  }
+
+  function saveStatus(id, status){
+    fetch('/api/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+      body: JSON.stringify({ id: id, status: status }),
+    }).catch(function(){});
+  }
+  function markSeen(id){
+    counts.unseen = Math.max(0, counts.unseen - 1);
+    updateHeader();
+    fetch('/api/seen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+      body: JSON.stringify({ id: id, seen: true }),
+    }).catch(function(){});
   }
 
   function renderCard(app){
@@ -751,12 +1061,14 @@ a{color:inherit;text-decoration:none}
     var firstName = (app.name || '').split(' ')[0];
     var waMsg = "Hi " + firstName + ", this is Kunmi. Thanks for applying to Start With Kunmi — I'd love to talk more about what you're building.";
     var waHref = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
-
     var emailSubject = 'Your application to Start With Kunmi';
-    var emailBody = "Hi " + firstName + ",\n\nThank you for applying to Start With Kunmi. Your answers stood out, and I'd love to talk more about what you're working on.\n\nWhen you have a moment, could you share a bit more about what you're building and where you are right now?\n\nTalk soon,\nKunmi";
+    var emailBody = "Hi " + firstName + ",\n\nThank you for applying to Start With Kunmi. Your answers stood out, and I'd love to talk more about what you're working on.\n\nTalk soon,\nKunmi";
     var mailHref = 'mailto:' + encodeURIComponent(app.email) +
       '?subject=' + encodeURIComponent(emailSubject) +
       '&body=' + encodeURIComponent(emailBody);
+    var declineHref = 'mailto:' + encodeURIComponent(app.email) +
+      '?subject=' + encodeURIComponent('About your Start With Kunmi application') +
+      '&body=' + encodeURIComponent("Hi " + firstName + ",\n\nThank you for applying to Start With Kunmi. We had a lot of strong applications this round, and we can't take everyone. We'd love to stay in touch for future cohorts.\n\nWishing you the best,\nKunmi");
 
     var date = '';
     if (app.last_submitted_at || app.submitted_at) {
@@ -764,29 +1076,21 @@ a{color:inherit;text-decoration:none}
       date = d.toLocaleDateString('en-NG', { day:'numeric', month:'short' });
     }
 
-    var cardClasses = ['card'];
-    if (!app.seen) cardClasses.push('is-unseen');
-    if (app.status) cardClasses.push('is-' + app.status);
-    if (app.__isNew) {
-      cardClasses.push('is-new');
-      delete app.__isNew;
-    }
+    var cls = ['card'];
+    if (!app.seen) cls.push('is-unseen');
+    if (app.status) cls.push('is-' + app.status);
 
     var dupHtml = (app.submission_count && app.submission_count > 1)
-      ? '<span class="dup-badge">Applied ' + app.submission_count + ' times</span>'
-      : '';
-
-    var statusTag = '';
-    if (app.status === 'accepted') statusTag = '<span class="tag status-accepted">Accepted</span>';
-    if (app.status === 'maybe')    statusTag = '<span class="tag status-maybe">Maybe</span>';
-    if (app.status === 'rejected') statusTag = '<span class="tag status-rejected">Rejected</span>';
+      ? '<span class="dup-badge">Applied ' + app.submission_count + ' times</span>' : '';
 
     return '' +
-      '<article class="' + cardClasses.join(' ') + '" data-id="' + app.id + '">' +
+      '<article class="' + cls.join(' ') + '" data-id="' + app.id + '">' +
         '<div class="card-head">' +
           '<div>' +
-            '<div class="card-name">' + esc(app.name) + '</div>' +
-            dupHtml +
+            '<div class="card-name-row">' +
+              '<div class="card-name">' + esc(app.name) + '</div>' +
+              '<span class="new-badge">New</span>' +
+            '</div>' + dupHtml +
           '</div>' +
           '<div class="card-date">' + esc(date) + '</div>' +
         '</div>' +
@@ -794,93 +1098,212 @@ a{color:inherit;text-decoration:none}
           (app.country ? '<span class="tag accent">' + esc(app.country) + '</span>' : '') +
           (app.age_range ? '<span class="tag">' + esc(app.age_range) + '</span>' : '') +
           (app.role ? '<span class="tag">' + esc(app.role) + '</span>' : '') +
-          statusTag +
-        '</div>' +
-        '<div class="action-row">' +
-          '<a class="btn-action btn-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
-            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
-            'WhatsApp' +
-          '</a>' +
-          '<a class="btn-action btn-mail" href="' + mailHref + '">' +
-            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
-            'Email' +
-          '</a>' +
-        '</div>' +
-        '<div class="status-row">' +
-          '<span class="status-label">Mark:</span>' +
-          statusPill(app.id, 'accepted', 'Accept', app.status === 'accepted') +
-          statusPill(app.id, 'maybe', 'Maybe', app.status === 'maybe') +
-          statusPill(app.id, 'rejected', 'No', app.status === 'rejected') +
         '</div>' +
         '<div class="card-answers">' +
           qa('Working on', app.what_building) +
           qa('Stuck on', app.current_challenge) +
           qa('Wants to leave with', app.final_response) +
         '</div>' +
+        '<div class="status-note"><span class="note-text"></span><button class="note-undo" type="button">Undo</button></div>' +
+        '<div class="secondary-row">' +
+          '<button class="ghost" type="button" data-status="maybe">Maybe</button>' +
+          '<button class="ghost" type="button" data-status="rejected">No</button>' +
+        '</div>' +
+        '<div class="cta-row">' +
+          '<a class="cta cta-wa" href="' + waHref + '" target="_blank" rel="noopener">' +
+            '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
+            '<span class="cta-label">Accept and WhatsApp</span>' +
+          '</a>' +
+          '<a class="cta cta-mail" href="' + mailHref + '">' +
+            '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
+            '<span class="cta-label">Accept and Email</span>' +
+          '</a>' +
+          '<a class="cta cta-decline" href="' + declineHref + '">Send decline</a>' +
+        '</div>' +
       '</article>';
-  }
-
-  function statusPill(id, status, label, isOn){
-    var cls = 'status-pill' + (isOn ? ' is-on-' + status : '');
-    return '<button type="button" class="' + cls + '" data-id="' + id + '" data-status="' + status + '">' + label + '</button>';
   }
 
   function qa(label, value){
     if (!value) return '';
     var text = String(value);
     var words = text.trim().split(/\s+/).filter(Boolean).length;
-    var long = text.length > 180;
+    var long = text.length > 170;
     return '' +
       '<div class="qa">' +
-        '<div class="qa-label">' +
-          '<span>' + esc(label) + '</span>' +
-          '<span class="qa-words">' + words + ' word' + (words === 1 ? '' : 's') + '</span>' +
-        '</div>' +
+        '<div class="qa-label"><span>' + esc(label) + '</span><span class="qa-words">' + words + ' word' + (words === 1 ? '' : 's') + '</span></div>' +
         '<div class="qa-body' + (long ? ' clamped' : '') + '">' + esc(text) + '</div>' +
         (long ? '<button type="button" class="qa-toggle">Read more</button>' : '') +
       '</div>';
   }
 
-  function setStatus(id, status){
-    fetch('/api/status', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-admin-password': password,
-      },
-      body: JSON.stringify({ id: id, status: status }),
-    })
-    .then(function(res){ return res.ok ? res.json() : null; })
-    .then(function(data){
-      if (!data || !data.success) return;
-      var app = allApps.find(function(a){ return a.id === id; });
-      if (app) app.status = data.status;
-      render();
-    })
-    .catch(function(){});
+  // ================== table view ==================
+  function loadTable(){
+    fetch('/api/submissions?view=' + encodeURIComponent(currentFilter) + '&view2=table', { headers: { 'x-admin-password': password } })
+      .catch(function(){ return null; })
+      .then(function(){
+        // Request the actual table payload
+        return fetch('/api/submissions?view=table', { headers: { 'x-admin-password': password } });
+      })
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){
+        if (!data) return;
+        counts = data.counts || counts;
+        updateCounts();
+        var rows = (data.applications || []).filter(function(a){
+          // Apply filter client-side for table view (tab)
+          if (currentFilter === 'inbox') return !a.status || a.status === 'maybe';
+          return a.status === currentFilter;
+        }).filter(matchesQuery);
+        renderTable(rows);
+      })
+      .catch(function(){});
   }
 
-  function markSeen(id){
-    fetch('/api/seen', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-admin-password': password,
-      },
-      body: JSON.stringify({ id: id, seen: true }),
-    })
-    .then(function(res){ return res.ok ? res.json() : null; })
-    .then(function(data){
-      if (!data || !data.success) return;
-      var app = allApps.find(function(a){ return a.id === id; });
-      if (app) app.seen = true;
-      if (unseenCount > 0) unseenCount -= 1;
-      updateHeader();
-      render();
-    })
-    .catch(function(){});
+  function renderTable(rows){
+    // Sort
+    rows.sort(function(a, b){
+      var av = a[sortKey], bv = b[sortKey];
+      if (av == null) av = '';
+      if (bv == null) bv = '';
+      if (typeof av === 'string') av = av.toLowerCase();
+      if (typeof bv === 'string') bv = bv.toLowerCase();
+      if (av < bv) return sortDir === 'asc' ? -1 : 1;
+      if (av > bv) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    // Update header arrows
+    leadsTable.querySelectorAll('th[data-sort]').forEach(function(th){
+      th.classList.toggle('is-sorted', th.getAttribute('data-sort') === sortKey);
+    });
+
+    if (rows.length === 0) {
+      leadsBody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:4rem 1rem;color:var(--muted);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase">No leads in this view</td></tr>';
+      return;
+    }
+
+    leadsBody.innerHTML = rows.map(function(app, i){
+      var rowCls = '';
+      if (app.status === 'accepted') rowCls = 'row-accepted';
+      else if (app.status === 'maybe') rowCls = 'row-maybe';
+      else if (app.status === 'rejected') rowCls = 'row-rejected';
+
+      var statusCls = '';
+      var statusText = 'Not reviewed';
+      if (app.status === 'accepted') { statusCls = 's-accepted'; statusText = 'Accepted'; }
+      if (app.status === 'maybe') { statusCls = 's-maybe'; statusText = 'Maybe'; }
+      if (app.status === 'rejected') { statusCls = 's-rejected'; statusText = 'Rejected'; }
+
+      var appliedDate = '';
+      if (app.last_submitted_at || app.submitted_at) {
+        var d = new Date(app.last_submitted_at || app.submitted_at);
+        appliedDate = d.toLocaleDateString('en-NG', { day:'numeric', month:'short', year:'2-digit' });
+      }
+
+      var times = (app.submission_count && app.submission_count > 1) ? app.submission_count + '×' : '';
+
+      var waNumber = sanitizeWA(app.whatsapp);
+      var firstName = (app.name || '').split(' ')[0];
+      var waMsg = "Hi " + firstName + ", this is Kunmi. Thanks for applying to Start With Kunmi — I'd love to talk more about what you're building.";
+      var waHref = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
+      var mailHref = 'mailto:' + encodeURIComponent(app.email);
+
+      return '' +
+        '<tr class="' + rowCls + '" data-id="' + app.id + '">' +
+          '<td class="td-num">' + (i + 1) + '</td>' +
+          '<td class="td-name">' + esc(app.name) + '</td>' +
+          '<td class="td-muted">' + esc(app.age_range || '—') + '</td>' +
+          '<td>' + esc(app.country || '—') + '</td>' +
+          '<td>' + esc(app.role || '—') + '</td>' +
+          '<td class="td-status">' +
+            '<button class="status-cell ' + statusCls + '" type="button" data-id="' + app.id + '">' + statusText + '</button>' +
+          '</td>' +
+          '<td class="td-muted">' + esc(appliedDate) + '</td>' +
+          '<td class="td-muted">' + esc(times) + '</td>' +
+          '<td>' +
+            '<div class="row-actions">' +
+              '<a class="row-action a-wa" href="' + waHref + '" target="_blank" rel="noopener" title="WhatsApp">' +
+                '<svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
+              '</a>' +
+              '<a class="row-action a-mail" href="' + mailHref + '" title="Email">' +
+                '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>' +
+              '</a>' +
+            '</div>' +
+          '</td>' +
+        '</tr>';
+    }).join('');
+
+    // Wire status cells
+    leadsBody.querySelectorAll('.status-cell').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        openStatusPopup(btn, parseInt(btn.getAttribute('data-id'), 10));
+      });
+    });
   }
 
+  var openPopup = null;
+  function openStatusPopup(anchorBtn, id){
+    closePopup();
+    var rect = anchorBtn.getBoundingClientRect();
+    var popup = document.createElement('div');
+    popup.className = 'status-popup';
+    popup.innerHTML =
+      '<button class="p-accepted" data-set="accepted">Accept</button>' +
+      '<button class="p-maybe" data-set="maybe">Maybe</button>' +
+      '<button class="p-rejected" data-set="rejected">No</button>' +
+      '<button class="p-clear" data-set="">Clear</button>';
+    document.body.appendChild(popup);
+    popup.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+    popup.style.left = (rect.left + window.scrollX) + 'px';
+    openPopup = popup;
+
+    popup.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var s = b.getAttribute('data-set') || null;
+        saveStatus(id, s);
+        // Update DOM immediately
+        var tr = leadsBody.querySelector('tr[data-id="' + id + '"]');
+        if (tr) {
+          tr.classList.remove('row-accepted','row-maybe','row-rejected');
+          if (s) tr.classList.add('row-' + s);
+          var cell = tr.querySelector('.status-cell');
+          if (cell) {
+            cell.classList.remove('s-accepted','s-maybe','s-rejected');
+            if (s) cell.classList.add('s-' + s);
+            cell.textContent = s ? s.charAt(0).toUpperCase() + s.slice(1) : 'Not reviewed';
+          }
+        }
+        // Refresh counts from server silently
+        fetch('/api/submissions?view=' + encodeURIComponent(currentFilter) + '&limit=1', { headers: { 'x-admin-password': password } })
+          .then(function(r){ return r.ok ? r.json() : null; })
+          .then(function(d){ if (d && d.counts) { counts = d.counts; updateCounts(); updateHeader(); } })
+          .catch(function(){});
+        closePopup();
+      });
+    });
+
+    setTimeout(function(){
+      document.addEventListener('click', onDocClickPopup, { once: true });
+    }, 0);
+  }
+  function onDocClickPopup(e){
+    if (openPopup && !openPopup.contains(e.target)) closePopup();
+  }
+  function closePopup(){
+    if (openPopup) { openPopup.remove(); openPopup = null; }
+  }
+
+  leadsTable.querySelectorAll('th[data-sort]').forEach(function(th){
+    th.addEventListener('click', function(){
+      var k = th.getAttribute('data-sort');
+      if (k === sortKey) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      else { sortKey = k; sortDir = 'asc'; }
+      loadTable();
+    });
+  });
+
+  // ================== helpers ==================
   function sanitizeWA(num){
     if (!num) return '';
     var digits = String(num).replace(/\D/g, '');
@@ -888,60 +1311,11 @@ a{color:inherit;text-decoration:none}
     else if (digits.length === 10) digits = '234' + digits;
     return digits;
   }
-
   function esc(s){
     if (s === null || s === undefined) return '';
-    return String(s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   }
-
-  var toastTimer = null;
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('is-visible');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toast.classList.remove('is-visible'); }, 2000);
-  }
-
-  var searchDebounce = null;
-  searchInput.addEventListener('input', function(){
-    clearTimeout(searchDebounce);
-    searchDebounce = setTimeout(function(){
-      currentQuery = searchInput.value.trim();
-      render();
-    }, 180);
-  });
-
-  filterPills.addEventListener('click', function(e){
-    var pill = e.target.closest('.pill');
-    if (!pill) return;
-    filterPills.querySelectorAll('.pill').forEach(function(p){ p.classList.remove('is-active'); });
-    pill.classList.add('is-active');
-    currentFilter = pill.getAttribute('data-filter');
-
-    // Status filters go to the server (different result set). Others are client-side.
-    if (currentFilter === 'accepted' || currentFilter === 'maybe' || currentFilter === 'rejected') {
-      // reload from server with this filter
-      allApps = [];
-      seenIds = new Set();
-      fetch(buildUrl(0), { headers: { 'x-admin-password': password } })
-        .then(function(res){ return res.ok ? res.json() : null; })
-        .then(function(data){
-          if (!data) return;
-          allApps = data.applications || [];
-          allApps.forEach(function(a){ seenIds.add(a.id); });
-          totalCount = data.total;
-          unseenCount = data.unseenCount || 0;
-          hasMore = !!data.hasMore;
-          updateHeader();
-          render();
-        })
-        .catch(function(){});
-    } else {
-      render();
-    }
-  });
 
   logoutBtn.addEventListener('click', function(){
     try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
